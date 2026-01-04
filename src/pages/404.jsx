@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Home, ArrowLeft } from 'lucide-react';
 
-const NotFoundPage = () => {
+const 404 = () => {
   return (
     <>
       <Helmet>
@@ -106,4 +106,4 @@ const NotFoundPage = () => {
   );
 };
 
-export default NotFoundPage;
+export default 404;
