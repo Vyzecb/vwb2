@@ -1,11 +1,9 @@
-
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { toast } from '@/components/ui/use-toast';
 import { Mail, Phone, MapPin, Send } from 'lucide-react';
-
 const ContactPage = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -16,21 +14,23 @@ const ContactPage = () => {
     budget: '',
     message: ''
   });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+  const handleChange = e => {
+    const {
+      name,
+      value
+    } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
   };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
-    
     toast({
       title: "Bericht Verzonden! ✉️",
       description: "We nemen binnen 24 uur contact met u op. Bedankt voor uw interesse!",
-      duration: 5000,
+      duration: 5000
     });
-
     setFormData({
       name: '',
       email: '',
@@ -41,26 +41,24 @@ const ContactPage = () => {
       message: ''
     });
   };
-
-  return (
-    <>
+  return <>
       <Helmet>
         <title>Contact - Vos Web Designs | Neem Contact Op</title>
-        <meta
-          name="description"
-          content="Klaar om uw project te starten? Neem contact op met Vos Web Designs. We beantwoorden al uw vragen en plannen graag een vrijblijvend gesprek."
-        />
+        <meta name="description" content="Klaar om uw project te starten? Neem contact op met Vos Web Designs. We beantwoorden al uw vragen en plannen graag een vrijblijvend gesprek." />
       </Helmet>
 
       <main className="pt-24 pb-16">
         <section className="py-16 bg-gradient-to-b from-[#0a0a0a] to-[#0f0f0f]">
           <div className="container mx-auto px-4">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="max-w-3xl mx-auto text-center"
-            >
+            <motion.div initial={{
+            opacity: 0,
+            y: 30
+          }} animate={{
+            opacity: 1,
+            y: 0
+          }} transition={{
+            duration: 0.8
+          }} className="max-w-3xl mx-auto text-center">
               <h1 className="text-5xl md:text-6xl font-bold mb-6">
                 Laten We{' '}
                 <span className="bg-gradient-to-r from-[#D4AF37] to-[#F4E4C1] bg-clip-text text-transparent">
@@ -78,13 +76,17 @@ const ContactPage = () => {
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
-                <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6 }}
-                  className="bg-[#1a1a1a] border border-gray-800 rounded-2xl p-8 text-center hover:border-[#D4AF37] transition-colors"
-                >
+                <motion.div initial={{
+                opacity: 0,
+                y: 30
+              }} whileInView={{
+                opacity: 1,
+                y: 0
+              }} viewport={{
+                once: true
+              }} transition={{
+                duration: 0.6
+              }} className="bg-[#1a1a1a] border border-gray-800 rounded-2xl p-8 text-center hover:border-[#D4AF37] transition-colors">
                   <div className="w-16 h-16 bg-gradient-to-r from-[#D4AF37]/10 to-[#F4E4C1]/10 rounded-full flex items-center justify-center mx-auto mb-4 text-[#D4AF37]">
                     <Mail size={28} />
                   </div>
@@ -94,46 +96,57 @@ const ContactPage = () => {
                   </a>
                 </motion.div>
 
-                <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: 0.1 }}
-                  className="bg-[#1a1a1a] border border-gray-800 rounded-2xl p-8 text-center hover:border-[#D4AF37] transition-colors"
-                >
+                <motion.div initial={{
+                opacity: 0,
+                y: 30
+              }} whileInView={{
+                opacity: 1,
+                y: 0
+              }} viewport={{
+                once: true
+              }} transition={{
+                duration: 0.6,
+                delay: 0.1
+              }} className="bg-[#1a1a1a] border border-gray-800 rounded-2xl p-8 text-center hover:border-[#D4AF37] transition-colors">
                   <div className="w-16 h-16 bg-gradient-to-r from-[#D4AF37]/10 to-[#F4E4C1]/10 rounded-full flex items-center justify-center mx-auto mb-4 text-[#D4AF37]">
                     <Phone size={28} />
                   </div>
                   <h3 className="text-xl font-bold mb-2">Telefoon</h3>
-                  <a href="tel:+31201234567" className="text-gray-300 hover:text-[#D4AF37] transition-colors">
-                    +31 20 123 4567
-                  </a>
+                  <a href="tel:+31201234567" className="text-gray-300 hover:text-[#D4AF37] transition-colors">+31 6 4860 8336</a>
                 </motion.div>
 
-                <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: 0.2 }}
-                  className="bg-[#1a1a1a] border border-gray-800 rounded-2xl p-8 text-center hover:border-[#D4AF37] transition-colors"
-                >
+                <motion.div initial={{
+                opacity: 0,
+                y: 30
+              }} whileInView={{
+                opacity: 1,
+                y: 0
+              }} viewport={{
+                once: true
+              }} transition={{
+                duration: 0.6,
+                delay: 0.2
+              }} className="bg-[#1a1a1a] border border-gray-800 rounded-2xl p-8 text-center hover:border-[#D4AF37] transition-colors">
                   <div className="w-16 h-16 bg-gradient-to-r from-[#D4AF37]/10 to-[#F4E4C1]/10 rounded-full flex items-center justify-center mx-auto mb-4 text-[#D4AF37]">
                     <MapPin size={28} />
                   </div>
                   <h3 className="text-xl font-bold mb-2">Locatie</h3>
-                  <p className="text-gray-300">
-                    Amsterdam, Nederland
-                  </p>
+                  <p className="text-gray-300">Lelystad, Nederland</p>
                 </motion.div>
               </div>
 
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-                <motion.div
-                  initial={{ opacity: 0, x: -30 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.8 }}
-                >
+                <motion.div initial={{
+                opacity: 0,
+                x: -30
+              }} whileInView={{
+                opacity: 1,
+                x: 0
+              }} viewport={{
+                once: true
+              }} transition={{
+                duration: 0.8
+              }}>
                   <h2 className="text-3xl font-bold mb-6">Stuur Een Bericht</h2>
                   <p className="text-gray-300 mb-8 leading-relaxed">
                     Vul het formulier in en we nemen zo snel mogelijk contact met u op. Meestal binnen 24 uur.
@@ -145,32 +158,14 @@ const ContactPage = () => {
                         <label htmlFor="name" className="block text-sm font-medium mb-2">
                           Naam *
                         </label>
-                        <input
-                          type="text"
-                          id="name"
-                          name="name"
-                          value={formData.name}
-                          onChange={handleChange}
-                          required
-                          className="w-full px-4 py-3 bg-[#1a1a1a] border border-gray-800 rounded-lg focus:border-[#D4AF37] focus:outline-none transition-colors text-white"
-                          placeholder="Uw naam"
-                        />
+                        <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} required className="w-full px-4 py-3 bg-[#1a1a1a] border border-gray-800 rounded-lg focus:border-[#D4AF37] focus:outline-none transition-colors text-white" placeholder="Uw naam" />
                       </div>
 
                       <div>
                         <label htmlFor="email" className="block text-sm font-medium mb-2">
                           Email *
                         </label>
-                        <input
-                          type="email"
-                          id="email"
-                          name="email"
-                          value={formData.email}
-                          onChange={handleChange}
-                          required
-                          className="w-full px-4 py-3 bg-[#1a1a1a] border border-gray-800 rounded-lg focus:border-[#D4AF37] focus:outline-none transition-colors text-white"
-                          placeholder="uw@email.nl"
-                        />
+                        <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required className="w-full px-4 py-3 bg-[#1a1a1a] border border-gray-800 rounded-lg focus:border-[#D4AF37] focus:outline-none transition-colors text-white" placeholder="uw@email.nl" />
                       </div>
                     </div>
 
@@ -179,30 +174,14 @@ const ContactPage = () => {
                         <label htmlFor="phone" className="block text-sm font-medium mb-2">
                           Telefoon
                         </label>
-                        <input
-                          type="tel"
-                          id="phone"
-                          name="phone"
-                          value={formData.phone}
-                          onChange={handleChange}
-                          className="w-full px-4 py-3 bg-[#1a1a1a] border border-gray-800 rounded-lg focus:border-[#D4AF37] focus:outline-none transition-colors text-white"
-                          placeholder="+31 6 12345678"
-                        />
+                        <input type="tel" id="phone" name="phone" value={formData.phone} onChange={handleChange} className="w-full px-4 py-3 bg-[#1a1a1a] border border-gray-800 rounded-lg focus:border-[#D4AF37] focus:outline-none transition-colors text-white" placeholder="+31 6 12345678" />
                       </div>
 
                       <div>
                         <label htmlFor="company" className="block text-sm font-medium mb-2">
                           Bedrijf
                         </label>
-                        <input
-                          type="text"
-                          id="company"
-                          name="company"
-                          value={formData.company}
-                          onChange={handleChange}
-                          className="w-full px-4 py-3 bg-[#1a1a1a] border border-gray-800 rounded-lg focus:border-[#D4AF37] focus:outline-none transition-colors text-white"
-                          placeholder="Uw bedrijf"
-                        />
+                        <input type="text" id="company" name="company" value={formData.company} onChange={handleChange} className="w-full px-4 py-3 bg-[#1a1a1a] border border-gray-800 rounded-lg focus:border-[#D4AF37] focus:outline-none transition-colors text-white" placeholder="Uw bedrijf" />
                       </div>
                     </div>
 
@@ -211,13 +190,7 @@ const ContactPage = () => {
                         <label htmlFor="service" className="block text-sm font-medium mb-2">
                           Interesse In
                         </label>
-                        <select
-                          id="service"
-                          name="service"
-                          value={formData.service}
-                          onChange={handleChange}
-                          className="w-full px-4 py-3 bg-[#1a1a1a] border border-gray-800 rounded-lg focus:border-[#D4AF37] focus:outline-none transition-colors text-white"
-                        >
+                        <select id="service" name="service" value={formData.service} onChange={handleChange} className="w-full px-4 py-3 bg-[#1a1a1a] border border-gray-800 rounded-lg focus:border-[#D4AF37] focus:outline-none transition-colors text-white">
                           <option value="">Selecteer een dienst</option>
                           <option value="webdesign">Webdesign</option>
                           <option value="development">Webontwikkeling</option>
@@ -231,13 +204,7 @@ const ContactPage = () => {
                         <label htmlFor="budget" className="block text-sm font-medium mb-2">
                           Budget
                         </label>
-                        <select
-                          id="budget"
-                          name="budget"
-                          value={formData.budget}
-                          onChange={handleChange}
-                          className="w-full px-4 py-3 bg-[#1a1a1a] border border-gray-800 rounded-lg focus:border-[#D4AF37] focus:outline-none transition-colors text-white"
-                        >
+                        <select id="budget" name="budget" value={formData.budget} onChange={handleChange} className="w-full px-4 py-3 bg-[#1a1a1a] border border-gray-800 rounded-lg focus:border-[#D4AF37] focus:outline-none transition-colors text-white">
                           <option value="">Selecteer budget</option>
                           <option value="2500-5000">€2.500 - €5.000</option>
                           <option value="5000-10000">€5.000 - €10.000</option>
@@ -251,36 +218,27 @@ const ContactPage = () => {
                       <label htmlFor="message" className="block text-sm font-medium mb-2">
                         Bericht *
                       </label>
-                      <textarea
-                        id="message"
-                        name="message"
-                        value={formData.message}
-                        onChange={handleChange}
-                        required
-                        rows={6}
-                        className="w-full px-4 py-3 bg-[#1a1a1a] border border-gray-800 rounded-lg focus:border-[#D4AF37] focus:outline-none transition-colors text-white resize-none"
-                        placeholder="Vertel ons over uw project..."
-                      />
+                      <textarea id="message" name="message" value={formData.message} onChange={handleChange} required rows={6} className="w-full px-4 py-3 bg-[#1a1a1a] border border-gray-800 rounded-lg focus:border-[#D4AF37] focus:outline-none transition-colors text-white resize-none" placeholder="Vertel ons over uw project..." />
                     </div>
 
-                    <Button
-                      type="submit"
-                      size="lg"
-                      className="w-full bg-gradient-to-r from-[#D4AF37] to-[#F4E4C1] text-black hover:opacity-90 transition-opacity"
-                    >
+                    <Button type="submit" size="lg" className="w-full bg-gradient-to-r from-[#D4AF37] to-[#F4E4C1] text-black hover:opacity-90 transition-opacity">
                       Verstuur Bericht
                       <Send className="ml-2" size={20} />
                     </Button>
                   </form>
                 </motion.div>
 
-                <motion.div
-                  initial={{ opacity: 0, x: 30 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.8 }}
-                  className="lg:sticky lg:top-28"
-                >
+                <motion.div initial={{
+                opacity: 0,
+                x: 30
+              }} whileInView={{
+                opacity: 1,
+                x: 0
+              }} viewport={{
+                once: true
+              }} transition={{
+                duration: 0.8
+              }} className="lg:sticky lg:top-28">
                   <div className="bg-gradient-to-br from-[#1a1a1a] to-[#0f0f0f] border border-gray-800 rounded-2xl p-8">
                     <h3 className="text-2xl font-bold mb-6">Wat Kunt U Verwachten?</h3>
                     <div className="space-y-6">
@@ -337,8 +295,6 @@ const ContactPage = () => {
           </div>
         </section>
       </main>
-    </>
-  );
+    </>;
 };
-
 export default ContactPage;
