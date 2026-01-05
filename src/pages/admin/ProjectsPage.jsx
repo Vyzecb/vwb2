@@ -90,37 +90,47 @@ const ProjectsPage = () => {
 
   /* ================= SAVE ================= */
   const handleSubmit = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    try {
-      const data = { ...formData };
+  try {
+    // ❗️category STRIPPEN
+    const {
+      category,      // ← bestaat alleen door join
+      ...cleanData
+    } = formData;
 
-      if (!data.slug && data.title) {
-        data.slug = data.title
-          .toLowerCase()
-          .replace(/\s+/g, '-')
-          .replace(/[^\w-]+/g, '');
-      }
-
-      const query = isEditing
-        ? supabase.from('projects').update(data).eq('id', isEditing)
-        : supabase.from('projects').insert([data]);
-
-      const { error } = await query;
-      if (error) throw error;
-
-      toast({
-        title: 'Succes',
-        description: isEditing ? 'Project bijgewerkt' : 'Project aangemaakt'
-      });
-
-      closeForm();
-      fetchData();
-    } catch (e) {
-      toast({ variant: 'destructive', title: 'Fout', description: e.message });
+    // slug veilig genereren
+    if (!cleanData.slug && cleanData.title) {
+      cleanData.slug = cleanData.title
+        .toLowerCase()
+        .replace(/\s+/g, '-')
+        .replace(/[^\w-]+/g, '');
     }
-  };
 
+    const query = isEditing
+      ? supabase.from('projects').update(cleanData).eq('id', isEditing)
+      : supabase.from('projects').insert([cleanData]);
+
+    const { error } = await query;
+    if (error) throw error;
+
+    toast({
+      title: 'Succes',
+      description: isEditing
+        ? 'Project bijgewerkt'
+        : 'Project aangemaakt'
+    });
+
+    closeForm();
+    fetchData();
+  } catch (e) {
+    toast({
+      variant: 'destructive',
+      title: 'Fout',
+      description: e.message
+    });
+  }
+};
   /* ================= DELETE ================= */
   const handleDelete = async () => {
     try {
