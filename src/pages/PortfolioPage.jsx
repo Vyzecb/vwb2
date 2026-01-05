@@ -1,149 +1,97 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React from 'react';
 import { Helmet } from 'react-helmet';
-import { motion, useInView } from 'framer-motion';
-import { Link } from 'react-router-dom';
-import { Button } from '@/components/ui/button';
-import { ArrowRight } from 'lucide-react';
-import { supabase } from '@/lib/customSupabaseClient';
+import { motion } from 'framer-motion';
 
-const PortfolioPage = () => {
-  const [activeFilter, setActiveFilter] = useState('Alle');
-  const [projects, setProjects] = useState([]);
-  const [categories, setCategories] = useState([]);
-  const [loading, setLoading] = useState(true);
+const teamMembers = [
+  {
+    id: 1,
+    name: 'Melvin Vos',
+    role: 'Founder & Lead Developer',
+    description:
+      'Specialist in premium webdesign, webontwikkeling en performance optimalisatie.',
+    image: '/team/melvin.jpg', // zorg dat deze bestaat in /public/team/
+  },
+  {
+    id: 2,
+    name: 'Team Member 2',
+    role: 'Designer',
+    description: 'Verborgen teamlid',
+    image: '/team/member2.jpg',
+  },
+  {
+    id: 3,
+    name: 'Team Member 3',
+    role: 'Marketing',
+    description: 'Verborgen teamlid',
+    image: '/team/member3.jpg',
+  },
+];
 
-  const projectsRef = useRef(null);
-  const projectsInView = useInView(projectsRef, { once: true, margin: '-100px' });
-
-  useEffect(() => {
-    const fetchPortfolio = async () => {
-      const [projRes, catRes] = await Promise.all([
-        supabase
-          .from('projects')
-          .select('*, categories(name)')
-          .eq('is_published', true)
-          .order('created_at', { ascending: false }),
-        supabase
-          .from('categories')
-          .select('*')
-          .order('name', { ascending: true }),
-      ]);
-
-      if (projRes.data) setProjects(projRes.data);
-      if (catRes.data) setCategories(catRes.data);
-      setLoading(false);
-    };
-
-    fetchPortfolio();
-  }, []);
-
-  const filteredProjects =
-    activeFilter === 'Alle'
-      ? projects
-      : projects.filter(p => p.categories?.name === activeFilter);
-
+const TeamPage = () => {
   return (
     <>
       <Helmet>
-        <title>Portfolio - Vos Web Designs</title>
-        <meta name="description" content="Ons werk en recente projecten." />
+        <title>Team - Vos Web Designs</title>
+        <meta
+          name="description"
+          content="Maak kennis met het team achter Vos Web Designs."
+        />
       </Helmet>
 
-      <main className="pt-24 pb-16">
-        {/* HERO */}
-        <section className="py-16 bg-gradient-to-b from-[#0a0a0a] to-[#0f0f0f]">
-          <div className="container mx-auto px-4 text-center">
-            <h1 className="text-5xl md:text-6xl font-bold mb-6">
-              Ons{' '}
-              <span className="bg-gradient-to-r from-[#D4AF37] to-[#F4E4C1] bg-clip-text text-transparent">
-                Portfolio
-              </span>
-            </h1>
-          </div>
+      <main className="pt-24 pb-16 bg-[#0a0a0a]">
+        {/* HEADER */}
+        <section className="text-center mb-16 px-4">
+          <h1 className="text-5xl md:text-6xl font-bold mb-6">
+            Ons{' '}
+            <span className="bg-gradient-to-r from-[#D4AF37] to-[#F4E4C1] bg-clip-text text-transparent">
+              Team
+            </span>
+          </h1>
+          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+            Klein team. Grote focus. Persoonlijke aanpak.
+          </p>
         </section>
 
-        {/* FILTERS */}
-        <section className="py-12 bg-[#0f0f0f] sticky top-20 z-40 border-b border-gray-800">
-          <div className="container mx-auto px-4 flex flex-wrap justify-center gap-3">
-            <Button
-              onClick={() => setActiveFilter('Alle')}
-              variant={activeFilter === 'Alle' ? 'default' : 'outline'}
-              className={activeFilter === 'Alle'
-                ? 'bg-[#D4AF37] text-black'
-                : 'border-gray-700 text-gray-300'}
-            >
-              Alle
-            </Button>
-
-            {categories.map(cat => (
-              <Button
-                key={cat.id}
-                onClick={() => setActiveFilter(cat.name)}
-                variant={activeFilter === cat.name ? 'default' : 'outline'}
-                className={activeFilter === cat.name
-                  ? 'bg-[#D4AF37] text-black'
-                  : 'border-gray-700 text-gray-300'}
+        {/* TEAM GRID */}
+        <section className="container mx-auto px-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-center">
+            {/* 🔒 SLECHTS 1 TEAMLID WORDT GERENDERD */}
+            {teamMembers.slice(0, 1).map((member, index) => (
+              <motion.div
+                key={member.id}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                className="bg-[#1a1a1a] border border-gray-800 rounded-2xl overflow-hidden hover:border-[#D4AF37] transition-all"
               >
-                {cat.name}
-              </Button>
+                <div className="aspect-square overflow-hidden">
+                  <img
+                    src={member.image}
+                    alt={member.name}
+                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+
+                <div className="p-6 text-center">
+                  <h3 className="text-2xl font-bold text-white mb-1">
+                    {member.name}
+                  </h3>
+                  <p className="text-[#D4AF37] font-medium mb-4">
+                    {member.role}
+                  </p>
+                  <p className="text-gray-400 text-sm leading-relaxed">
+                    {member.description}
+                  </p>
+                </div>
+              </motion.div>
             ))}
           </div>
-        </section>
 
-        {/* PROJECTS */}
-        <section ref={projectsRef} className="py-16 bg-[#0a0a0a]">
-          <div className="container mx-auto px-4">
-            {loading ? (
-              <p className="text-center text-gray-400">Laden…</p>
-            ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {filteredProjects.map((project, index) => (
-                  <motion.div
-                    key={project.id}
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={projectsInView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ duration: 0.6, delay: index * 0.1 }}
-                  >
-                    <Link to={`/portfolio/${project.id}`}>
-                      <div className="group relative overflow-hidden rounded-2xl bg-[#1a1a1a] border border-gray-800 hover:border-[#D4AF37] transition-all duration-300">
-                        <div className="aspect-[4/3] overflow-hidden">
-                          <img
-                            src={project.hero_image || '/placeholder.png'}
-                            alt={project.title}
-                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                            loading="lazy"
-                          />
-                        </div>
-
-                        <div className="p-6">
-                          {project.categories?.name && (
-                            <span className="inline-block px-3 py-1 bg-[#D4AF37]/10 text-[#D4AF37] text-xs font-medium rounded-full mb-3">
-                              {project.categories.name}
-                            </span>
-                          )}
-
-                          <h3 className="text-xl font-bold mb-2 group-hover:text-[#D4AF37] transition-colors">
-                            {project.title}
-                          </h3>
-
-                          <p className="text-gray-400 text-sm leading-relaxed mb-4 line-clamp-3">
-                            {project.short_description}
-                          </p>
-
-                          <div className="flex items-center text-[#D4AF37] text-sm font-medium">
-                            Bekijk Project
-                            <ArrowRight
-                              className="ml-2 group-hover:translate-x-2 transition-transform"
-                              size={16}
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </Link>
-                  </motion.div>
-                ))}
-              </div>
-            )}
+          {/* OPTIONAL FOOTNOTE */}
+          <div className="text-center mt-16">
+            <p className="text-gray-500 text-sm">
+              Het team wordt binnenkort uitgebreid.
+            </p>
           </div>
         </section>
       </main>
@@ -151,4 +99,4 @@ const PortfolioPage = () => {
   );
 };
 
-export default PortfolioPage;
+export default TeamPage;
