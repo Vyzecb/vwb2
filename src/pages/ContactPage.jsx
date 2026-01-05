@@ -3,7 +3,14 @@ import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { toast } from '@/components/ui/use-toast';
-import { Mail, Phone, MapPin, Send, Package } from 'lucide-react';
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Send,
+  CheckCircle,
+  ArrowRight
+} from 'lucide-react';
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({
@@ -47,12 +54,12 @@ const ContactPage = () => {
         <title>Contact – Vos Web Designs</title>
         <meta
           name="description"
-          content="Start uw project bij Vos Web Designs. Kies uw dienst en pakket en ontvang binnen 24 uur reactie."
+          content="Start uw project bij Vos Web Designs. Kies een dienst en pakket en ontvang binnen 24 uur reactie."
         />
       </Helmet>
 
-      <main className="pt-24 pb-16">
-        {/* HERO */}
+      <main className="pt-24 pb-20 bg-[#0a0a0a]">
+        {/* HERO – zelfde als Services */}
         <section className="py-16 bg-gradient-to-b from-[#0a0a0a] to-[#0f0f0f]">
           <div className="container mx-auto px-4 text-center">
             <motion.div
@@ -67,7 +74,7 @@ const ContactPage = () => {
                   Project
                 </span>
               </h1>
-              <p className="text-xl text-gray-300">
+              <p className="text-xl text-gray-300 leading-relaxed">
                 Kies een dienst en pakket – wij regelen de rest.
               </p>
             </motion.div>
@@ -77,13 +84,14 @@ const ContactPage = () => {
         {/* CONTENT */}
         <section className="py-16 bg-[#0a0a0a]">
           <div className="container mx-auto px-4 max-w-6xl">
-            <div className="grid lg:grid-cols-2 gap-12">
-              {/* FORM */}
+            <div className="grid lg:grid-cols-2 gap-12 items-start">
+              {/* FORM CARD */}
               <motion.div
                 initial={{ opacity: 0, x: -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.8 }}
+                transition={{ duration: 0.7 }}
+                className="bg-[#0f0f0f] border border-gray-800 rounded-2xl p-8"
               >
                 <h2 className="text-3xl font-bold mb-6">Contactformulier</h2>
 
@@ -125,11 +133,7 @@ const ContactPage = () => {
                     />
                   </div>
 
-                  {/* DIENST */}
-                  <div>
-                    <label className="block mb-2 text-sm font-medium">
-                      Dienst
-                    </label>
+                  <div className="grid md:grid-cols-2 gap-6">
                     <select
                       name="service"
                       value={formData.service}
@@ -137,20 +141,14 @@ const ContactPage = () => {
                       required
                       className="input"
                     >
-                      <option value="">Selecteer een dienst</option>
-                      <option value="Webdesign">Webdesign</option>
-                      <option value="Webontwikkeling">Webontwikkeling</option>
-                      <option value="E-commerce">E-commerce</option>
-                      <option value="SEO & Marketing">SEO & Marketing</option>
-                      <option value="Performance">Performance optimalisatie</option>
+                      <option value="">Selecteer dienst</option>
+                      <option>Webdesign</option>
+                      <option>Webontwikkeling</option>
+                      <option>E-commerce</option>
+                      <option>SEO & Marketing</option>
+                      <option>Performance optimalisatie</option>
                     </select>
-                  </div>
 
-                  {/* PAKKET */}
-                  <div>
-                    <label className="block mb-2 text-sm font-medium">
-                      Gekozen pakket
-                    </label>
                     <select
                       name="package"
                       value={formData.package}
@@ -159,20 +157,19 @@ const ContactPage = () => {
                       className="input"
                     >
                       <option value="">Selecteer pakket</option>
-                      <option value="Starter">Starter</option>
-                      <option value="Groei (Meest gekozen)">Groei (Meest gekozen)</option>
-                      <option value="Pro">Pro</option>
+                      <option>Starter</option>
+                      <option>Groei</option>
+                      <option>Pro</option>
                     </select>
                   </div>
 
-                  {/* MESSAGE */}
                   <textarea
                     name="message"
+                    rows={6}
                     placeholder="Vertel kort over uw project *"
                     value={formData.message}
                     onChange={handleChange}
                     required
-                    rows={6}
                     className="input resize-none"
                   />
 
@@ -187,29 +184,34 @@ const ContactPage = () => {
                 </form>
               </motion.div>
 
-              {/* INFO CARD */}
+              {/* INFO CARD – zelfde vibe als services packages */}
               <motion.div
                 initial={{ opacity: 0, x: 30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.8 }}
-                className="lg:sticky lg:top-28"
+                transition={{ duration: 0.7 }}
+                className="bg-[#0f0f0f] border border-gray-800 rounded-2xl p-8"
               >
-                <div className="bg-[#121212] border border-gray-800 rounded-2xl p-8">
-                  <h3 className="text-2xl font-bold mb-6">
-                    Wat gebeurt er na uw aanvraag?
-                  </h3>
+                <h3 className="text-2xl font-bold mb-6">
+                  Wat kunt u verwachten?
+                </h3>
 
-                  <ul className="space-y-5 text-gray-300">
-                    <li>✅ Reactie binnen 24 uur</li>
-                    <li>✅ Kort kennismakingsgesprek</li>
-                    <li>✅ Heldere planning & prijs</li>
-                    <li>✅ Snelle projectstart</li>
-                  </ul>
+                <ul className="space-y-4 mb-8">
+                  {[
+                    'Reactie binnen 24 uur',
+                    'Vrijblijvend kennismakingsgesprek',
+                    'Heldere planning & prijs',
+                    'Snelle projectstart'
+                  ].map((item, i) => (
+                    <li key={i} className="flex gap-3 text-gray-300">
+                      <CheckCircle size={20} className="text-[#D4AF37]" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
 
-                  <p className="text-gray-400 text-sm mt-6">
-                    Geen verplichtingen. Geen kleine lettertjes.
-                  </p>
+                <div className="pt-6 border-t border-gray-800 text-gray-400 text-sm">
+                  Geen verplichtingen. Geen kleine lettertjes.
                 </div>
               </motion.div>
             </div>
