@@ -22,7 +22,9 @@ const ServicesPage = () => {
     {
       icon: <Palette size={36} />,
       title: 'Webdesign',
-      subtitle: 'Professioneel design voor starters & groeiende bedrijven',
+      shortDescription: 'Luxe, op maat gemaakte designs die uw merk tot leven brengen',
+      description:
+        'Wij creëren visueel aantrekkelijke, gebruiksvriendelijke designs die perfect aansluiten bij uw merkidentiteit. Elk design is uniek en gericht op het verhogen van conversies en gebruikersengagement.',
       image: '/webde.png',
       packages: [
         {
@@ -33,8 +35,7 @@ const ServicesPage = () => {
             '1–3 pagina’s',
             'Modern responsive design',
             'Contactformulier',
-            'Basis SEO setup',
-            'Snelle oplevering'
+            'Basis SEO'
           ]
         },
         {
@@ -43,10 +44,9 @@ const ServicesPage = () => {
           highlight: true,
           features: [
             'Tot 6 pagina’s',
-            'Uniek UI/UX design',
-            'Conversiegericht ontwerp',
+            'Conversiegericht design',
             'Animaties & interacties',
-            'SEO basis + performance'
+            'SEO + performance'
           ]
         },
         {
@@ -56,8 +56,7 @@ const ServicesPage = () => {
           features: [
             'Volledig maatwerk',
             'Design system',
-            'A/B conversie focus',
-            'Geavanceerde animaties',
+            'A/B testing',
             'Premium support'
           ]
         }
@@ -66,7 +65,9 @@ const ServicesPage = () => {
     {
       icon: <Code size={36} />,
       title: 'Webontwikkeling',
-      subtitle: 'Snelle, schaalbare websites & webapps',
+      shortDescription: 'Krachtige, schaalbare websites gebouwd met moderne technologieën',
+      description:
+        'Van eenvoudige websites tot complexe webapplicaties. Wij bouwen snelle, veilige en schaalbare oplossingen met moderne technologieën die meegroeien met uw bedrijf.',
       image: '/webon.png',
       packages: [
         {
@@ -75,9 +76,8 @@ const ServicesPage = () => {
           highlight: false,
           features: [
             'Professionele website',
-            'React / moderne stack',
-            'CMS integratie',
-            'Basis beveiliging'
+            'Moderne tech stack',
+            'CMS integratie'
           ]
         },
         {
@@ -87,8 +87,7 @@ const ServicesPage = () => {
           features: [
             'Next.js / API koppelingen',
             'Database integratie',
-            'Snelle performance',
-            'Uitbreidbaar systeem'
+            'Performance optimalisatie'
           ]
         },
         {
@@ -96,8 +95,7 @@ const ServicesPage = () => {
           price: '€3.995',
           highlight: false,
           features: [
-            'Complexe webapp',
-            'Custom backend',
+            'Custom webapp',
             'Authenticatie',
             'Langdurige support'
           ]
@@ -107,7 +105,9 @@ const ServicesPage = () => {
     {
       icon: <ShoppingCart size={36} />,
       title: 'E-commerce',
-      subtitle: 'Webshops die verkopen',
+      shortDescription: 'Complete online winkels die verkopen stimuleren',
+      description:
+        'Wij bouwen krachtige webshops die niet alleen mooi zijn, maar ook converteren. Van productbeheer tot betaalintegraties – alles wordt voor u geregeld.',
       image: '/ecom.png',
       packages: [
         {
@@ -116,9 +116,8 @@ const ServicesPage = () => {
           highlight: false,
           features: [
             'Tot 10 producten',
-            'iDEAL / betaling',
-            'Responsive webshop',
-            'Basis voorraad'
+            'iDEAL betalingen',
+            'Basis voorraadbeheer'
           ]
         },
         {
@@ -128,8 +127,7 @@ const ServicesPage = () => {
           features: [
             'Onbeperkt producten',
             'Kortingen & coupons',
-            'Conversie optimalisatie',
-            'Orderbeheer'
+            'Conversie optimalisatie'
           ]
         },
         {
@@ -137,10 +135,9 @@ const ServicesPage = () => {
           price: '€5.995',
           highlight: false,
           features: [
-            'Custom e-commerce',
+            'Maatwerk webshop',
             'Automatiseringen',
-            'Analytics & funnels',
-            'Premium support'
+            'Analytics & funnels'
           ]
         }
       ]
@@ -148,22 +145,24 @@ const ServicesPage = () => {
     {
       icon: <Search size={36} />,
       title: 'SEO & Marketing',
-      subtitle: 'Meer zichtbaarheid, meer klanten',
+      shortDescription: 'Vergroot uw online zichtbaarheid en trek meer klanten aan',
+      description:
+        'Zichtbaar zijn in Google is essentieel. Wij optimaliseren uw website technisch en inhoudelijk om structureel meer bezoekers en aanvragen te genereren.',
       image: '/seo.png',
       packages: [
         {
           name: 'Starter',
-          price: '€249 / mnd',
+          price: '€249 / maand',
           highlight: false,
           features: [
             'Technische SEO',
-            'Keyword optimalisatie',
-            'Basis rapportage'
+            'Basis optimalisatie',
+            'Rapportage'
           ]
         },
         {
           name: 'Groei',
-          price: '€499 / mnd',
+          price: '€499 / maand',
           highlight: true,
           features: [
             'Content optimalisatie',
@@ -173,20 +172,22 @@ const ServicesPage = () => {
         },
         {
           name: 'Pro',
-          price: '€899 / mnd',
+          price: '€899 / maand',
           highlight: false,
           features: [
             'Linkbuilding',
             'Concurrentie analyse',
-            'Doorlopende optimalisatie'
+            'Doorlopende groei'
           ]
         }
       ]
     },
     {
       icon: <Zap size={36} />,
-      title: 'Performance',
-      subtitle: 'Snellere websites = meer conversies',
+      title: 'Performance Optimalisatie',
+      shortDescription: 'Snellere websites voor betere conversies',
+      description:
+        'Een trage website kost klanten. Wij optimaliseren snelheid, Core Web Vitals en technische prestaties voor maximale impact.',
       image: '/performance.png',
       packages: [
         {
@@ -215,8 +216,8 @@ const ServicesPage = () => {
           highlight: false,
           features: [
             'CDN setup',
-            'Advanced caching',
-            'Monitoring'
+            'Monitoring',
+            'Doorlopende optimalisatie'
           ]
         }
       ]
@@ -230,34 +231,40 @@ const ServicesPage = () => {
       </Helmet>
 
       <main className="pt-24 pb-20 bg-[#0a0a0a]">
-        <section className="container mx-auto px-4 text-center mb-20">
-          <h1 className="text-5xl font-bold mb-6">
-            Transparante{' '}
-            <span className="bg-gradient-to-r from-[#D4AF37] to-[#F4E4C1] bg-clip-text text-transparent">
-              Pakketten
-            </span>
-          </h1>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            Betaalbaar voor starters. Schaalbaar voor groei.
-          </p>
-        </section>
-
         <section ref={ref} className="container mx-auto px-4 space-y-32">
           {services.map((service, i) => (
             <motion.div
               key={i}
               initial={{ opacity: 0, y: 40 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6 }}
+              transition={{ duration: 0.7 }}
+              className="space-y-16"
             >
-              <div className="text-center mb-12">
-                <div className="mx-auto mb-4 w-16 h-16 rounded-xl bg-[#D4AF37]/10 flex items-center justify-center text-[#D4AF37]">
-                  {service.icon}
+              {/* INFO + IMAGE */}
+              <div className="grid lg:grid-cols-2 gap-12 items-center">
+                <div>
+                  <div className="w-16 h-16 rounded-xl bg-[#D4AF37]/10 flex items-center justify-center text-[#D4AF37] mb-6">
+                    {service.icon}
+                  </div>
+                  <h2 className="text-4xl font-bold mb-4">{service.title}</h2>
+                  <p className="text-xl text-gray-300 mb-4">
+                    {service.shortDescription}
+                  </p>
+                  <p className="text-gray-400 leading-relaxed">
+                    {service.description}
+                  </p>
                 </div>
-                <h2 className="text-4xl font-bold">{service.title}</h2>
-                <p className="text-gray-400 mt-3">{service.subtitle}</p>
+
+                <div className="rounded-2xl overflow-hidden border border-gray-800">
+                  <img
+                    src={service.image}
+                    alt={service.title}
+                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
               </div>
 
+              {/* PACKAGES */}
               <div className="grid md:grid-cols-3 gap-8">
                 {service.packages.map((pkg, idx) => (
                   <div
