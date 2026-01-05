@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '@/lib/customSupabaseClient';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/contexts/SupabaseAuthContext';
+import { toast } from '@/components/ui/use-toast';
 import {
   FolderKanban,
   MessageSquare,
@@ -15,28 +16,43 @@ import {
 
 /* ================= HELPERS ================= */
 
-const formatActivityText = (a) => {
-  const typeMap = {
-    project: 'Project',
-    testimonial: 'Review',
-    category: 'Categorie',
-  };
-
-  const actionMap = {
-    created: 'toegevoegd',
-    updated: 'bijgewerkt',
-    deleted: 'verwijderd',
-  };
-
-  return `${typeMap[a.type] || 'Item'} "${a.title || ''}" ${actionMap[a.action] || ''}`;
+const TYPE_LABELS = {
+  project: 'Project',
+  testimonial: 'Review',
+  category: 'Categorie',
+  settings: 'Instellingen',
 };
 
-const timeAgo = (date) => {
+const ACTION_LABELS = {
+  created: 'toegevoegd',
+  updated: 'bijgewerkt',
+  deleted: 'verwijderd',
+};
+
+const getTargetRoute = (activity) => {
+  switch (activity.type) {
+    case 'project':
+      return '/admin/projects';
+    case 'testimonial':
+      return '/admin/testimonials';
+    case 'category':
+      return '/admin/categories';
+    case 'settings':
+      return '/admin/settings';
+    default:
+      return null;
+  }
+};
+
+const formatTimeAgo = (date) => {
   const diff = Math.floor((Date.now() - new Date(date)) / 60000);
   if (diff < 1) return 'zojuist';
   if (diff < 60) return `${diff}m geleden`;
-  const h = Math.floor(diff / 60);
-  return `${h}u geleden`;
+  return `${Math.floor(diff / 60)}u geleden`;
+};
+
+const formatActivityText = (a) => {
+  return `${TYPE_LABELS[a.type] || 'Item'} "${a.title || ''}" ${ACTION_LABELS[a.action] || ''}`;
 };
 
 /* ================= PAGE ================= */
@@ -44,19 +60,21 @@ const timeAgo = (date) => {
 const DashboardPage = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
+  const channelRef = useRef(null);
 
   const [stats, setStats] = useState({
     projects: 0,
     testimonials: 0,
     categories: 0,
   });
+
   const [activities, setActivities] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  /* ================= DATA ================= */
+  /* ================= INITIAL FETCH ================= */
 
   useEffect(() => {
-    const fetchAll = async () => {
+    const fetchInitialData = async () => {
       try {
         setLoading(true);
 
@@ -73,7 +91,7 @@ const DashboardPage = () => {
             .from('activity_log')
             .select('*')
             .order('created_at', { ascending: false })
-            .limit(6),
+            .limit(8),
         ]);
 
         setStats({
@@ -90,8 +108,51 @@ const DashboardPage = () => {
       }
     };
 
-    fetchAll();
+    fetchInitialData();
   }, []);
+
+  /* ================= REALTIME ================= */
+
+  useEffect(() => {
+    channelRef.current = supabase
+      .channel('activity-log-realtime')
+      .on(
+        'postgres_changes',
+        { event: 'INSERT', schema: 'public', table: 'activity_log' },
+        (payload) => {
+          const activity = payload.new;
+
+          // prepend activity
+          setActivities(prev => [activity, ...prev].slice(0, 8));
+
+          // toast
+          toast({
+            title: 'Nieuwe activiteit',
+            description: `${formatActivityText(activity)} ${
+              activity.user_id === user?.id ? '(door jou)' : '(door andere gebruiker)'
+            }`,
+            action: getTargetRoute(activity)
+              ? (
+                <Button
+                  variant="link"
+                  className="text-[#D4AF37]"
+                  onClick={() => navigate(getTargetRoute(activity))}
+                >
+                  Bekijk
+                </Button>
+              )
+              : null,
+          });
+        }
+      )
+      .subscribe();
+
+    return () => {
+      if (channelRef.current) {
+        supabase.removeChannel(channelRef.current);
+      }
+    };
+  }, [navigate, user]);
 
   /* ================= COMPONENTS ================= */
 
@@ -126,38 +187,20 @@ const DashboardPage = () => {
       <div>
         <h1 className="text-3xl font-bold text-white">Dashboard</h1>
         <p className="text-gray-400 mt-2">
-          Welkom terug! Hier is een overzicht van je portfolio.
+          Live overzicht van alles wat er gebeurt.
         </p>
       </div>
 
       {/* STATS */}
       <div className="grid gap-4 md:grid-cols-3">
-        <StatCard
-          title="Totaal Projecten"
-          value={stats.projects}
-          icon={FolderKanban}
-          color="text-blue-500"
-          href="/admin/projects"
-        />
-        <StatCard
-          title="Reviews"
-          value={stats.testimonials}
-          icon={MessageSquare}
-          color="text-green-500"
-          href="/admin/testimonials"
-        />
-        <StatCard
-          title="Categorieën"
-          value={stats.categories}
-          icon={Layers}
-          color="text-purple-500"
-          href="/admin/categories"
-        />
+        <StatCard title="Projecten" value={stats.projects} icon={FolderKanban} color="text-blue-500" href="/admin/projects" />
+        <StatCard title="Reviews" value={stats.testimonials} icon={MessageSquare} color="text-green-500" href="/admin/testimonials" />
+        <StatCard title="Categorieën" value={stats.categories} icon={Layers} color="text-purple-500" href="/admin/categories" />
       </div>
 
       {/* CONTENT */}
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
-        {/* RECENTE ACTIVITEIT */}
+        {/* ACTIVITY */}
         <Card className="col-span-4 bg-[#1a1a1a] border-gray-800">
           <CardHeader>
             <CardTitle className="text-white">Recente Activiteit</CardTitle>
@@ -165,67 +208,68 @@ const DashboardPage = () => {
           <CardContent>
             <div className="space-y-4">
               {activities.length === 0 && (
-                <p className="text-gray-500 text-sm">
-                  Nog geen recente activiteit.
-                </p>
+                <p className="text-gray-500 text-sm">Nog geen activiteit.</p>
               )}
 
-              {activities.map((a) => (
-                <div
-                  key={a.id}
-                  className="flex items-center gap-4 text-sm border-b border-gray-800 pb-3 last:border-0"
-                >
-                  <div className="h-2 w-2 rounded-full bg-[#D4AF37]" />
-                  <div className="flex-1">
-                    <p className="text-gray-300">
-                      {formatActivityText(a)}
-                    </p>
+              {activities.map(a => {
+                const route = getTargetRoute(a);
+                return (
+                  <div
+                    key={a.id}
+                    onClick={() => route && navigate(route)}
+                    className={`flex items-center gap-4 text-sm border-b border-gray-800 pb-3 last:border-0 ${
+                      route ? 'cursor-pointer hover:bg-[#222]' : ''
+                    } p-2 rounded`}
+                  >
+                    <div className="h-2 w-2 rounded-full bg-[#D4AF37]" />
+                    <div className="flex-1">
+                      <p className="text-gray-300">
+                        {formatActivityText(a)}
+                        <span className="text-xs text-gray-500 ml-2">
+                          {a.user_id === user?.id ? '• door jou' : '• andere gebruiker'}
+                        </span>
+                      </p>
+
+                      {a.meta?.changes && (
+                        <p className="text-xs text-gray-500 mt-1">
+                          Gewijzigd: {Object.keys(a.meta.changes).join(', ')}
+                        </p>
+                      )}
+                    </div>
+                    <span className="text-gray-500 text-xs">
+                      {formatTimeAgo(a.created_at)}
+                    </span>
                   </div>
-                  <span className="text-gray-500 text-xs">
-                    {timeAgo(a.created_at)}
-                  </span>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </CardContent>
         </Card>
 
-        {/* SNELLE ACTIES */}
+        {/* QUICK ACTIONS */}
         <Card className="col-span-3 bg-[#1a1a1a] border-gray-800">
           <CardHeader>
             <CardTitle className="text-white">Snelle Acties</CardTitle>
           </CardHeader>
           <CardContent className="grid grid-cols-2 gap-4">
-            <Button
-              className="h-24 flex flex-col items-center justify-center gap-2 bg-black border border-gray-800 hover:border-[#D4AF37]"
-              onClick={() => navigate('/admin/projects?new=true')}
-            >
+            <Button onClick={() => navigate('/admin/projects?new=true')} className="h-24 flex flex-col items-center justify-center gap-2 bg-black border border-gray-800 hover:border-[#D4AF37]">
               <Plus size={24} className="text-[#D4AF37]" />
-              <span>Nieuw Project</span>
+              Nieuw Project
             </Button>
 
-            <Button
-              className="h-24 flex flex-col items-center justify-center gap-2 bg-black border border-gray-800 hover:border-[#D4AF37]"
-              onClick={() => navigate('/admin/testimonials?new=true')}
-            >
+            <Button onClick={() => navigate('/admin/testimonials?new=true')} className="h-24 flex flex-col items-center justify-center gap-2 bg-black border border-gray-800 hover:border-[#D4AF37]">
               <Plus size={24} className="text-[#D4AF37]" />
-              <span>Nieuwe Review</span>
+              Nieuwe Review
             </Button>
 
-            <Button
-              className="h-24 flex flex-col items-center justify-center gap-2 bg-black border border-gray-800"
-              onClick={() => navigate('/admin/settings')}
-            >
+            <Button onClick={() => navigate('/admin/settings')} className="h-24 flex flex-col items-center justify-center gap-2 bg-black border border-gray-800">
               <Layers size={24} className="text-gray-400" />
-              <span>Instellingen</span>
+              Instellingen
             </Button>
 
-            <Button
-              className="h-24 flex flex-col items-center justify-center gap-2 border border-[#D4AF37] text-[#D4AF37]"
-              onClick={() => window.open('/', '_blank')}
-            >
+            <Button onClick={() => window.open('/', '_blank')} className="h-24 flex flex-col items-center justify-center gap-2 border border-[#D4AF37] text-[#D4AF37]">
               <Eye size={24} />
-              <span>Bekijk Site</span>
+              Bekijk Site
             </Button>
           </CardContent>
         </Card>
