@@ -70,11 +70,11 @@ module.exports = {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
 			},
-					.input {
+		},
+	},
+			.input {
   @apply w-full px-4 py-3 bg-[#1a1a1a] border border-gray-800 rounded-lg 
   focus:border-[#D4AF37] focus:outline-none transition-colors text-white;
 },
-		},
-	},
 	plugins: [require('tailwindcss-animate')],
 };
