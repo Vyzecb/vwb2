@@ -10,7 +10,7 @@ import DeleteConfirmDialog from '@/components/DeleteConfirmDialog';
 import ImageUpload from '@/components/admin/ImageUpload';
 import { motion, AnimatePresence } from 'framer-motion';
 
-/* ✅ UNIVERSELE INPUT STYLE (DIT MISSE JE) */
+/* ===== INPUT STYLE ===== */
 const INPUT =
   'w-full bg-black border border-gray-700 rounded-lg px-4 py-3 text-white ' +
   'placeholder:text-gray-500 focus:border-[#D4AF37] focus:outline-none';
@@ -42,16 +42,29 @@ const ProjectsPage = () => {
   const fetchData = async () => {
     try {
       setLoading(true);
-      const [pRes, cRes] = await Promise.all([
-        supabase.from('projects').select('*, categories(name)').order('created_at', { ascending: false }),
-        supabase.from('categories').select('*').order('name')
-      ]);
 
-      if (pRes.error) throw pRes.error;
-      if (cRes.error) throw cRes.error;
+      const { data: projects, error: pErr } = await supabase
+        .from('projects')
+        .select(`
+          *,
+          category:categories (
+            id,
+            name
+          )
+        `)
+        .order('created_at', { ascending: false });
 
-      setProjects(pRes.data || []);
-      setCategories(cRes.data || []);
+      if (pErr) throw pErr;
+
+      const { data: categories, error: cErr } = await supabase
+        .from('categories')
+        .select('*')
+        .order('name');
+
+      if (cErr) throw cErr;
+
+      setProjects(projects || []);
+      setCategories(categories || []);
     } catch (e) {
       toast({ variant: 'destructive', title: 'Fout', description: e.message });
     } finally {
@@ -78,11 +91,15 @@ const ProjectsPage = () => {
   /* ================= SAVE ================= */
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     try {
       const data = { ...formData };
 
       if (!data.slug && data.title) {
-        data.slug = data.title.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]+/g, '');
+        data.slug = data.title
+          .toLowerCase()
+          .replace(/\s+/g, '-')
+          .replace(/[^\w-]+/g, '');
       }
 
       const query = isEditing
@@ -92,7 +109,11 @@ const ProjectsPage = () => {
       const { error } = await query;
       if (error) throw error;
 
-      toast({ title: 'Succes', description: isEditing ? 'Project bijgewerkt' : 'Project aangemaakt' });
+      toast({
+        title: 'Succes',
+        description: isEditing ? 'Project bijgewerkt' : 'Project aangemaakt'
+      });
+
       closeForm();
       fetchData();
     } catch (e) {
@@ -102,15 +123,39 @@ const ProjectsPage = () => {
 
   /* ================= DELETE ================= */
   const handleDelete = async () => {
-    await supabase.from('projects').delete().eq('id', deleteId);
-    setProjects(p => p.filter(x => x.id !== deleteId));
-    setDeleteId(null);
+    try {
+      const { error } = await supabase
+        .from('projects')
+        .delete()
+        .eq('id', deleteId);
+
+      if (error) throw error;
+
+      setProjects(p => p.filter(x => x.id !== deleteId));
+      toast({ title: 'Verwijderd', description: 'Project verwijderd' });
+    } catch (e) {
+      toast({ variant: 'destructive', title: 'Fout', description: e.message });
+    } finally {
+      setDeleteId(null);
+    }
   };
 
   /* ================= PUBLISH ================= */
   const togglePublish = async (id, current) => {
-    await supabase.from('projects').update({ is_published: !current }).eq('id', id);
-    setProjects(p => p.map(x => x.id === id ? { ...x, is_published: !current } : x));
+    try {
+      const { error } = await supabase
+        .from('projects')
+        .update({ is_published: !current })
+        .eq('id', id);
+
+      if (error) throw error;
+
+      setProjects(p =>
+        p.map(x => x.id === id ? { ...x, is_published: !current } : x)
+      );
+    } catch {
+      toast({ variant: 'destructive', title: 'Fout', description: 'Status wijzigen mislukt' });
+    }
   };
 
   /* ================= UI ================= */
@@ -140,29 +185,36 @@ const ProjectsPage = () => {
               className="lg:col-span-5"
             >
               <form onSubmit={handleSubmit} className="bg-[#111] rounded-xl border border-gray-800 p-5 space-y-4">
-                <ImageUpload value={formData.hero_image || ''} onChange={url => setFormData({ ...formData, hero_image: url })} />
+                <ImageUpload
+                  value={formData.hero_image || ''}
+                  onChange={url => setFormData({ ...formData, hero_image: url })}
+                />
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <input className={INPUT} placeholder="Titel" value={formData.title} onChange={e => setFormData({ ...formData, title: e.target.value })} required />
-                  <select className={INPUT} value={formData.category_id || ''} onChange={e => setFormData({ ...formData, category_id: e.target.value })}>
-                    <option value="">Selecteer categorie</option>
-                    {categories.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
-                  </select>
-                </div>
+                <input className={INPUT} placeholder="Titel" value={formData.title} onChange={e => setFormData({ ...formData, title: e.target.value })} required />
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <input className={INPUT} placeholder="Klant" value={formData.client || ''} onChange={e => setFormData({ ...formData, client: e.target.value })} />
-                  <input className={INPUT} placeholder="Jaar" value={formData.year || ''} onChange={e => setFormData({ ...formData, year: e.target.value })} />
-                </div>
+                <select className={INPUT} value={formData.category_id || ''} onChange={e => setFormData({ ...formData, category_id: e.target.value })}>
+                  <option value="">Selecteer categorie</option>
+                  {categories.map(c => (
+                    <option key={c.id} value={c.id}>{c.name}</option>
+                  ))}
+                </select>
 
-                <input className={INPUT} placeholder="Projectduur (bijv. 6 weken)" value={formData.duration || ''} onChange={e => setFormData({ ...formData, duration: e.target.value })} />
+                <input className={INPUT} placeholder="Klant" value={formData.client || ''} onChange={e => setFormData({ ...formData, client: e.target.value })} />
+                <input className={INPUT} placeholder="Jaar" value={formData.year || ''} onChange={e => setFormData({ ...formData, year: e.target.value })} />
+                <input className={INPUT} placeholder="Projectduur" value={formData.duration || ''} onChange={e => setFormData({ ...formData, duration: e.target.value })} />
 
                 <textarea className={`${INPUT} h-24`} placeholder="Korte beschrijving" value={formData.short_description || ''} onChange={e => setFormData({ ...formData, short_description: e.target.value })} />
                 <textarea className={`${INPUT} h-36`} placeholder="Uitgebreide projectbeschrijving" value={formData.description || ''} onChange={e => setFormData({ ...formData, description: e.target.value })} />
 
-                <div className="flex flex-col sm:flex-row justify-between gap-4">
-                  <label className="flex items-center gap-2 text-sm"><input type="checkbox" checked={formData.is_published} onChange={e => setFormData({ ...formData, is_published: e.target.checked })} /> Online</label>
-                  <label className="flex items-center gap-2 text-sm"><input type="checkbox" checked={formData.is_featured} onChange={e => setFormData({ ...formData, is_featured: e.target.checked })} /> Uitgelicht</label>
+                <div className="flex justify-between text-sm">
+                  <label className="flex items-center gap-2">
+                    <input type="checkbox" checked={formData.is_published} onChange={e => setFormData({ ...formData, is_published: e.target.checked })} />
+                    Online
+                  </label>
+                  <label className="flex items-center gap-2">
+                    <input type="checkbox" checked={formData.is_featured} onChange={e => setFormData({ ...formData, is_featured: e.target.checked })} />
+                    Uitgelicht
+                  </label>
                 </div>
 
                 <div className="flex gap-3">
@@ -193,12 +245,21 @@ const ProjectsPage = () => {
                 <div className="flex-1">
                   <h3 className="font-bold text-white">{p.title}</h3>
                   <p className="text-sm text-gray-400 line-clamp-3">{p.short_description || '—'}</p>
+                  {p.category?.name && (
+                    <span className="text-xs text-[#D4AF37]">{p.category.name}</span>
+                  )}
                 </div>
 
                 <div className="flex sm:flex-col gap-2 justify-end">
-                  <Button size="icon" variant="ghost" onClick={() => togglePublish(p.id, p.is_published)}>{p.is_published ? <Eye /> : <EyeOff />}</Button>
-                  <Button size="icon" variant="ghost" onClick={() => openEdit(p)}><Edit /></Button>
-                  <Button size="icon" variant="ghost" onClick={() => setDeleteId(p.id)}><Trash className="text-red-500" /></Button>
+                  <Button size="icon" variant="ghost" onClick={() => togglePublish(p.id, p.is_published)}>
+                    {p.is_published ? <Eye /> : <EyeOff />}
+                  </Button>
+                  <Button size="icon" variant="ghost" onClick={() => openEdit(p)}>
+                    <Edit />
+                  </Button>
+                  <Button size="icon" variant="ghost" onClick={() => setDeleteId(p.id)}>
+                    <Trash className="text-red-500" />
+                  </Button>
                 </div>
               </div>
             ))
