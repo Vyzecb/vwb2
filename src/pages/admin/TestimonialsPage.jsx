@@ -5,8 +5,11 @@ import { Trash, Plus, Edit, Star, Quote, Loader2, X } from 'lucide-react';
 import { toast } from '@/components/ui/use-toast';
 import DeleteConfirmDialog from '@/components/DeleteConfirmDialog';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useAuth } from '@/contexts/SupabaseAuthContext';
 
 const TestimonialsPage = () => {
+  const { user } = useAuth();
+
   const [testimonials, setTestimonials] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
@@ -27,12 +30,12 @@ const TestimonialsPage = () => {
   /* ================= FETCH ================= */
   const fetchTestimonials = async () => {
     setLoading(true);
-    const { data, error } = await supabase
+    const { data } = await supabase
       .from('testimonials')
       .select('*')
       .order('created_at', { ascending: false });
 
-    if (!error && data) setTestimonials(data);
+    if (data) setTestimonials(data);
     setLoading(false);
   };
 
@@ -45,13 +48,24 @@ const TestimonialsPage = () => {
     e.preventDefault();
 
     try {
-      const { error } = isEditing
+      const isUpdate = Boolean(isEditing);
+
+      const { error } = isUpdate
         ? await supabase.from('testimonials').update(formData).eq('id', isEditing)
         : await supabase.from('testimonials').insert([formData]);
 
       if (error) throw error;
 
+      // 🟡 ACTIVITY LOG
+      await supabase.from('activity_log').insert([{
+        type: 'testimonial',
+        action: isUpdate ? 'updated' : 'created',
+        title: formData.name,
+        user_id: user?.id
+      }]);
+
       toast({ title: 'Succes', description: 'Review opgeslagen' });
+
       setShowForm(false);
       setIsEditing(null);
       setFormData(initialForm);
@@ -72,7 +86,18 @@ const TestimonialsPage = () => {
   /* ================= DELETE ================= */
   const handleDelete = async () => {
     try {
+      const item = testimonials.find(t => t.id === deleteId);
+
       await supabase.from('testimonials').delete().eq('id', deleteId);
+
+      // 🟡 ACTIVITY LOG
+      await supabase.from('activity_log').insert([{
+        type: 'testimonial',
+        action: 'deleted',
+        title: item?.name,
+        user_id: user?.id
+      }]);
+
       setTestimonials(prev => prev.filter(t => t.id !== deleteId));
       toast({ title: 'Verwijderd', description: 'Review verwijderd' });
     } catch (e) {
@@ -84,7 +109,7 @@ const TestimonialsPage = () => {
 
   return (
     <>
-      {/* 🔥 CRUCIALE FIX: DIALOG BUITEN FRAMER MOTION */}
+      {/* DELETE DIALOG – buiten framer-motion (iOS safe) */}
       <DeleteConfirmDialog
         isOpen={!!deleteId}
         onConfirm={handleDelete}
@@ -127,11 +152,7 @@ const TestimonialsPage = () => {
                     <h3 className="font-bold text-white">
                       {isEditing ? 'Bewerk review' : 'Nieuwe review'}
                     </h3>
-                    <Button
-                      size="icon"
-                      variant="ghost"
-                      onClick={() => setShowForm(false)}
-                    >
+                    <Button size="icon" variant="ghost" onClick={() => setShowForm(false)}>
                       <X size={18} />
                     </Button>
                   </div>
@@ -187,21 +208,14 @@ const TestimonialsPage = () => {
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {testimonials.map(t => (
-                  <div
-                    key={t.id}
-                    className="bg-[#1a1a1a] p-5 rounded-xl border border-gray-800 flex flex-col"
-                  >
+                  <div key={t.id} className="bg-[#1a1a1a] p-5 rounded-xl border border-gray-800 flex flex-col">
                     <div className="flex justify-between mb-3">
                       <div className="flex gap-1">
                         {[...Array(5)].map((_, i) => (
                           <Star
                             key={i}
                             size={14}
-                            className={
-                              i < t.rating
-                                ? 'text-[#D4AF37] fill-[#D4AF37]'
-                                : 'text-gray-700'
-                            }
+                            className={i < t.rating ? 'text-[#D4AF37] fill-[#D4AF37]' : 'text-gray-700'}
                           />
                         ))}
                       </div>
@@ -218,9 +232,7 @@ const TestimonialsPage = () => {
 
                     <div className="relative pl-4 mb-4">
                       <Quote className="absolute left-0 top-0 text-[#D4AF37]/20" size={24} />
-                      <p className="text-gray-300 italic text-sm">
-                        "{t.text}"
-                      </p>
+                      <p className="text-gray-300 italic text-sm">"{t.text}"</p>
                     </div>
 
                     <div className="mt-auto pt-3 border-t border-gray-800">
