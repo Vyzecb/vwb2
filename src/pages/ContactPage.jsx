@@ -3,14 +3,7 @@ import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { toast } from '@/components/ui/use-toast';
-import {
-  Mail,
-  Phone,
-  MapPin,
-  Send,
-  CheckCircle,
-  ArrowRight
-} from 'lucide-react';
+import { Mail, Phone, MapPin, Send } from 'lucide-react';
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({
@@ -25,15 +18,19 @@ const ContactPage = () => {
 
   const handleChange = e => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
   };
 
   const handleSubmit = e => {
     e.preventDefault();
 
     toast({
-      title: 'Bericht verzonden ✉️',
-      description: 'We nemen binnen 24 uur contact met u op.',
+      title: 'Bericht Verzonden! ✉️',
+      description:
+        'We nemen binnen 24 uur contact met u op. Bedankt voor uw interesse!',
       duration: 5000
     });
 
@@ -51,31 +48,32 @@ const ContactPage = () => {
   return (
     <>
       <Helmet>
-        <title>Contact – Vos Web Designs</title>
+        <title>Contact - Vos Web Designs | Neem Contact Op</title>
         <meta
           name="description"
-          content="Start uw project bij Vos Web Designs. Kies een dienst en pakket en ontvang binnen 24 uur reactie."
+          content="Klaar om uw project te starten? Neem contact op met Vos Web Designs. We beantwoorden al uw vragen en plannen graag een vrijblijvend gesprek."
         />
       </Helmet>
 
-      <main className="pt-24 pb-20 bg-[#0a0a0a]">
-        {/* HERO – zelfde als Services */}
+      <main className="pt-24 pb-16">
+        {/* HERO */}
         <section className="py-16 bg-gradient-to-b from-[#0a0a0a] to-[#0f0f0f]">
-          <div className="container mx-auto px-4 text-center">
+          <div className="container mx-auto px-4">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="max-w-3xl mx-auto"
+              className="max-w-3xl mx-auto text-center"
             >
               <h1 className="text-5xl md:text-6xl font-bold mb-6">
-                Start Uw{' '}
+                Laten We{' '}
                 <span className="bg-gradient-to-r from-[#D4AF37] to-[#F4E4C1] bg-clip-text text-transparent">
-                  Project
+                  In Gesprek Gaan
                 </span>
               </h1>
               <p className="text-xl text-gray-300 leading-relaxed">
-                Kies een dienst en pakket – wij regelen de rest.
+                Heeft u een project in gedachten? We horen graag over uw plannen
+                en uitdagingen
               </p>
             </motion.div>
           </div>
@@ -83,137 +81,220 @@ const ContactPage = () => {
 
         {/* CONTENT */}
         <section className="py-16 bg-[#0a0a0a]">
-          <div className="container mx-auto px-4 max-w-6xl">
-            <div className="grid lg:grid-cols-2 gap-12 items-start">
-              {/* FORM CARD */}
-              <motion.div
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.7 }}
-                className="bg-[#0f0f0f] border border-gray-800 rounded-2xl p-8"
-              >
-                <h2 className="text-3xl font-bold mb-6">Contactformulier</h2>
-
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <input
-                      name="name"
-                      placeholder="Naam *"
-                      value={formData.name}
-                      onChange={handleChange}
-                      required
-                      className="input"
-                    />
-                    <input
-                      name="email"
-                      type="email"
-                      placeholder="Email *"
-                      value={formData.email}
-                      onChange={handleChange}
-                      required
-                      className="input"
-                    />
+          <div className="container mx-auto px-4">
+            <div className="max-w-6xl mx-auto">
+              {/* INFO CARDS */}
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+                {/* Email */}
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6 }}
+                  className="bg-[#1a1a1a] border border-gray-800 rounded-2xl p-8 text-center hover:border-[#D4AF37] transition-colors"
+                >
+                  <div className="w-16 h-16 bg-gradient-to-r from-[#D4AF37]/10 to-[#F4E4C1]/10 rounded-full flex items-center justify-center mx-auto mb-4 text-[#D4AF37]">
+                    <Mail size={28} />
                   </div>
-
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <input
-                      name="phone"
-                      placeholder="Telefoon"
-                      value={formData.phone}
-                      onChange={handleChange}
-                      className="input"
-                    />
-                    <input
-                      name="company"
-                      placeholder="Bedrijf"
-                      value={formData.company}
-                      onChange={handleChange}
-                      className="input"
-                    />
-                  </div>
-
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <select
-                      name="service"
-                      value={formData.service}
-                      onChange={handleChange}
-                      required
-                      className="input"
-                    >
-                      <option value="">Selecteer dienst</option>
-                      <option>Webdesign</option>
-                      <option>Webontwikkeling</option>
-                      <option>E-commerce</option>
-                      <option>SEO & Marketing</option>
-                      <option>Performance optimalisatie</option>
-                    </select>
-
-                    <select
-                      name="package"
-                      value={formData.package}
-                      onChange={handleChange}
-                      required
-                      className="input"
-                    >
-                      <option value="">Selecteer pakket</option>
-                      <option>Starter</option>
-                      <option>Groei</option>
-                      <option>Pro</option>
-                    </select>
-                  </div>
-
-                  <textarea
-                    name="message"
-                    rows={6}
-                    placeholder="Vertel kort over uw project *"
-                    value={formData.message}
-                    onChange={handleChange}
-                    required
-                    className="input resize-none"
-                  />
-
-                  <Button
-                    type="submit"
-                    size="lg"
-                    className="w-full bg-gradient-to-r from-[#D4AF37] to-[#F4E4C1] text-black"
+                  <h3 className="text-xl font-bold mb-2">Email</h3>
+                  <a
+                    href="mailto:info@voswebdesigns.nl"
+                    className="text-gray-300 hover:text-[#D4AF37] transition-colors"
                   >
-                    Verstuur aanvraag
-                    <Send className="ml-2" size={20} />
-                  </Button>
-                </form>
-              </motion.div>
+                    info@voswebdesigns.nl
+                  </a>
+                </motion.div>
 
-              {/* INFO CARD – zelfde vibe als services packages */}
-              <motion.div
-                initial={{ opacity: 0, x: 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.7 }}
-                className="bg-[#0f0f0f] border border-gray-800 rounded-2xl p-8"
-              >
-                <h3 className="text-2xl font-bold mb-6">
-                  Wat kunt u verwachten?
-                </h3>
+                {/* Phone */}
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.1 }}
+                  className="bg-[#1a1a1a] border border-gray-800 rounded-2xl p-8 text-center hover:border-[#D4AF37] transition-colors"
+                >
+                  <div className="w-16 h-16 bg-gradient-to-r from-[#D4AF37]/10 to-[#F4E4C1]/10 rounded-full flex items-center justify-center mx-auto mb-4 text-[#D4AF37]">
+                    <Phone size={28} />
+                  </div>
+                  <h3 className="text-xl font-bold mb-2">Telefoon</h3>
+                  <a
+                    href="tel:+31648608336"
+                    className="text-gray-300 hover:text-[#D4AF37] transition-colors"
+                  >
+                    +31 6 4860 8336
+                  </a>
+                </motion.div>
 
-                <ul className="space-y-4 mb-8">
-                  {[
-                    'Reactie binnen 24 uur',
-                    'Vrijblijvend kennismakingsgesprek',
-                    'Heldere planning & prijs',
-                    'Snelle projectstart'
-                  ].map((item, i) => (
-                    <li key={i} className="flex gap-3 text-gray-300">
-                      <CheckCircle size={20} className="text-[#D4AF37]" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
+                {/* Location */}
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.2 }}
+                  className="bg-[#1a1a1a] border border-gray-800 rounded-2xl p-8 text-center hover:border-[#D4AF37] transition-colors"
+                >
+                  <div className="w-16 h-16 bg-gradient-to-r from-[#D4AF37]/10 to-[#F4E4C1]/10 rounded-full flex items-center justify-center mx-auto mb-4 text-[#D4AF37]">
+                    <MapPin size={28} />
+                  </div>
+                  <h3 className="text-xl font-bold mb-2">Locatie</h3>
+                  <p className="text-gray-300">Lelystad, Nederland</p>
+                </motion.div>
+              </div>
 
-                <div className="pt-6 border-t border-gray-800 text-gray-400 text-sm">
-                  Geen verplichtingen. Geen kleine lettertjes.
-                </div>
-              </motion.div>
+              {/* FORM + INFO */}
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+                {/* FORM */}
+                <motion.div
+                  initial={{ opacity: 0, x: -30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8 }}
+                >
+                  <h2 className="text-3xl font-bold mb-6">
+                    Stuur Een Bericht
+                  </h2>
+                  <p className="text-gray-300 mb-8 leading-relaxed">
+                    Vul het formulier in en we nemen zo snel mogelijk contact met
+                    u op. Meestal binnen 24 uur.
+                  </p>
+
+                  <form onSubmit={handleSubmit} className="space-y-6">
+                    {/* Name + Email */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <input
+                        name="name"
+                        value={formData.name}
+                        onChange={handleChange}
+                        required
+                        placeholder="Uw naam *"
+                        className="input"
+                      />
+                      <input
+                        type="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        required
+                        placeholder="uw@email.nl *"
+                        className="input"
+                      />
+                    </div>
+
+                    {/* Phone + Company */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <input
+                        name="phone"
+                        value={formData.phone}
+                        onChange={handleChange}
+                        placeholder="+31 6 12345678"
+                        className="input"
+                      />
+                      <input
+                        name="company"
+                        value={formData.company}
+                        onChange={handleChange}
+                        placeholder="Uw bedrijf"
+                        className="input"
+                      />
+                    </div>
+
+                    {/* Service + Package */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <select
+                        name="service"
+                        value={formData.service}
+                        onChange={handleChange}
+                        required
+                        className="input"
+                      >
+                        <option value="">Selecteer een dienst</option>
+                        <option value="Webdesign">Webdesign</option>
+                        <option value="Webontwikkeling">Webontwikkeling</option>
+                        <option value="E-commerce">E-commerce</option>
+                        <option value="SEO & Marketing">SEO & Marketing</option>
+                        <option value="Anders">Anders</option>
+                      </select>
+
+                      <select
+                        name="package"
+                        value={formData.package}
+                        onChange={handleChange}
+                        required
+                        className="input"
+                      >
+                        <option value="">Selecteer pakket</option>
+                        <option value="Starter">Starter</option>
+                        <option value="Groei">Groei</option>
+                        <option value="Pro">Pro</option>
+                      </select>
+                    </div>
+
+                    {/* Message */}
+                    <textarea
+                      name="message"
+                      value={formData.message}
+                      onChange={handleChange}
+                      required
+                      rows={6}
+                      placeholder="Vertel ons over uw project..."
+                      className="input resize-none"
+                    />
+
+                    <Button
+                      type="submit"
+                      size="lg"
+                      className="w-full bg-gradient-to-r from-[#D4AF37] to-[#F4E4C1] text-black hover:opacity-90 transition-opacity"
+                    >
+                      Verstuur Bericht
+                      <Send className="ml-2" size={20} />
+                    </Button>
+                  </form>
+                </motion.div>
+
+                {/* RIGHT CARD (ongewijzigd) */}
+                <motion.div
+                  initial={{ opacity: 0, x: 30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8 }}
+                  className="lg:sticky lg:top-28"
+                >
+                  <div className="bg-gradient-to-br from-[#1a1a1a] to-[#0f0f0f] border border-gray-800 rounded-2xl p-8">
+                    <h3 className="text-2xl font-bold mb-6">
+                      Wat Kunt U Verwachten?
+                    </h3>
+
+                    <div className="space-y-6">
+                      {[
+                        'Snelle Reactie',
+                        'Kennismakingsgesprek',
+                        'Offerte op Maat',
+                        'Project Start'
+                      ].map((title, i) => (
+                        <div key={i} className="flex gap-4">
+                          <div className="w-10 h-10 bg-[#D4AF37]/10 rounded-full flex items-center justify-center shrink-0">
+                            <span className="text-[#D4AF37] font-bold">
+                              {i + 1}
+                            </span>
+                          </div>
+                          <div>
+                            <span className="font-semibold block mb-1">
+                              {title}
+                            </span>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+
+                    <div className="mt-8 pt-8 border-t border-gray-800">
+                      <p className="text-gray-400 text-sm leading-relaxed">
+                        Heeft u vragen over onze diensten, prijzen of werkwijze?
+                        We beantwoorden graag al uw vragen.
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
+              </div>
             </div>
           </div>
         </section>
