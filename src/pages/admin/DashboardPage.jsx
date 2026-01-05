@@ -247,32 +247,80 @@ const DashboardPage = () => {
         </Card>
 
         {/* QUICK ACTIONS */}
-        <Card className="col-span-3 bg-[#1a1a1a] border-gray-800">
-          <CardHeader>
-            <CardTitle className="text-white">Snelle Acties</CardTitle>
-          </CardHeader>
-          <CardContent className="grid grid-cols-2 gap-4">
-            <Button onClick={() => navigate('/admin/projects?new=true')} className="h-24 flex flex-col items-center justify-center gap-2 bg-black border border-gray-800 hover:border-[#D4AF37]">
-              <Plus size={24} className="text-[#D4AF37]" />
-              Nieuw Project
-            </Button>
+<Card className="col-span-3 bg-[#1a1a1a] border-gray-800">
+  <CardHeader>
+    <CardTitle className="text-white">Snelle Acties</CardTitle>
+  </CardHeader>
 
-            <Button onClick={() => navigate('/admin/testimonials?new=true')} className="h-24 flex flex-col items-center justify-center gap-2 bg-black border border-gray-800 hover:border-[#D4AF37]">
-              <Plus size={24} className="text-[#D4AF37]" />
-              Nieuwe Review
-            </Button>
+  <CardContent className="space-y-4">
+    {/* PRIMARY ACTION */}
+    <Button
+      onClick={() => navigate('/admin/projects?new=true')}
+      className="
+        w-full h-20
+        flex items-center justify-center gap-3
+        bg-[#D4AF37] text-black
+        hover:bg-[#b8962e]
+        font-semibold text-lg
+        rounded-xl
+      "
+    >
+      <Plus size={26} />
+      Nieuw Project
+    </Button>
 
-            <Button onClick={() => navigate('/admin/settings')} className="h-24 flex flex-col items-center justify-center gap-2 bg-black border border-gray-800">
-              <Layers size={24} className="text-gray-400" />
-              Instellingen
-            </Button>
+    {/* SECONDARY ACTIONS */}
+    <div className="grid grid-cols-2 gap-3">
+      <Button
+        onClick={() => navigate('/admin/testimonials?new=true')}
+        className="
+          h-16
+          flex flex-col items-center justify-center gap-1
+          bg-black border border-gray-800
+          hover:border-[#D4AF37]
+          hover:bg-[#111]
+          rounded-xl
+        "
+      >
+        <Plus size={20} className="text-[#D4AF37]" />
+        <span className="text-sm">Nieuwe Review</span>
+      </Button>
 
-            <Button onClick={() => window.open('/', '_blank')} className="h-24 flex flex-col items-center justify-center gap-2 border border-[#D4AF37] text-[#D4AF37]">
-              <Eye size={24} />
-              Bekijk Site
-            </Button>
-          </CardContent>
-        </Card>
+      <Button
+        onClick={() => navigate('/admin/settings')}
+        className="
+          h-16
+          flex flex-col items-center justify-center gap-1
+          bg-black border border-gray-800
+          hover:border-[#D4AF37]
+          hover:bg-[#111]
+          rounded-xl
+        "
+      >
+        <Layers size={20} className="text-gray-400" />
+        <span className="text-sm">Instellingen</span>
+      </Button>
+
+      <Button
+        onClick={() => window.open('/', '_blank')}
+        className="
+          col-span-2
+          h-14
+          flex items-center justify-center gap-2
+          border border-[#D4AF37]
+          text-[#D4AF37]
+          hover:bg-[#D4AF37]
+          hover:text-black
+          rounded-xl
+          transition
+        "
+      >
+        <Eye size={18} />
+        Bekijk website
+      </Button>
+    </div>
+  </CardContent>
+</Card>
       </div>
     </div>
   );
