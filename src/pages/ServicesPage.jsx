@@ -34,7 +34,7 @@ const ServicesPage = () => {
       ],
       pricing: 'Vanaf €2.500',
       timeline: '2-4 weken',
-      image: '/webde.png'
+      image: 'public/webde.png'
     },
     {
       icon: <Code size={40} />,
