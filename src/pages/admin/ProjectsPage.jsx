@@ -9,6 +9,7 @@ import { toast } from '@/components/ui/use-toast';
 import DeleteConfirmDialog from '@/components/DeleteConfirmDialog';
 import ImageUpload from '@/components/admin/ImageUpload';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useAuth } from '@/contexts/SupabaseAuthContext';
 
 /* ===== INPUT STYLE ===== */
 const INPUT =
@@ -30,6 +31,8 @@ const INITIAL_FORM_STATE = {
 };
 
 const ProjectsPage = () => {
+  const { user } = useAuth();
+
   const [projects, setProjects] = useState([]);
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -90,56 +93,69 @@ const ProjectsPage = () => {
 
   /* ================= SAVE ================= */
   const handleSubmit = async (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  try {
-    // ❗️category STRIPPEN
-    const {
-      category,      // ← bestaat alleen door join
-      ...cleanData
-    } = formData;
+    try {
+      const { category, ...cleanData } = formData;
 
-    // slug veilig genereren
-    if (!cleanData.slug && cleanData.title) {
-      cleanData.slug = cleanData.title
-        .toLowerCase()
-        .replace(/\s+/g, '-')
-        .replace(/[^\w-]+/g, '');
+      if (!cleanData.slug && cleanData.title) {
+        cleanData.slug = cleanData.title
+          .toLowerCase()
+          .replace(/\s+/g, '-')
+          .replace(/[^\w-]+/g, '');
+      }
+
+      const isUpdate = Boolean(isEditing);
+
+      const { error } = isUpdate
+        ? await supabase.from('projects').update(cleanData).eq('id', isEditing)
+        : await supabase.from('projects').insert([cleanData]);
+
+      if (error) throw error;
+
+      // 🟡 ACTIVITY LOG
+      await supabase.from('activity_log').insert([{
+        type: 'project',
+        action: isUpdate ? 'updated' : 'created',
+        title: cleanData.title,
+        user_id: user?.id
+      }]);
+
+      toast({
+        title: 'Succes',
+        description: isUpdate ? 'Project bijgewerkt' : 'Project aangemaakt'
+      });
+
+      closeForm();
+      fetchData();
+    } catch (e) {
+      toast({
+        variant: 'destructive',
+        title: 'Fout',
+        description: e.message
+      });
     }
+  };
 
-    const query = isEditing
-      ? supabase.from('projects').update(cleanData).eq('id', isEditing)
-      : supabase.from('projects').insert([cleanData]);
-
-    const { error } = await query;
-    if (error) throw error;
-
-    toast({
-      title: 'Succes',
-      description: isEditing
-        ? 'Project bijgewerkt'
-        : 'Project aangemaakt'
-    });
-
-    closeForm();
-    fetchData();
-  } catch (e) {
-    toast({
-      variant: 'destructive',
-      title: 'Fout',
-      description: e.message
-    });
-  }
-};
   /* ================= DELETE ================= */
   const handleDelete = async () => {
     try {
+      const item = projects.find(p => p.id === deleteId);
+
       const { error } = await supabase
         .from('projects')
         .delete()
         .eq('id', deleteId);
 
       if (error) throw error;
+
+      // 🟡 ACTIVITY LOG
+      await supabase.from('activity_log').insert([{
+        type: 'project',
+        action: 'deleted',
+        title: item?.title,
+        user_id: user?.id
+      }]);
 
       setProjects(p => p.filter(x => x.id !== deleteId));
       toast({ title: 'Verwijderd', description: 'Project verwijderd' });
@@ -201,12 +217,9 @@ const ProjectsPage = () => {
                 />
 
                 <input className={INPUT} placeholder="Titel" value={formData.title} onChange={e => setFormData({ ...formData, title: e.target.value })} required />
-
                 <select className={INPUT} value={formData.category_id || ''} onChange={e => setFormData({ ...formData, category_id: e.target.value })}>
                   <option value="">Selecteer categorie</option>
-                  {categories.map(c => (
-                    <option key={c.id} value={c.id}>{c.name}</option>
-                  ))}
+                  {categories.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
                 </select>
 
                 <input className={INPUT} placeholder="Klant" value={formData.client || ''} onChange={e => setFormData({ ...formData, client: e.target.value })} />
