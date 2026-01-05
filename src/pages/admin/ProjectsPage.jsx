@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { supabase } from '@/lib/customSupabaseClient';
 import { Button } from '@/components/ui/button';
 import {
-  Trash, Eye, EyeOff, Edit, Plus, X, Loader2,
+  Trash, Eye, EyeOff, Edit, Plus, Loader2,
   Image as ImageIcon, FolderKanban
 } from 'lucide-react';
 import { toast } from '@/components/ui/use-toast';
@@ -10,6 +10,7 @@ import DeleteConfirmDialog from '@/components/DeleteConfirmDialog';
 import ImageUpload from '@/components/admin/ImageUpload';
 import { motion, AnimatePresence } from 'framer-motion';
 
+/* ✅ UNIVERSELE INPUT STYLE (DIT MISSE JE) */
 const INPUT =
   'w-full bg-black border border-gray-700 rounded-lg px-4 py-3 text-white ' +
   'placeholder:text-gray-500 focus:border-[#D4AF37] focus:outline-none';
@@ -43,7 +44,7 @@ const ProjectsPage = () => {
       setLoading(true);
       const [pRes, cRes] = await Promise.all([
         supabase.from('projects').select('*, categories(name)').order('created_at', { ascending: false }),
-        supabase.from('categories').select('*').order('name'),
+        supabase.from('categories').select('*').order('name')
       ]);
 
       if (pRes.error) throw pRes.error;
@@ -60,7 +61,7 @@ const ProjectsPage = () => {
 
   useEffect(() => { fetchData(); }, []);
 
-  /* ================= FORM ================= */
+  /* ================= EDIT ================= */
   const openEdit = (project) => {
     setFormData({ ...INITIAL_FORM_STATE, ...project });
     setIsEditing(project.id);
@@ -74,19 +75,21 @@ const ProjectsPage = () => {
     setFormData(INITIAL_FORM_STATE);
   };
 
+  /* ================= SAVE ================= */
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const data = { ...formData };
+
       if (!data.slug && data.title) {
         data.slug = data.title.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]+/g, '');
       }
 
-      const q = isEditing
+      const query = isEditing
         ? supabase.from('projects').update(data).eq('id', isEditing)
         : supabase.from('projects').insert([data]);
 
-      const { error } = await q;
+      const { error } = await query;
       if (error) throw error;
 
       toast({ title: 'Succes', description: isEditing ? 'Project bijgewerkt' : 'Project aangemaakt' });
@@ -97,20 +100,22 @@ const ProjectsPage = () => {
     }
   };
 
-  const togglePublish = async (id, current) => {
-    await supabase.from('projects').update({ is_published: !current }).eq('id', id);
-    setProjects(p => p.map(x => x.id === id ? { ...x, is_published: !current } : x));
-  };
-
+  /* ================= DELETE ================= */
   const handleDelete = async () => {
     await supabase.from('projects').delete().eq('id', deleteId);
     setProjects(p => p.filter(x => x.id !== deleteId));
     setDeleteId(null);
   };
 
+  /* ================= PUBLISH ================= */
+  const togglePublish = async (id, current) => {
+    await supabase.from('projects').update({ is_published: !current }).eq('id', id);
+    setProjects(p => p.map(x => x.id === id ? { ...x, is_published: !current } : x));
+  };
+
   /* ================= UI ================= */
   return (
-    <div className="max-w-7xl mx-auto space-y-6 px-4 pb-20">
+    <div className="max-w-7xl mx-auto space-y-6 px-4 pb-24">
       {/* HEADER */}
       <div className="flex flex-col sm:flex-row justify-between gap-4">
         <div>
@@ -134,7 +139,7 @@ const ProjectsPage = () => {
               exit={{ opacity: 0 }}
               className="lg:col-span-5"
             >
-              <form onSubmit={handleSubmit} className="bg-[#111] rounded-xl border border-gray-800 p-5 space-y-6">
+              <form onSubmit={handleSubmit} className="bg-[#111] rounded-xl border border-gray-800 p-5 space-y-4">
                 <ImageUpload value={formData.hero_image || ''} onChange={url => setFormData({ ...formData, hero_image: url })} />
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -155,15 +160,9 @@ const ProjectsPage = () => {
                 <textarea className={`${INPUT} h-24`} placeholder="Korte beschrijving" value={formData.short_description || ''} onChange={e => setFormData({ ...formData, short_description: e.target.value })} />
                 <textarea className={`${INPUT} h-36`} placeholder="Uitgebreide projectbeschrijving" value={formData.description || ''} onChange={e => setFormData({ ...formData, description: e.target.value })} />
 
-                <div className="flex flex-col sm:flex-row gap-4 justify-between">
-                  <label className="flex items-center gap-2 text-sm">
-                    <input type="checkbox" checked={formData.is_published} onChange={e => setFormData({ ...formData, is_published: e.target.checked })} />
-                    Online
-                  </label>
-                  <label className="flex items-center gap-2 text-sm">
-                    <input type="checkbox" checked={formData.is_featured} onChange={e => setFormData({ ...formData, is_featured: e.target.checked })} />
-                    Uitgelicht
-                  </label>
+                <div className="flex flex-col sm:flex-row justify-between gap-4">
+                  <label className="flex items-center gap-2 text-sm"><input type="checkbox" checked={formData.is_published} onChange={e => setFormData({ ...formData, is_published: e.target.checked })} /> Online</label>
+                  <label className="flex items-center gap-2 text-sm"><input type="checkbox" checked={formData.is_featured} onChange={e => setFormData({ ...formData, is_featured: e.target.checked })} /> Uitgelicht</label>
                 </div>
 
                 <div className="flex gap-3">
@@ -197,9 +196,7 @@ const ProjectsPage = () => {
                 </div>
 
                 <div className="flex sm:flex-col gap-2 justify-end">
-                  <Button size="icon" variant="ghost" onClick={() => togglePublish(p.id, p.is_published)}>
-                    {p.is_published ? <Eye /> : <EyeOff />}
-                  </Button>
+                  <Button size="icon" variant="ghost" onClick={() => togglePublish(p.id, p.is_published)}>{p.is_published ? <Eye /> : <EyeOff />}</Button>
                   <Button size="icon" variant="ghost" onClick={() => openEdit(p)}><Edit /></Button>
                   <Button size="icon" variant="ghost" onClick={() => setDeleteId(p.id)}><Trash className="text-red-500" /></Button>
                 </div>
