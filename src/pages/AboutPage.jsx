@@ -46,7 +46,7 @@ const AboutPage = () => {
     {
       name: 'Melvin Vos',
       role: 'Founder & Lead Developer',
-      image: '/about-team.jpg',
+      image: '/logo.jpeg',
       bio: 'Met een sterke focus op performance, schaalbaarheid en design bouw ik premium websites en webapplicaties die bedrijven écht verder helpen.',
     },
   ];
@@ -105,7 +105,7 @@ const AboutPage = () => {
 
               <div className="rounded-2xl overflow-hidden border border-gray-800">
                 <img
-                  src="/about-story.jpg"
+                  src="/werk.png"
                   alt="Werkplek Vos Web Designs"
                   className="w-full h-full object-cover"
                 />
