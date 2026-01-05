@@ -1,8 +1,13 @@
-
 import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { supabase } from '@/lib/customSupabaseClient';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription
+} from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -11,39 +16,49 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Switch } from '@/components/ui/switch';
 import { useToast } from '@/components/ui/use-toast';
 import { useSettings } from '@/contexts/SettingsContext';
-import { Save, Loader2, Globe, Building2, Share2, Search, Bell } from 'lucide-react';
+import {
+  Save,
+  Loader2,
+  Globe,
+  Building2,
+  Share2,
+  Search,
+  Bell
+} from 'lucide-react';
 
 const SettingsPage = () => {
   const { toast } = useToast();
   const { refreshSettings } = useSettings();
+
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [activeTab, setActiveTab] = useState('general');
-  
+  const [settingsId, setSettingsId] = useState(null);
+
   const [formData, setFormData] = useState({
     site_name: '',
     site_description: '',
     contact_email: '',
     contact_phone: '',
-    
+
     address_street: '',
     address_city: '',
     address_postal_code: '',
     address_country: '',
-    
+
     social_instagram: '',
     social_linkedin: '',
     social_facebook: '',
     social_twitter: '',
-    
+
     seo_meta_description: '',
     seo_keywords: '',
-    
+
     notify_new_project: true,
     notify_new_review: true,
   });
 
-  const [settingsId, setSettingsId] = useState(null);
+  /* ================= FETCH ================= */
 
   useEffect(() => {
     fetchSettings();
@@ -57,24 +72,25 @@ const SettingsPage = () => {
         .select('*')
         .limit(1)
         .single();
-        
-      if (error && error.code !== 'PGRST116') throw error; // PGRST116 is "Row not found"
-      
+
+      if (error && error.code !== 'PGRST116') throw error;
+
       if (data) {
         setFormData(prev => ({ ...prev, ...data }));
         setSettingsId(data.id);
       }
     } catch (error) {
-      console.error('Error fetching settings:', error);
       toast({
-        variant: "destructive",
-        title: "Fout",
-        description: "Kon instellingen niet laden."
+        variant: 'destructive',
+        title: 'Fout',
+        description: 'Kon instellingen niet laden.',
       });
     } finally {
       setLoading(false);
     }
   };
+
+  /* ================= HANDLERS ================= */
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -85,51 +101,62 @@ const SettingsPage = () => {
     setFormData(prev => ({ ...prev, [name]: checked }));
   };
 
+  /* ================= SAVE ================= */
+
   const handleSave = async () => {
     setSaving(true);
+
     try {
-      // Remove any non-DB fields if necessary (like updated_at which is handled by DB defaults, but here we can send it or let Supabase ignore)
+      const userRes = await supabase.auth.getUser();
+      const userId = userRes?.data?.user?.id || null;
+
       const dataToSave = {
         ...formData,
-        updated_at: new Date().toISOString()
+        updated_at: new Date().toISOString(),
       };
 
       let error;
-      
+
       if (settingsId) {
-        // Update existing
         const { error: updateError } = await supabase
           .from('site_settings')
           .update(dataToSave)
           .eq('id', settingsId);
         error = updateError;
       } else {
-        // Create new
         const { data: newData, error: insertError } = await supabase
           .from('site_settings')
           .insert([dataToSave])
           .select()
           .single();
-          
+
         if (newData) setSettingsId(newData.id);
         error = insertError;
       }
 
       if (error) throw error;
 
-      // Refresh global settings context
+      /* 🔔 ACTIVITY LOG */
+      await supabase.from('activity_log').insert([
+        {
+          type: 'settings',
+          action: 'updated',
+          title: 'Website instellingen',
+          user_id: userId,
+        },
+      ]);
+
       await refreshSettings();
 
       toast({
-        title: "Succes",
-        description: "Instellingen succesvol opgeslagen."
+        title: 'Succes',
+        description: 'Instellingen succesvol opgeslagen.',
       });
     } catch (error) {
-      console.error('Error saving settings:', error);
       toast({
-        variant: "destructive",
-        title: "Fout bij opslaan",
-        description: error.message
+        variant: 'destructive',
+        title: 'Fout bij opslaan',
+        description: error.message,
       });
     } finally {
       setSaving(false);
@@ -144,23 +171,32 @@ const SettingsPage = () => {
     );
   }
 
+  /* ================= UI ================= */
+
   return (
     <div className="space-y-6 max-w-5xl mx-auto pb-20">
       <Helmet>
         <title>Instellingen - Vos Admin</title>
       </Helmet>
 
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+      <div className="flex flex-col sm:flex-row justify-between gap-4">
         <div>
           <h1 className="text-3xl font-bold text-white">Instellingen</h1>
-          <p className="text-gray-400 mt-2">Beheer je algemene website instellingen.</p>
+          <p className="text-gray-400 mt-2">
+            Beheer je algemene website instellingen.
+          </p>
         </div>
-        <Button 
-          onClick={handleSave} 
+
+        <Button
+          onClick={handleSave}
           disabled={saving}
-          className="bg-[#D4AF37] text-black hover:bg-[#b8962e] min-w-[140px]"
+          className="bg-[#D4AF37] text-black min-w-[140px]"
         >
-          {saving ? <Loader2 className="animate-spin mr-2" size={18} /> : <Save className="mr-2" size={18} />}
+          {saving ? (
+            <Loader2 className="animate-spin mr-2" size={18} />
+          ) : (
+            <Save className="mr-2" size={18} />
+          )}
           Opslaan
         </Button>
       </div>
