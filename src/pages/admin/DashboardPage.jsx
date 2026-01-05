@@ -246,77 +246,81 @@ const DashboardPage = () => {
           </CardContent>
         </Card>
 
-        {/* QUICK ACTIONS */}
+       {/* QUICK ACTIONS */}
 <Card className="col-span-3 bg-[#1a1a1a] border-gray-800">
   <CardHeader>
     <CardTitle className="text-white">Snelle Acties</CardTitle>
   </CardHeader>
 
-  <CardContent className="space-y-4">
+  <CardContent className="space-y-5">
     {/* PRIMARY ACTION */}
     <Button
       onClick={() => navigate('/admin/projects?new=true')}
       className="
-        w-full h-20
+        w-full h-16
         flex items-center justify-center gap-3
         bg-[#D4AF37] text-black
         hover:bg-[#b8962e]
-        font-semibold text-lg
-        rounded-xl
+        font-semibold text-base
+        rounded-lg
+        shadow-md
       "
     >
-      <Plus size={26} />
-      Nieuw Project
+      <Plus size={22} />
+      Nieuw project aanmaken
     </Button>
 
     {/* SECONDARY ACTIONS */}
-    <div className="grid grid-cols-2 gap-3">
+    <div className="space-y-2">
       <Button
         onClick={() => navigate('/admin/testimonials?new=true')}
+        variant="outline"
         className="
-          h-16
-          flex flex-col items-center justify-center gap-1
-          bg-black border border-gray-800
+          w-full h-12
+          flex items-center gap-3
+          justify-start
+          border-gray-700 text-gray-300
           hover:border-[#D4AF37]
-          hover:bg-[#111]
-          rounded-xl
+          hover:text-white
+          rounded-lg
         "
       >
-        <Plus size={20} className="text-[#D4AF37]" />
-        <span className="text-sm">Nieuwe Review</span>
+        <Plus size={18} className="text-[#D4AF37]" />
+        Nieuwe review toevoegen
       </Button>
 
       <Button
         onClick={() => navigate('/admin/settings')}
+        variant="outline"
         className="
-          h-16
-          flex flex-col items-center justify-center gap-1
-          bg-black border border-gray-800
-          hover:border-[#D4AF37]
-          hover:bg-[#111]
-          rounded-xl
+          w-full h-12
+          flex items-center gap-3
+          justify-start
+          border-gray-700 text-gray-300
+          hover:border-gray-500
+          hover:text-white
+          rounded-lg
         "
       >
-        <Layers size={20} className="text-gray-400" />
-        <span className="text-sm">Instellingen</span>
+        <Layers size={18} className="text-gray-400" />
+        Instellingen beheren
       </Button>
+    </div>
 
+    {/* TERTIARY ACTION */}
+    <div className="pt-2 border-t border-gray-800">
       <Button
         onClick={() => window.open('/', '_blank')}
+        variant="ghost"
         className="
-          col-span-2
-          h-14
+          w-full
           flex items-center justify-center gap-2
-          border border-[#D4AF37]
-          text-[#D4AF37]
-          hover:bg-[#D4AF37]
-          hover:text-black
-          rounded-xl
-          transition
+          text-gray-400
+          hover:text-[#D4AF37]
         "
       >
-        <Eye size={18} />
-        Bekijk website
+        <Eye size={16} />
+        Website bekijken
       </Button>
     </div>
   </CardContent>
