@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useMemo } from 'react';
 import { Helmet } from 'react-helmet';
 import { motion, useInView } from 'framer-motion';
 import { Link } from 'react-router-dom';
@@ -30,7 +30,6 @@ const ServicesPage = () => {
         {
           name: 'Starter',
           price: '€695',
-          highlight: false,
           features: [
             '1–3 pagina’s',
             'Modern responsive design',
@@ -41,7 +40,6 @@ const ServicesPage = () => {
         {
           name: 'Groei',
           price: '€1.195',
-          highlight: true,
           features: [
             'Tot 6 pagina’s',
             'Conversiegericht design',
@@ -52,7 +50,6 @@ const ServicesPage = () => {
         {
           name: 'Pro',
           price: '€1.995',
-          highlight: false,
           features: [
             'Volledig maatwerk',
             'Design system',
@@ -73,7 +70,6 @@ const ServicesPage = () => {
         {
           name: 'Starter',
           price: '€1.250',
-          highlight: false,
           features: [
             'Professionele website',
             'Moderne tech stack',
@@ -83,7 +79,6 @@ const ServicesPage = () => {
         {
           name: 'Groei',
           price: '€2.250',
-          highlight: true,
           features: [
             'Next.js / API koppelingen',
             'Database integratie',
@@ -93,7 +88,6 @@ const ServicesPage = () => {
         {
           name: 'Pro',
           price: '€3.995',
-          highlight: false,
           features: [
             'Custom webapp',
             'Authenticatie',
@@ -107,13 +101,12 @@ const ServicesPage = () => {
       title: 'E-commerce',
       shortDescription: 'Complete online winkels die verkopen stimuleren',
       description:
-        'Wij bouwen krachtige webshops die niet alleen mooi zijn, maar ook converteren. Van productbeheer tot betaalintegraties – alles wordt voor u geregeld.',
+        'Wij bouwen krachtige webshops die niet alleen mooi zijn, maar ook converteren.',
       image: '/ecom.png',
       packages: [
         {
           name: 'Starter',
           price: '€1.995',
-          highlight: false,
           features: [
             'Tot 10 producten',
             'iDEAL betalingen',
@@ -123,7 +116,6 @@ const ServicesPage = () => {
         {
           name: 'Groei',
           price: '€3.495',
-          highlight: true,
           features: [
             'Onbeperkt producten',
             'Kortingen & coupons',
@@ -133,7 +125,6 @@ const ServicesPage = () => {
         {
           name: 'Pro',
           price: '€5.995',
-          highlight: false,
           features: [
             'Maatwerk webshop',
             'Automatiseringen',
@@ -147,13 +138,12 @@ const ServicesPage = () => {
       title: 'SEO & Marketing',
       shortDescription: 'Vergroot uw online zichtbaarheid en trek meer klanten aan',
       description:
-        'Zichtbaar zijn in Google is essentieel. Wij optimaliseren uw website technisch en inhoudelijk om structureel meer bezoekers en aanvragen te genereren.',
+        'Wij optimaliseren uw website technisch en inhoudelijk voor structurele groei.',
       image: '/seo.png',
       packages: [
         {
           name: 'Starter',
           price: '€249 / maand',
-          highlight: false,
           features: [
             'Technische SEO',
             'Basis optimalisatie',
@@ -163,7 +153,6 @@ const ServicesPage = () => {
         {
           name: 'Groei',
           price: '€499 / maand',
-          highlight: true,
           features: [
             'Content optimalisatie',
             'Local SEO',
@@ -173,7 +162,6 @@ const ServicesPage = () => {
         {
           name: 'Pro',
           price: '€899 / maand',
-          highlight: false,
           features: [
             'Linkbuilding',
             'Concurrentie analyse',
@@ -187,13 +175,12 @@ const ServicesPage = () => {
       title: 'Performance Optimalisatie',
       shortDescription: 'Snellere websites voor betere conversies',
       description:
-        'Een trage website kost klanten. Wij optimaliseren snelheid, Core Web Vitals en technische prestaties voor maximale impact.',
+        'Wij optimaliseren snelheid, Core Web Vitals en technische prestaties.',
       image: '/performance.png',
       packages: [
         {
           name: 'Starter',
           price: '€495',
-          highlight: false,
           features: [
             'Speed audit',
             'Afbeelding optimalisatie',
@@ -203,7 +190,6 @@ const ServicesPage = () => {
         {
           name: 'Groei',
           price: '€895',
-          highlight: true,
           features: [
             'Core Web Vitals',
             'Lazy loading',
@@ -213,7 +199,6 @@ const ServicesPage = () => {
         {
           name: 'Pro',
           price: '€1.495',
-          highlight: false,
           features: [
             'CDN setup',
             'Monitoring',
@@ -223,6 +208,12 @@ const ServicesPage = () => {
       ]
     }
   ];
+
+  // 🔥 1 willekeurig “meest gekozen” pakket per dienst (per page-load)
+  const highlightedIndexes = useMemo(
+    () => services.map(s => Math.floor(Math.random() * s.packages.length)),
+    []
+  );
 
   return (
     <>
@@ -266,43 +257,47 @@ const ServicesPage = () => {
 
               {/* PACKAGES */}
               <div className="grid md:grid-cols-3 gap-8">
-                {service.packages.map((pkg, idx) => (
-                  <div
-                    key={idx}
-                    className={`relative rounded-2xl border p-8 ${
-                      pkg.highlight
-                        ? 'border-[#D4AF37] bg-[#121212] scale-105'
-                        : 'border-gray-800 bg-[#0f0f0f]'
-                    }`}
-                  >
-                    {pkg.highlight && (
-                      <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-[#D4AF37] to-[#F4E4C1] text-black text-sm px-4 py-1 rounded-full flex items-center gap-1">
-                        <Star size={14} /> Meest gekozen
-                      </div>
-                    )}
+                {service.packages.map((pkg, idx) => {
+                  const isHighlighted = idx === highlightedIndexes[i];
 
-                    <h3 className="text-2xl font-bold mb-2">{pkg.name}</h3>
-                    <p className="text-[#D4AF37] text-3xl font-bold mb-6">
-                      {pkg.price}
-                    </p>
+                  return (
+                    <div
+                      key={idx}
+                      className={`relative rounded-2xl border p-8 ${
+                        isHighlighted
+                          ? 'border-[#D4AF37] bg-[#121212] scale-105'
+                          : 'border-gray-800 bg-[#0f0f0f]'
+                      }`}
+                    >
+                      {isHighlighted && (
+                        <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-[#D4AF37] to-[#F4E4C1] text-black text-sm px-4 py-1 rounded-full flex items-center gap-1">
+                          <Star size={14} /> Meest gekozen
+                        </div>
+                      )}
 
-                    <ul className="space-y-3 mb-8">
-                      {pkg.features.map((f, fi) => (
-                        <li key={fi} className="flex gap-2 text-gray-300">
-                          <CheckCircle size={18} className="text-[#D4AF37]" />
-                          {f}
-                        </li>
-                      ))}
-                    </ul>
+                      <h3 className="text-2xl font-bold mb-2">{pkg.name}</h3>
+                      <p className="text-[#D4AF37] text-3xl font-bold mb-6">
+                        {pkg.price}
+                      </p>
 
-                    <Link to="/contact">
-                      <Button className="w-full bg-gradient-to-r from-[#D4AF37] to-[#F4E4C1] text-black">
-                        Start mijn project
-                        <ArrowRight className="ml-2" size={18} />
-                      </Button>
-                    </Link>
-                  </div>
-                ))}
+                      <ul className="space-y-3 mb-8">
+                        {pkg.features.map((f, fi) => (
+                          <li key={fi} className="flex gap-2 text-gray-300">
+                            <CheckCircle size={18} className="text-[#D4AF37]" />
+                            {f}
+                          </li>
+                        ))}
+                      </ul>
+
+                      <Link to="/contact">
+                        <Button className="w-full bg-gradient-to-r from-[#D4AF37] to-[#F4E4C1] text-black">
+                          Start mijn project
+                          <ArrowRight className="ml-2" size={18} />
+                        </Button>
+                      </Link>
+                    </div>
+                  );
+                })}
               </div>
             </motion.div>
           ))}
