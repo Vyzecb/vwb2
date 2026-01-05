@@ -79,8 +79,11 @@ const PortfolioPage = () => {
                     <Link to={`/portfolio/${project.id}`}>
                       <div className="group relative overflow-hidden rounded-2xl bg-[#1a1a1a] border border-gray-800 hover:border-[#D4AF37] transition-all duration-300">
                         <div className="aspect-[4/3] overflow-hidden">
-                          <img className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt={project.title} src={project.hero_image || "https://images.unsplash.com/photo-1572177812156-58036aae439c"} />
-                        </div>
+                         <img 
+  className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+  alt={service.title}
+  src={service.image}
+/>                        </div>
                         <div className="p-6">
                           <span className="inline-block px-3 py-1 bg-[#D4AF37]/10 text-[#D4AF37] text-xs font-medium rounded-full mb-3">{project.categories?.name}</span>
                           <h3 className="text-xl font-bold mb-2 group-hover:text-[#D4AF37] transition-colors">{project.title}</h3>
