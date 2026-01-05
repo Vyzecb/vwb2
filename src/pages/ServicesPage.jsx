@@ -151,11 +151,11 @@ const ServicesPage = () => {
                 >
                   <div className={index % 2 === 1 ? 'lg:order-2' : ''}>
                     <div className="aspect-video rounded-2xl overflow-hidden border border-gray-800">
-                      <img 
-                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-                        alt={service.title}
-                       src="https://images.unsplash.com/photo-1595872018818-97555653a011" />
-                    </div>
+<img 
+  className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+  alt={service.title}
+  src={service.image}
+/>          </div>
                   </div>
 
                   <div className={index % 2 === 1 ? 'lg:order-1' : ''}>
