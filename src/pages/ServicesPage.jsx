@@ -34,7 +34,7 @@ const ServicesPage = () => {
       ],
       pricing: 'Vanaf €2.500',
       timeline: '2-4 weken',
-      image: 'webde.png'
+      image: '/webde.png'
     },
     {
       icon: <Code size={40} />,
@@ -51,7 +51,7 @@ const ServicesPage = () => {
       ],
       pricing: 'Vanaf €4.000',
       timeline: '4-8 weken',
-      image: 'Software developer coding on multiple screens with modern workspace'
+      image: '/webon.png'
     },
     {
       icon: <ShoppingCart size={40} />,
@@ -68,7 +68,7 @@ const ServicesPage = () => {
       ],
       pricing: 'Vanaf €6.000',
       timeline: '6-12 weken',
-      image: 'E-commerce website on laptop showing product catalog and shopping cart'
+      image: '/ecom.png'
     },
     {
       icon: <Search size={40} />,
@@ -85,7 +85,7 @@ const ServicesPage = () => {
       ],
       pricing: 'Vanaf €750/maand',
       timeline: 'Doorlopend',
-      image: 'SEO analytics dashboard showing traffic growth and keyword rankings'
+      image: '/seo.png'
     },
     {
       icon: <Zap size={40} />,
@@ -102,7 +102,7 @@ const ServicesPage = () => {
       ],
       pricing: 'Vanaf €1.500',
       timeline: '1-2 weken',
-      image: 'Website speed test results showing excellent performance scores'
+      image: '/performance.png'
     }
   ];
 
