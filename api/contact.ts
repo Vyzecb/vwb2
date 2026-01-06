@@ -5,6 +5,8 @@ import type { VercelRequest, VercelResponse } from "@vercel/node";
 ======================= */
 
 const LOGO_URL = "https://voswebdesigns.nl/logo.jpeg";
+const FROM_EMAIL = "Vos Web Designs <onboarding@resend.dev>";
+const ADMIN_EMAIL = "info@voswebdesigns.nl";
 
 /* =======================
    DIENST-SPECIFIEKE COPY
@@ -27,37 +29,37 @@ const serviceCopy: Record<
   ecommerce: {
     title: "Samen bouwen aan een succesvolle webshop",
     intro:
-      "Een goede webshop verkoopt. Wij focussen op snelheid, vertrouwen en een soepele gebruikerservaring voor uw klanten.",
+      "Een goede webshop verkoopt. Wij focussen op snelheid, vertrouwen en een soepele gebruikerservaring.",
     expectations: [
-      "Bespreking van producten, betalingen en verzending",
-      "Advies over conversie en schaalbaarheid",
-      "Duidelijk stappenplan richting livegang",
+      "Bespreking van producten en betalingen",
+      "Conversie- en schaalbaarheidsadvies",
+      "Duidelijk stappenplan",
     ],
   },
   development: {
     title: "Maatwerk webontwikkeling",
     intro:
-      "Voor technische of complexe projecten denken wij actief mee in oplossingen, structuur en schaalbaarheid.",
+      "Voor technische of complexe projecten denken wij actief mee in oplossingen en architectuur.",
     expectations: [
-      "Inventarisatie van functionaliteiten",
-      "Technisch advies en haalbaarheid",
+      "Inventarisatie functionaliteiten",
+      "Technisch advies",
       "Toekomstbestendige aanpak",
     ],
   },
   seo: {
     title: "Meer zichtbaarheid en online groei",
     intro:
-      "Goede vindbaarheid begint bij een sterke basis. Wij kijken zowel technisch als strategisch naar SEO.",
+      "Goede vindbaarheid begint bij een sterke basis en een lange termijn strategie.",
     expectations: [
-      "Analyse van uw huidige website",
-      "Kansen voor betere vindbaarheid",
-      "Eerlijk en transparant groeiplan",
+      "SEO analyse",
+      "Concrete verbeterpunten",
+      "Transparant groeiplan",
     ],
   },
   other: {
     title: "Uw aanvraag is ontvangen",
     intro:
-      "Elke aanvraag is uniek. Wij nemen de tijd om uw vraag goed te begrijpen en passend advies te geven.",
+      "Elke aanvraag is uniek. Wij nemen de tijd om uw vraag goed te begrijpen.",
     expectations: [
       "Persoonlijke reactie",
       "Meedenken in oplossingen",
@@ -81,9 +83,8 @@ const adminTemplate = (data: any) => `
 
 <tr>
 <td style="padding:24px;text-align:center;">
-<img src="${LOGO_URL}" alt="Vos Web Designs" width="140" style="margin-bottom:16px;" />
+<img src="${LOGO_URL}" width="140" style="margin-bottom:16px;" />
 <h1 style="margin:0;font-size:26px;color:#D4AF37;">Nieuw Contactbericht</h1>
-<p style="margin-top:6px;color:#aaa;">Vos Web Designs</p>
 </td>
 </tr>
 
@@ -97,15 +98,9 @@ const adminTemplate = (data: any) => `
 <p><strong>Pakket:</strong> ${data.package || "-"}</p>
 
 <p style="margin-top:24px;"><strong>Bericht:</strong></p>
-<div style="margin-top:8px;padding:16px;background:#1a1a1a;border-radius:8px;border:1px solid #2a2a2a;">
+<div style="padding:16px;background:#1a1a1a;border-radius:8px;">
 ${data.message}
 </div>
-</td>
-</tr>
-
-<tr>
-<td style="padding:20px;text-align:center;font-size:12px;color:#777;">
-Automatisch verzonden via voswebdesigns.nl
 </td>
 </tr>
 
@@ -122,70 +117,42 @@ Automatisch verzonden via voswebdesigns.nl
 ======================= */
 
 const customerTemplate = (data: any) => {
-  const key = data.service || "other";
-  const content = serviceCopy[key] || serviceCopy.other;
+  const content = serviceCopy[data.service] || serviceCopy.other;
 
   return `
 <!DOCTYPE html>
-<html lang="nl">
+<html>
 <body style="margin:0;padding:0;background:#0a0a0a;font-family:Arial,sans-serif;color:#ffffff;">
 <table width="100%" cellpadding="0" cellspacing="0">
 <tr>
 <td align="center" style="padding:40px 16px;">
-<table width="600" style="background:#111;border-radius:16px;border:1px solid #2a2a2a;overflow:hidden;">
+<table width="600" style="background:#111;border-radius:16px;border:1px solid #2a2a2a;">
 
 <tr>
 <td style="padding:32px;text-align:center;">
-<img src="${LOGO_URL}" alt="Vos Web Designs" width="160" style="margin-bottom:20px;" />
-<h1 style="margin:0;font-size:26px;color:#D4AF37;">
-${content.title}
-</h1>
-<p style="margin-top:10px;color:#aaa;">Vos Web Designs</p>
+<img src="${LOGO_URL}" width="160" style="margin-bottom:20px;" />
+<h1 style="color:#D4AF37;">${content.title}</h1>
 </td>
 </tr>
 
 <tr>
-<td style="padding:0 40px 32px;font-size:16px;line-height:1.7;">
+<td style="padding:0 40px 32px;font-size:16px;">
 <p>Beste <strong>${data.name}</strong>,</p>
 
-<p>
-Hartelijk dank voor uw bericht. Wij hebben uw aanvraag goed ontvangen en nemen
-<strong>binnen 24 uur</strong> persoonlijk contact met u op.
-</p>
+<p>Dank voor uw bericht. Wij nemen <strong>binnen 24 uur</strong> contact met u op.</p>
 
 <p>${content.intro}</p>
 
-<div style="margin:24px 0;padding:20px;background:#1a1a1a;border-radius:10px;border:1px solid #2a2a2a;">
-<strong style="color:#D4AF37;">Samenvatting van uw aanvraag</strong><br /><br />
-<strong>Dienst:</strong> ${data.service || "Niet gespecificeerd"}<br />
-<strong>Pakket:</strong> ${data.package || "Nog te bepalen"}<br />
-<strong>Bedrijf:</strong> ${data.company || "-"}<br /><br />
-<strong>Uw bericht:</strong><br />
-${data.message}
-</div>
-
-<p><strong>Wat kunt u van ons verwachten?</strong></p>
-<ul style="padding-left:18px;color:#ccc;">
-${content.expectations.map(item => `<li>${item}</li>`).join("")}
+<p><strong>Wat kunt u verwachten?</strong></p>
+<ul>
+${content.expectations.map(e => `<li>${e}</li>`).join("")}
 </ul>
 
-<p style="margin-top:24px;">
-Wij nemen contact met u op via e-mail of telefoon.
-Wilt u alvast extra informatie delen? U kunt eenvoudig reageren op deze e-mail.
-</p>
-
-<p style="margin-top:32px;">
+<p>
 Met vriendelijke groet,<br />
 <strong>Melvin Vos</strong><br />
 Vos Web Designs
 </p>
-</td>
-</tr>
-
-<tr>
-<td style="padding:20px;text-align:center;font-size:12px;color:#777;">
-© Vos Web Designs – Luxe Webdesign & Development<br />
-Lelystad · Nederland
 </td>
 </tr>
 
@@ -221,16 +188,20 @@ export default async function handler(
       return res.status(400).json({ error: "Invalid form data" });
     }
 
+    // ADMIN MAIL (FIXED)
     await resend.emails.send({
-      from: "Vos Web Designs <info@voswebdesigns.nl>",
-      to: ["info@voswebdesigns.nl"],
+      from: FROM_EMAIL,
+      to: [ADMIN_EMAIL],
+      reply_to: data.email,
       subject: `Nieuw contactbericht van ${data.name}`,
       html: adminTemplate(data),
     });
 
+    // CUSTOMER CONFIRMATION
     await resend.emails.send({
-      from: "Vos Web Designs <info@voswebdesigns.nl>",
+      from: FROM_EMAIL,
       to: [data.email],
+      reply_to: ADMIN_EMAIL,
       subject: "Wij hebben uw bericht ontvangen",
       html: customerTemplate(data),
     });
