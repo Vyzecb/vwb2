@@ -18,6 +18,19 @@ const ServicesPage = () => {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-100px' });
 
+  /* === EXTRA LOGICA (NIEUW) === */
+  const getCTA = (name: string) => {
+    if (name === 'Starter') return 'Start eenvoudig';
+    if (name === 'Groei') return 'Beste keuze – start nu';
+    return 'Plan een kennismaking';
+  };
+
+  const getDelivery = (name: string) => {
+    if (name === 'Starter') return 'Meestal binnen 1–2 weken opgeleverd';
+    if (name === 'Groei') return 'Meestal binnen 2–4 weken opgeleverd';
+    return 'Planning in overleg';
+  };
+
   const services = [
     {
       icon: <Palette size={36} />,
@@ -32,9 +45,6 @@ const ServicesPage = () => {
         {
           name: 'Starter',
           price: '€349',
-          from: true,
-          starterBadge: true,
-          upsellHint: 'Populair bij starters die willen doorgroeien',
           features: [
             '1–2 pagina’s',
             'Modern & responsive design',
@@ -45,7 +55,6 @@ const ServicesPage = () => {
         {
           name: 'Groei',
           price: '€649',
-          recommended: true,
           features: [
             'Tot 5 pagina’s',
             'Conversiegericht ontwerp',
@@ -79,9 +88,6 @@ const ServicesPage = () => {
         {
           name: 'Starter',
           price: '€595',
-          from: true,
-          starterBadge: true,
-          upsellHint: 'Later eenvoudig uit te breiden',
           features: [
             'Professionele website',
             'Snelle laadtijden',
@@ -91,7 +97,6 @@ const ServicesPage = () => {
         {
           name: 'Groei',
           price: '€995',
-          recommended: true,
           features: [
             'Uitgebreide pagina’s',
             'Formulieren & koppelingen',
@@ -123,9 +128,6 @@ const ServicesPage = () => {
         {
           name: 'Starter',
           price: '€895',
-          from: true,
-          starterBadge: true,
-          upsellHint: 'Later upgraden naar Groei is eenvoudig',
           features: [
             'Tot 10 producten',
             'iDEAL betalingen',
@@ -135,7 +137,6 @@ const ServicesPage = () => {
         {
           name: 'Groei',
           price: '€1.495',
-          recommended: true,
           features: [
             'Onbeperkt producten',
             'Kortingen & acties',
@@ -167,9 +168,6 @@ const ServicesPage = () => {
         {
           name: 'Starter',
           price: '€149 / maand',
-          from: true,
-          starterBadge: true,
-          upsellHint: 'Veel gekozen als eerste stap',
           features: [
             'Technische SEO check',
             'Basis optimalisatie',
@@ -179,7 +177,6 @@ const ServicesPage = () => {
         {
           name: 'Groei',
           price: '€299 / maand',
-          recommended: true,
           features: [
             'Content optimalisatie',
             'Lokale SEO',
@@ -211,9 +208,6 @@ const ServicesPage = () => {
         {
           name: 'Starter',
           price: '€295',
-          from: true,
-          starterBadge: true,
-          upsellHint: 'Perfect als eerste optimalisatie',
           features: [
             'Snelheidsanalyse',
             'Afbeelding optimalisatie',
@@ -223,7 +217,6 @@ const ServicesPage = () => {
         {
           name: 'Groei',
           price: '€495',
-          recommended: true,
           features: [
             'Core Web Vitals',
             'Lazy loading',
@@ -281,6 +274,7 @@ const ServicesPage = () => {
               <div className="grid md:grid-cols-3 gap-8">
                 {service.packages.map(pkg => {
                   const isHighlighted = pkg.name === service.highlightedPackage;
+                  const isStarter = pkg.name === 'Starter';
 
                   return (
                     <div
@@ -291,15 +285,13 @@ const ServicesPage = () => {
                           : 'border-gray-800 bg-[#0f0f0f]'
                       }`}
                     >
-                      {/* Highlight */}
                       {isHighlighted && (
                         <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-[#D4AF37] to-[#F4E4C1] text-black text-sm px-4 py-1 rounded-full flex items-center gap-1">
                           <Star size={14} /> {service.highlightLabel}
                         </div>
                       )}
 
-                      {/* Starter badge */}
-                      {pkg.starterBadge && (
+                      {isStarter && (
                         <div className="absolute top-4 right-4 text-xs px-3 py-1 rounded-full bg-white/10 text-[#D4AF37] border border-[#D4AF37]/30">
                           Perfect voor starters
                         </div>
@@ -307,23 +299,20 @@ const ServicesPage = () => {
 
                       <h3 className="text-2xl font-bold mb-2">{pkg.name}</h3>
 
-                      {/* Price */}
                       <p className="text-[#D4AF37] text-3xl font-bold">
-                        {pkg.from && <span className="text-base text-gray-400 mr-1">Vanaf</span>}
+                        {isStarter && (
+                          <span className="text-base text-gray-400 mr-1">Vanaf</span>
+                        )}
                         {pkg.price}
                       </p>
 
-                      {/* Micro copy */}
-                      <p className="text-sm text-gray-400 mt-1 mb-4">
-                        Geen verplichtingen • Persoonlijk contact
+                      <p className="text-sm text-gray-400 mt-1">
+                        {getDelivery(pkg.name)}
                       </p>
 
-                      {/* Upsell hint */}
-                      {pkg.upsellHint && (
-                        <p className="text-xs text-[#D4AF37] mb-4">
-                          {pkg.upsellHint}
-                        </p>
-                      )}
+                      <p className="text-xs text-gray-500 mb-4">
+                        Geen aanbetaling nodig • Persoonlijk contact
+                      </p>
 
                       <ul className="space-y-3 mb-8">
                         {pkg.features.map(f => (
@@ -336,7 +325,7 @@ const ServicesPage = () => {
 
                       <Link to="/contact">
                         <Button className="w-full bg-gradient-to-r from-[#D4AF37] to-[#F4E4C1] text-black">
-                          Start mijn project
+                          {getCTA(pkg.name)}
                           <ArrowRight className="ml-2" size={18} />
                         </Button>
                       </Link>
@@ -346,6 +335,36 @@ const ServicesPage = () => {
               </div>
             </motion.div>
           ))}
+
+          {/* VERGELIJKINGSTABEL */}
+          <div className="overflow-x-auto">
+            <h2 className="text-3xl font-bold mb-6">Starter vs Groei</h2>
+            <table className="w-full border border-gray-800">
+              <thead className="bg-[#121212]">
+                <tr>
+                  <th className="p-4">Feature</th>
+                  <th className="p-4">Starter</th>
+                  <th className="p-4">Groei</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  ['Aantal pagina’s', '1–2', 'Tot 5'],
+                  ['SEO basis', '✔', '✔'],
+                  ['Conversiegericht design', '—', '✔'],
+                  ['Animaties', '—', '✔'],
+                  ['Snellere oplevering', '✔', '✔'],
+                  ['Geschikt voor groei', 'Beperkt', '✔✔']
+                ].map(row => (
+                  <tr key={row[0]} className="border-t border-gray-800">
+                    <td className="p-4 text-gray-300">{row[0]}</td>
+                    <td className="p-4">{row[1]}</td>
+                    <td className="p-4">{row[2]}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </section>
       </main>
     </>
