@@ -18,7 +18,6 @@ const ServicesPage = () => {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-100px' });
 
-  /* === EXTRA LOGICA (NIEUW) === */
   const getCTA = (name: string) => {
     if (name === 'Starter') return 'Start eenvoudig';
     if (name === 'Groei') return 'Beste keuze – start nu';
@@ -336,34 +335,59 @@ const ServicesPage = () => {
             </motion.div>
           ))}
 
-          {/* VERGELIJKINGSTABEL */}
-          <div className="overflow-x-auto">
-            <h2 className="text-3xl font-bold mb-6">Starter vs Groei</h2>
-            <table className="w-full border border-gray-800">
-              <thead className="bg-[#121212]">
-                <tr>
-                  <th className="p-4">Feature</th>
-                  <th className="p-4">Starter</th>
-                  <th className="p-4">Groei</th>
-                </tr>
-              </thead>
-              <tbody>
-                {[
-                  ['Aantal pagina’s', '1–2', 'Tot 5'],
-                  ['SEO basis', '✔', '✔'],
-                  ['Conversiegericht design', '—', '✔'],
-                  ['Animaties', '—', '✔'],
-                  ['Snellere oplevering', '✔', '✔'],
-                  ['Geschikt voor groei', 'Beperkt', '✔✔']
-                ].map(row => (
-                  <tr key={row[0]} className="border-t border-gray-800">
-                    <td className="p-4 text-gray-300">{row[0]}</td>
-                    <td className="p-4">{row[1]}</td>
-                    <td className="p-4">{row[2]}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+          {/* GARANTIE BLOK */}
+          <div className="bg-[#121212] border border-[#D4AF37]/30 rounded-2xl p-10 text-center">
+            <h2 className="text-3xl font-bold mb-4">Onze garantie</h2>
+            <p className="text-gray-300 max-w-2xl mx-auto mb-6">
+              Wij werken transparant en zonder risico voor u. Geen kleine lettertjes,
+              geen verplichtingen en altijd persoonlijk contact.
+            </p>
+            <ul className="space-y-3 max-w-xl mx-auto">
+              {[
+                'Geen aanbetaling nodig',
+                'Tevredenheid staat voorop',
+                'Duidelijke afspraken vooraf',
+                'Persoonlijk contact tijdens het hele traject'
+              ].map(item => (
+                <li key={item} className="flex items-center gap-2 justify-center text-gray-300">
+                  <CheckCircle size={18} className="text-[#D4AF37]" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* FAQ */}
+          <div className="max-w-3xl mx-auto">
+            <h2 className="text-3xl font-bold mb-8 text-center">Veelgestelde vragen</h2>
+            <div className="space-y-6">
+              {[
+                {
+                  q: 'Moet ik vooraf betalen?',
+                  a: 'Nee, wij vragen geen aanbetaling. We starten pas nadat alles duidelijk is afgestemd.'
+                },
+                {
+                  q: 'Kan ik later uitbreiden?',
+                  a: 'Ja, alle websites zijn zo opgezet dat uitbreiden altijd mogelijk is.'
+                },
+                {
+                  q: 'Hoe lang duurt een project?',
+                  a: 'Starter-projecten zijn vaak binnen 1–2 weken klaar. Grotere projecten in overleg.'
+                },
+                {
+                  q: 'Is support inbegrepen?',
+                  a: 'Ja, na oplevering staan we altijd klaar voor vragen of kleine aanpassingen.'
+                }
+              ].map(item => (
+                <div
+                  key={item.q}
+                  className="border border-gray-800 rounded-xl p-6 bg-[#0f0f0f]"
+                >
+                  <h3 className="font-semibold mb-2">{item.q}</h3>
+                  <p className="text-gray-400">{item.a}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
       </main>
