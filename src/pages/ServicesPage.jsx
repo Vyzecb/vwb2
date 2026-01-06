@@ -32,6 +32,9 @@ const ServicesPage = () => {
         {
           name: 'Starter',
           price: '€349',
+          from: true,
+          starterBadge: true,
+          upsellHint: 'Populair bij starters die willen doorgroeien',
           features: [
             '1–2 pagina’s',
             'Modern & responsive design',
@@ -42,6 +45,7 @@ const ServicesPage = () => {
         {
           name: 'Groei',
           price: '€649',
+          recommended: true,
           features: [
             'Tot 5 pagina’s',
             'Conversiegericht ontwerp',
@@ -75,6 +79,9 @@ const ServicesPage = () => {
         {
           name: 'Starter',
           price: '€595',
+          from: true,
+          starterBadge: true,
+          upsellHint: 'Later eenvoudig uit te breiden',
           features: [
             'Professionele website',
             'Snelle laadtijden',
@@ -84,6 +91,7 @@ const ServicesPage = () => {
         {
           name: 'Groei',
           price: '€995',
+          recommended: true,
           features: [
             'Uitgebreide pagina’s',
             'Formulieren & koppelingen',
@@ -115,6 +123,9 @@ const ServicesPage = () => {
         {
           name: 'Starter',
           price: '€895',
+          from: true,
+          starterBadge: true,
+          upsellHint: 'Later upgraden naar Groei is eenvoudig',
           features: [
             'Tot 10 producten',
             'iDEAL betalingen',
@@ -124,6 +135,7 @@ const ServicesPage = () => {
         {
           name: 'Groei',
           price: '€1.495',
+          recommended: true,
           features: [
             'Onbeperkt producten',
             'Kortingen & acties',
@@ -155,6 +167,9 @@ const ServicesPage = () => {
         {
           name: 'Starter',
           price: '€149 / maand',
+          from: true,
+          starterBadge: true,
+          upsellHint: 'Veel gekozen als eerste stap',
           features: [
             'Technische SEO check',
             'Basis optimalisatie',
@@ -164,6 +179,7 @@ const ServicesPage = () => {
         {
           name: 'Groei',
           price: '€299 / maand',
+          recommended: true,
           features: [
             'Content optimalisatie',
             'Lokale SEO',
@@ -195,6 +211,9 @@ const ServicesPage = () => {
         {
           name: 'Starter',
           price: '€295',
+          from: true,
+          starterBadge: true,
+          upsellHint: 'Perfect als eerste optimalisatie',
           features: [
             'Snelheidsanalyse',
             'Afbeelding optimalisatie',
@@ -204,6 +223,7 @@ const ServicesPage = () => {
         {
           name: 'Groei',
           price: '€495',
+          recommended: true,
           features: [
             'Core Web Vitals',
             'Lazy loading',
@@ -271,16 +291,39 @@ const ServicesPage = () => {
                           : 'border-gray-800 bg-[#0f0f0f]'
                       }`}
                     >
+                      {/* Highlight */}
                       {isHighlighted && (
                         <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-[#D4AF37] to-[#F4E4C1] text-black text-sm px-4 py-1 rounded-full flex items-center gap-1">
                           <Star size={14} /> {service.highlightLabel}
                         </div>
                       )}
 
+                      {/* Starter badge */}
+                      {pkg.starterBadge && (
+                        <div className="absolute top-4 right-4 text-xs px-3 py-1 rounded-full bg-white/10 text-[#D4AF37] border border-[#D4AF37]/30">
+                          Perfect voor starters
+                        </div>
+                      )}
+
                       <h3 className="text-2xl font-bold mb-2">{pkg.name}</h3>
-                      <p className="text-[#D4AF37] text-3xl font-bold mb-6">
+
+                      {/* Price */}
+                      <p className="text-[#D4AF37] text-3xl font-bold">
+                        {pkg.from && <span className="text-base text-gray-400 mr-1">Vanaf</span>}
                         {pkg.price}
                       </p>
+
+                      {/* Micro copy */}
+                      <p className="text-sm text-gray-400 mt-1 mb-4">
+                        Geen verplichtingen • Persoonlijk contact
+                      </p>
+
+                      {/* Upsell hint */}
+                      {pkg.upsellHint && (
+                        <p className="text-xs text-[#D4AF37] mb-4">
+                          {pkg.upsellHint}
+                        </p>
+                      )}
 
                       <ul className="space-y-3 mb-8">
                         {pkg.features.map(f => (
