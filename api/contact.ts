@@ -1,6 +1,12 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 
 /* =======================
+   CONFIG
+======================= */
+
+const LOGO_URL = "https://voswebdesigns.nl/logo.jpeg";
+
+/* =======================
    DIENST-SPECIFIEKE COPY
 ======================= */
 
@@ -18,7 +24,6 @@ const serviceCopy: Record<
       "Heldere uitleg over planning en investering",
     ],
   },
-
   ecommerce: {
     title: "Samen bouwen aan een succesvolle webshop",
     intro:
@@ -29,7 +34,6 @@ const serviceCopy: Record<
       "Duidelijk stappenplan richting livegang",
     ],
   },
-
   development: {
     title: "Maatwerk webontwikkeling",
     intro:
@@ -37,10 +41,9 @@ const serviceCopy: Record<
     expectations: [
       "Inventarisatie van functionaliteiten",
       "Technisch advies en haalbaarheid",
-      "Toekomstbestendige en schaalbare aanpak",
+      "Toekomstbestendige aanpak",
     ],
   },
-
   seo: {
     title: "Meer zichtbaarheid en online groei",
     intro:
@@ -51,7 +54,6 @@ const serviceCopy: Record<
       "Eerlijk en transparant groeiplan",
     ],
   },
-
   other: {
     title: "Uw aanvraag is ontvangen",
     intro:
@@ -59,7 +61,7 @@ const serviceCopy: Record<
     expectations: [
       "Persoonlijke reactie",
       "Meedenken in oplossingen",
-      "Eerlijk advies, ook als iets niet past",
+      "Eerlijk advies",
     ],
   },
 };
@@ -76,10 +78,12 @@ const adminTemplate = (data: any) => `
 <tr>
 <td align="center" style="padding:40px 16px;">
 <table width="600" style="background:#111;border-radius:16px;border:1px solid #2a2a2a;">
+
 <tr>
-<td style="padding:32px;text-align:center;">
-<h1 style="margin:0;font-size:28px;color:#D4AF37;">Nieuw Contactbericht</h1>
-<p style="margin-top:8px;color:#aaa;">Vos Web Designs</p>
+<td style="padding:24px;text-align:center;">
+<img src="${LOGO_URL}" alt="Vos Web Designs" width="140" style="margin-bottom:16px;" />
+<h1 style="margin:0;font-size:26px;color:#D4AF37;">Nieuw Contactbericht</h1>
+<p style="margin-top:6px;color:#aaa;">Vos Web Designs</p>
 </td>
 </tr>
 
@@ -100,10 +104,11 @@ ${data.message}
 </tr>
 
 <tr>
-<td style="padding:24px;text-align:center;font-size:12px;color:#777;">
+<td style="padding:20px;text-align:center;font-size:12px;color:#777;">
 Automatisch verzonden via voswebdesigns.nl
 </td>
 </tr>
+
 </table>
 </td>
 </tr>
@@ -130,11 +135,12 @@ const customerTemplate = (data: any) => {
 <table width="600" style="background:#111;border-radius:16px;border:1px solid #2a2a2a;overflow:hidden;">
 
 <tr>
-<td style="padding:40px;text-align:center;">
-<h1 style="margin:0;font-size:28px;color:#D4AF37;">
+<td style="padding:32px;text-align:center;">
+<img src="${LOGO_URL}" alt="Vos Web Designs" width="160" style="margin-bottom:20px;" />
+<h1 style="margin:0;font-size:26px;color:#D4AF37;">
 ${content.title}
 </h1>
-<p style="margin-top:12px;color:#aaa;">Vos Web Designs</p>
+<p style="margin-top:10px;color:#aaa;">Vos Web Designs</p>
 </td>
 </tr>
 
@@ -177,7 +183,7 @@ Vos Web Designs
 </tr>
 
 <tr>
-<td style="padding:24px;text-align:center;font-size:12px;color:#777;">
+<td style="padding:20px;text-align:center;font-size:12px;color:#777;">
 © Vos Web Designs – Luxe Webdesign & Development<br />
 Lelystad · Nederland
 </td>
