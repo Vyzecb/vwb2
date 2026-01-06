@@ -129,7 +129,7 @@ export default async function handler(
 
     // 📩 Mail naar jou
     await resend.emails.send({
-      from: "Vos Web Designs <onboarding@resend.dev>",
+      from: "Vos Web Designs <info@voswebdesigns.nl>",
       to: ["info@voswebdesigns.nl"],
       subject: `Nieuw contactbericht van ${data.name}`,
       html: adminTemplate(data),
@@ -137,7 +137,7 @@ export default async function handler(
 
     // ✉️ Bevestiging naar klant
     await resend.emails.send({
-      from: "Vos Web Designs <onboarding@resend.dev>",
+      from: "Vos Web Designs <info@voswebdesigns.nl>",
       to: [data.email],
       subject: "Wij hebben uw bericht ontvangen",
       html: customerTemplate(data),
