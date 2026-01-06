@@ -22,27 +22,42 @@ const ServicesPage = () => {
     {
       icon: <Palette size={36} />,
       title: 'Webdesign',
-      shortDescription: 'Luxe, op maat gemaakte designs die uw merk tot leven brengen',
+      shortDescription: 'Professioneel design voor starters & kleine bedrijven',
       description:
-        'Wij creëren visueel aantrekkelijke, gebruiksvriendelijke designs die perfect aansluiten bij uw merkidentiteit.',
+        'Perfect voor ondernemers die nét beginnen en een sterke, betrouwbare online uitstraling willen zonder hoge instapkosten.',
       image: '/webde.png',
       highlightedPackage: 'Groei',
       highlightLabel: 'Meest gekozen',
       packages: [
         {
           name: 'Starter',
-          price: '€695',
-          features: ['1–3 pagina’s', 'Responsive design', 'Contactformulier', 'Basis SEO']
+          price: '€349',
+          features: [
+            '1–2 pagina’s',
+            'Modern & responsive design',
+            'Contactformulier',
+            'Basis SEO'
+          ]
         },
         {
           name: 'Groei',
-          price: '€1.195',
-          features: ['Tot 6 pagina’s', 'Conversiegericht design', 'Animaties', 'SEO + performance']
+          price: '€649',
+          features: [
+            'Tot 5 pagina’s',
+            'Conversiegericht ontwerp',
+            'Subtiele animaties',
+            'SEO & performance basis'
+          ]
         },
         {
           name: 'Pro',
-          price: '€1.995',
-          features: ['Volledig maatwerk', 'Design system', 'A/B testing', 'Premium support']
+          price: '€995',
+          features: [
+            'Volledig maatwerk design',
+            'Unieke branding look',
+            'Uitbreidbaar voor groei',
+            'Persoonlijke begeleiding'
+          ]
         }
       ]
     },
@@ -50,27 +65,39 @@ const ServicesPage = () => {
     {
       icon: <Code size={36} />,
       title: 'Webontwikkeling',
-      shortDescription: 'Krachtige, schaalbare websites gebouwd met moderne technologieën',
+      shortDescription: 'Betrouwbare techniek zonder onnodige complexiteit',
       description:
-        'Van eenvoudige websites tot complexe webapplicaties gebouwd voor groei.',
+        'Voor websites en webapplicaties die stabiel moeten werken en later eenvoudig uit te breiden zijn.',
       image: '/webon.png',
-      highlightedPackage: 'Pro',
-      highlightLabel: 'Meest compleet',
+      highlightedPackage: 'Groei',
+      highlightLabel: 'Beste balans',
       packages: [
         {
           name: 'Starter',
-          price: '€1.250',
-          features: ['Professionele website', 'Moderne tech stack', 'CMS integratie']
+          price: '€595',
+          features: [
+            'Professionele website',
+            'Snelle laadtijden',
+            'Eenvoudig beheerbaar'
+          ]
         },
         {
           name: 'Groei',
-          price: '€2.250',
-          features: ['API koppelingen', 'Database integratie', 'Performance optimalisatie']
+          price: '€995',
+          features: [
+            'Uitgebreide pagina’s',
+            'Formulieren & koppelingen',
+            'Performance optimalisatie'
+          ]
         },
         {
           name: 'Pro',
-          price: '€3.995',
-          features: ['Custom webapp', 'Authenticatie', 'Langdurige support']
+          price: '€1.495',
+          features: [
+            'Custom functionaliteit',
+            'Database of login systeem',
+            'Doorontwikkelbaar platform'
+          ]
         }
       ]
     },
@@ -78,27 +105,39 @@ const ServicesPage = () => {
     {
       icon: <ShoppingCart size={36} />,
       title: 'E-commerce',
-      shortDescription: 'Complete online winkels die verkopen stimuleren',
+      shortDescription: 'Start eenvoudig met online verkopen',
       description:
-        'Webshops die niet alleen mooi zijn, maar ook converteren.',
+        'Ideaal voor ondernemers die hun eerste webshop willen starten zonder direct grote investeringen.',
       image: '/ecom.png',
-      highlightedPackage: 'Groei',
-      highlightLabel: 'Beste prijs / kwaliteit',
+      highlightedPackage: 'Starter',
+      highlightLabel: 'Ideaal voor starters',
       packages: [
         {
           name: 'Starter',
-          price: '€1.995',
-          features: ['Tot 10 producten', 'iDEAL betalingen', 'Basis voorraadbeheer']
+          price: '€895',
+          features: [
+            'Tot 10 producten',
+            'iDEAL betalingen',
+            'Gebruiksvriendelijk beheer'
+          ]
         },
         {
           name: 'Groei',
-          price: '€3.495',
-          features: ['Onbeperkt producten', 'Kortingen & coupons', 'Conversie optimalisatie']
+          price: '€1.495',
+          features: [
+            'Onbeperkt producten',
+            'Kortingen & acties',
+            'Conversiegericht design'
+          ]
         },
         {
           name: 'Pro',
-          price: '€5.995',
-          features: ['Maatwerk webshop', 'Automatiseringen', 'Analytics & funnels']
+          price: '€2.495',
+          features: [
+            'Maatwerk webshop',
+            'Automatiseringen',
+            'Analytics & optimalisatie'
+          ]
         }
       ]
     },
@@ -106,27 +145,39 @@ const ServicesPage = () => {
     {
       icon: <Search size={36} />,
       title: 'SEO & Marketing',
-      shortDescription: 'Vergroot uw online zichtbaarheid',
+      shortDescription: 'Gevonden worden in Google, stap voor stap',
       description:
-        'Structurele groei in Google met een lange termijn strategie.',
+        'Geen dure contracten, maar duidelijke maandelijkse optimalisatie gericht op zichtbaarheid en groei.',
       image: '/seo.png',
-      highlightedPackage: 'Groei',
-      highlightLabel: 'Populair',
+      highlightedPackage: 'Starter',
+      highlightLabel: 'Laagdrempelig',
       packages: [
         {
           name: 'Starter',
-          price: '€249 / maand',
-          features: ['Technische SEO', 'Basis optimalisatie', 'Rapportage']
+          price: '€149 / maand',
+          features: [
+            'Technische SEO check',
+            'Basis optimalisatie',
+            'Maandelijkse rapportage'
+          ]
         },
         {
           name: 'Groei',
-          price: '€499 / maand',
-          features: ['Content optimalisatie', 'Local SEO', 'Maandelijkse strategie']
+          price: '€299 / maand',
+          features: [
+            'Content optimalisatie',
+            'Lokale SEO',
+            'Actieplan per maand'
+          ]
         },
         {
           name: 'Pro',
-          price: '€899 / maand',
-          features: ['Linkbuilding', 'Concurrentie analyse', 'Doorlopende groei']
+          price: '€499 / maand',
+          features: [
+            'Concurrentie analyse',
+            'Doorlopende optimalisatie',
+            'Structurele groei'
+          ]
         }
       ]
     },
@@ -134,27 +185,39 @@ const ServicesPage = () => {
     {
       icon: <Zap size={36} />,
       title: 'Performance Optimalisatie',
-      shortDescription: 'Snellere websites voor betere conversies',
+      shortDescription: 'Snelle winst voor je website',
       description:
-        'Optimale snelheid en Core Web Vitals voor SEO en UX.',
+        'Een snellere website zorgt direct voor betere gebruikservaring en hogere conversies.',
       image: '/performance.png',
       highlightedPackage: 'Starter',
-      highlightLabel: 'Snelle winst',
+      highlightLabel: 'Quick win',
       packages: [
         {
           name: 'Starter',
-          price: '€495',
-          features: ['Speed audit', 'Afbeelding optimalisatie', 'Basis caching']
+          price: '€295',
+          features: [
+            'Snelheidsanalyse',
+            'Afbeelding optimalisatie',
+            'Basis caching'
+          ]
         },
         {
           name: 'Groei',
-          price: '€895',
-          features: ['Core Web Vitals', 'Lazy loading', 'Code optimalisatie']
+          price: '€495',
+          features: [
+            'Core Web Vitals',
+            'Lazy loading',
+            'Code optimalisatie'
+          ]
         },
         {
           name: 'Pro',
-          price: '€1.495',
-          features: ['CDN setup', 'Monitoring', 'Doorlopende optimalisatie']
+          price: '€795',
+          features: [
+            'Geavanceerde optimalisatie',
+            'Monitoring',
+            'Advies voor groei'
+          ]
         }
       ]
     }
