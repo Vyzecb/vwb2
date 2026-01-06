@@ -18,15 +18,18 @@ const ContactPage = () => {
 
   const handleChange = e => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
   };
 
   const handleSubmit = e => {
     e.preventDefault();
 
     toast({
-      title: 'Bericht Verzonden! ✉️',
-      description: 'We nemen binnen 24 uur contact met u op.',
+      title: "Bericht Verzonden! ✉️",
+      description: "We nemen binnen 24 uur contact met u op. Bedankt voor uw interesse!",
       duration: 5000
     });
 
@@ -44,11 +47,14 @@ const ContactPage = () => {
   return (
     <>
       <Helmet>
-        <title>Contact - Vos Web Designs</title>
+        <title>Contact - Vos Web Designs | Neem Contact Op</title>
+        <meta
+          name="description"
+          content="Klaar om uw project te starten? Neem contact op met Vos Web Designs. We beantwoorden al uw vragen en plannen graag een vrijblijvend gesprek."
+        />
       </Helmet>
 
       <main className="pt-24 pb-16">
-        {/* HERO */}
         <section className="py-16 bg-gradient-to-b from-[#0a0a0a] to-[#0f0f0f]">
           <div className="container mx-auto px-4">
             <motion.div
@@ -63,183 +69,252 @@ const ContactPage = () => {
                   In Gesprek Gaan
                 </span>
               </h1>
-              <p className="text-xl text-gray-300">
-                Heeft u een project in gedachten? We horen graag over uw plannen.
+              <p className="text-xl text-gray-300 leading-relaxed">
+                Heeft u een project in gedachten? We horen graag over uw plannen en uitdagingen
               </p>
             </motion.div>
           </div>
         </section>
 
-        {/* CONTENT */}
         <section className="py-16 bg-[#0a0a0a]">
-          <div className="container mx-auto px-4 max-w-6xl">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-              {/* FORM */}
-              <motion.div
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8 }}
-              >
-                <h2 className="text-3xl font-bold mb-6">Stuur Een Bericht</h2>
+          <div className="container mx-auto px-4">
+            <div className="max-w-6xl mx-auto">
 
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  {/* Naam */}
-                  <div>
-                    <label className="block text-sm font-medium mb-2">
-                      Naam *
-                    </label>
-                    <input
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      required
-                      placeholder="Uw naam"
-                      className="input"
-                    />
+              {/* INFO CARDS */}
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6 }}
+                  className="bg-[#1a1a1a] border border-gray-800 rounded-2xl p-8 text-center hover:border-[#D4AF37] transition-colors"
+                >
+                  <div className="w-16 h-16 bg-gradient-to-r from-[#D4AF37]/10 to-[#F4E4C1]/10 rounded-full flex items-center justify-center mx-auto mb-4 text-[#D4AF37]">
+                    <Mail size={28} />
                   </div>
+                  <h3 className="text-xl font-bold mb-2">Email</h3>
+                  <a href="mailto:info@voswebdesigns.nl" className="text-gray-300 hover:text-[#D4AF37] transition-colors">
+                    info@voswebdesigns.nl
+                  </a>
+                </motion.div>
 
-                  {/* Email */}
-                  <div>
-                    <label className="block text-sm font-medium mb-2">
-                      Email *
-                    </label>
-                    <input
-                      type="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      required
-                      placeholder="uw@email.nl"
-                      className="input"
-                    />
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.1 }}
+                  className="bg-[#1a1a1a] border border-gray-800 rounded-2xl p-8 text-center hover:border-[#D4AF37] transition-colors"
+                >
+                  <div className="w-16 h-16 bg-gradient-to-r from-[#D4AF37]/10 to-[#F4E4C1]/10 rounded-full flex items-center justify-center mx-auto mb-4 text-[#D4AF37]">
+                    <Phone size={28} />
                   </div>
+                  <h3 className="text-xl font-bold mb-2">Telefoon</h3>
+                  <a href="tel:+31648608336" className="text-gray-300 hover:text-[#D4AF37] transition-colors">
+                    +31 6 4860 8336
+                  </a>
+                </motion.div>
 
-                  {/* Telefoon */}
-                  <div>
-                    <label className="block text-sm font-medium mb-2">
-                      Telefoon
-                    </label>
-                    <input
-                      name="phone"
-                      value={formData.phone}
-                      onChange={handleChange}
-                      placeholder="+31 6 12345678"
-                      className="input"
-                    />
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.2 }}
+                  className="bg-[#1a1a1a] border border-gray-800 rounded-2xl p-8 text-center hover:border-[#D4AF37] transition-colors"
+                >
+                  <div className="w-16 h-16 bg-gradient-to-r from-[#D4AF37]/10 to-[#F4E4C1]/10 rounded-full flex items-center justify-center mx-auto mb-4 text-[#D4AF37]">
+                    <MapPin size={28} />
                   </div>
+                  <h3 className="text-xl font-bold mb-2">Locatie</h3>
+                  <p className="text-gray-300">Lelystad, Nederland</p>
+                </motion.div>
+              </div>
 
-                  {/* Bedrijf */}
-                  <div>
-                    <label className="block text-sm font-medium mb-2">
-                      Bedrijf
-                    </label>
-                    <input
-                      name="company"
-                      value={formData.company}
-                      onChange={handleChange}
-                      placeholder="Uw bedrijf"
-                      className="input"
-                    />
-                  </div>
+              {/* FORM + INFO */}
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+                <motion.div
+                  initial={{ opacity: 0, x: -30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8 }}
+                >
+                  <h2 className="text-3xl font-bold mb-6">Stuur Een Bericht</h2>
 
-                  {/* Dienst */}
-                  <div>
-                    <label className="block text-sm font-medium mb-2">
-                      Interesse In
-                    </label>
-                    <select
-                      name="service"
-                      value={formData.service}
-                      onChange={handleChange}
-                      className="input"
-                      required
-                    >
-                      <option value="">Selecteer een dienst</option>
-                      <option value="Webdesign">Webdesign</option>
-                      <option value="Webontwikkeling">Webontwikkeling</option>
-                      <option value="E-commerce">E-commerce</option>
-                      <option value="SEO & Marketing">SEO & Marketing</option>
-                      <option value="Anders">Anders</option>
-                    </select>
-                  </div>
-
-                  {/* PAKKET (vervangt budget) */}
-                  <div>
-                    <label className="block text-sm font-medium mb-2">
-                      Pakket
-                    </label>
-                    <select
-                      name="package"
-                      value={formData.package}
-                      onChange={handleChange}
-                      className="input"
-                      required
-                    >
-                      <option value="">Selecteer pakket</option>
-                      <option value="Starter">Starter</option>
-                      <option value="Groei">Groei</option>
-                      <option value="Pro">Pro</option>
-                    </select>
-                  </div>
-
-                  {/* Bericht */}
-                  <div>
-                    <label className="block text-sm font-medium mb-2">
-                      Bericht *
-                    </label>
-                    <textarea
-                      name="message"
-                      value={formData.message}
-                      onChange={handleChange}
-                      required
-                      rows={6}
-                      placeholder="Vertel ons over uw project..."
-                      className="input resize-none"
-                    />
-                  </div>
-
-                  <Button
-                    type="submit"
-                    size="lg"
-                    className="w-full bg-gradient-to-r from-[#D4AF37] to-[#F4E4C1] text-black"
-                  >
-                    Verstuur Bericht
-                    <Send className="ml-2" size={20} />
-                  </Button>
-                </form>
-              </motion.div>
-
-              {/* INFO */}
-              <motion.div
-                initial={{ opacity: 0, x: 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8 }}
-                className="lg:sticky lg:top-28"
-              >
-                <div className="bg-gradient-to-br from-[#1a1a1a] to-[#0f0f0f] border border-gray-800 rounded-2xl p-8">
-                  <h3 className="text-2xl font-bold mb-6">
-                    Wat Kunt U Verwachten?
-                  </h3>
-
-                  {[
-                    'Snelle Reactie',
-                    'Kennismakingsgesprek',
-                    'Offerte op Maat',
-                    'Project Start'
-                  ].map((item, i) => (
-                    <div key={i} className="flex gap-4 mb-4">
-                      <div className="w-10 h-10 bg-[#D4AF37]/10 rounded-full flex items-center justify-center">
-                        <span className="text-[#D4AF37] font-bold">
-                          {i + 1}
-                        </span>
+                  <form onSubmit={handleSubmit} className="space-y-6">
+                    {/* Naam + Email */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div>
+                        <label className="block text-sm font-medium mb-2">Naam *</label>
+                        <input
+                          name="name"
+                          value={formData.name}
+                          onChange={handleChange}
+                          required
+                          className="w-full px-4 py-3 bg-[#1a1a1a] border border-gray-800 rounded-lg focus:border-[#D4AF37] focus:outline-none transition-colors text-white"
+                          placeholder="Uw naam"
+                        />
                       </div>
-                      <span className="font-semibold">{item}</span>
+
+                      <div>
+                        <label className="block text-sm font-medium mb-2">Email *</label>
+                        <input
+                          type="email"
+                          name="email"
+                          value={formData.email}
+                          onChange={handleChange}
+                          required
+                          className="w-full px-4 py-3 bg-[#1a1a1a] border border-gray-800 rounded-lg focus:border-[#D4AF37] focus:outline-none transition-colors text-white"
+                          placeholder="uw@email.nl"
+                        />
+                      </div>
                     </div>
-                  ))}
-                </div>
-              </motion.div>
+
+                    {/* Telefoon + Bedrijf */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div>
+                        <label className="block text-sm font-medium mb-2">Telefoon</label>
+                        <input
+                          name="phone"
+                          value={formData.phone}
+                          onChange={handleChange}
+                          className="w-full px-4 py-3 bg-[#1a1a1a] border border-gray-800 rounded-lg focus:border-[#D4AF37] focus:outline-none transition-colors text-white"
+                          placeholder="+31 6 12345678"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-medium mb-2">Bedrijf</label>
+                        <input
+                          name="company"
+                          value={formData.company}
+                          onChange={handleChange}
+                          className="w-full px-4 py-3 bg-[#1a1a1a] border border-gray-800 rounded-lg focus:border-[#D4AF37] focus:outline-none transition-colors text-white"
+                          placeholder="Uw bedrijf"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Dienst + Pakket */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div>
+                        <label className="block text-sm font-medium mb-2">Interesse In</label>
+                        <select
+                          name="service"
+                          value={formData.service}
+                          onChange={handleChange}
+                          className="w-full px-4 py-3 bg-[#1a1a1a] border border-gray-800 rounded-lg focus:border-[#D4AF37] focus:outline-none transition-colors text-white"
+                        >
+                          <option value="">Selecteer een dienst</option>
+                          <option value="webdesign">Webdesign</option>
+                          <option value="development">Webontwikkeling</option>
+                          <option value="ecommerce">E-commerce</option>
+                          <option value="seo">SEO & Marketing</option>
+                          <option value="other">Anders</option>
+                        </select>
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-medium mb-2">Pakket</label>
+                        <select
+                          name="package"
+                          value={formData.package}
+                          onChange={handleChange}
+                          className="w-full px-4 py-3 bg-[#1a1a1a] border border-gray-800 rounded-lg focus:border-[#D4AF37] focus:outline-none transition-colors text-white"
+                        >
+                          <option value="">Selecteer pakket</option>
+                          <option value="Starter">Starter</option>
+                          <option value="Groei">Groei</option>
+                          <option value="Pro">Pro</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    {/* Bericht */}
+                    <div>
+                      <label className="block text-sm font-medium mb-2">Bericht *</label>
+                      <textarea
+                        name="message"
+                        value={formData.message}
+                        onChange={handleChange}
+                        required
+                        rows={6}
+                        className="w-full px-4 py-3 bg-[#1a1a1a] border border-gray-800 rounded-lg focus:border-[#D4AF37] focus:outline-none transition-colors text-white resize-none"
+                        placeholder="Vertel ons over uw project..."
+                      />
+                    </div>
+
+                    <Button
+                      type="submit"
+                      size="lg"
+                      className="w-full bg-gradient-to-r from-[#D4AF37] to-[#F4E4C1] text-black hover:opacity-90 transition-opacity"
+                    >
+                      Verstuur Bericht
+                      <Send className="ml-2" size={20} />
+                    </Button>
+                  </form>
+                </motion.div>
+
+                {/* INFO RIGHT */}
+                <motion.div
+                  initial={{ opacity: 0, x: 30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8 }}
+                  className="lg:sticky lg:top-28"
+                >
+                  <div className="bg-gradient-to-br from-[#1a1a1a] to-[#0f0f0f] border border-gray-800 rounded-2xl p-8">
+                    <h3 className="text-2xl font-bold mb-6">Wat Kunt U Verwachten?</h3>
+
+                    <div className="space-y-6">
+                      <div className="flex gap-4">
+                        <div className="w-10 h-10 bg-[#D4AF37]/10 rounded-full flex items-center justify-center">
+                          <span className="text-[#D4AF37] font-bold">1</span>
+                        </div>
+                        <div>
+                          <span className="font-semibold block mb-1">Snelle Reactie</span>
+                          <p className="text-gray-400 text-sm">We reageren binnen 24 uur op uw bericht</p>
+                        </div>
+                      </div>
+
+                      <div className="flex gap-4">
+                        <div className="w-10 h-10 bg-[#D4AF37]/10 rounded-full flex items-center justify-center">
+                          <span className="text-[#D4AF37] font-bold">2</span>
+                        </div>
+                        <div>
+                          <span className="font-semibold block mb-1">Kennismakingsgesprek</span>
+                          <p className="text-gray-400 text-sm">Een vrijblijvend gesprek over uw project en wensen</p>
+                        </div>
+                      </div>
+
+                      <div className="flex gap-4">
+                        <div className="w-10 h-10 bg-[#D4AF37]/10 rounded-full flex items-center justify-center">
+                          <span className="text-[#D4AF37] font-bold">3</span>
+                        </div>
+                        <div>
+                          <span className="font-semibold block mb-1">Offerte op Maat</span>
+                          <p className="text-gray-400 text-sm">Een gedetailleerde offerte afgestemd op uw behoeften</p>
+                        </div>
+                      </div>
+
+                      <div className="flex gap-4">
+                        <div className="w-10 h-10 bg-[#D4AF37]/10 rounded-full flex items-center justify-center">
+                          <span className="text-[#D4AF37] font-bold">4</span>
+                        </div>
+                        <div>
+                          <span className="font-semibold block mb-1">Project Start</span>
+                          <p className="text-gray-400 text-sm">Bij akkoord starten we direct met uw project</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="mt-8 pt-8 border-t border-gray-800">
+                      <p className="text-gray-400 text-sm">
+                        Heeft u vragen over onze diensten, prijzen of werkwijze? We beantwoorden graag al uw vragen.
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
+
+              </div>
             </div>
           </div>
         </section>
