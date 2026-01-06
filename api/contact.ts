@@ -1,7 +1,4 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
-import { Resend } from "resend";
-
-const resend = new Resend(process.env.RESEND_API_KEY);
 
 /* =======================
    LUXE HTML TEMPLATES
@@ -108,7 +105,7 @@ const customerTemplate = (data: any) => `
 `;
 
 /* =======================
-   API HANDLER
+   API HANDLER (ESM SAFE)
 ======================= */
 
 export default async function handler(
@@ -120,6 +117,10 @@ export default async function handler(
   }
 
   try {
+    // ✅ DYNAMIC IMPORT (ESSENTIEEL)
+    const { Resend } = await import("resend");
+    const resend = new Resend(process.env.RESEND_API_KEY);
+
     const data =
       typeof req.body === "string" ? JSON.parse(req.body) : req.body;
 
@@ -129,7 +130,7 @@ export default async function handler(
 
     // 📩 Mail naar jou
     await resend.emails.send({
-      from: "Vos Web Designs <info@voswebdesigns.nl>",
+      from: "Vos Web Designs <onboarding@resend.dev>",
       to: ["info@voswebdesigns.nl"],
       subject: `Nieuw contactbericht van ${data.name}`,
       html: adminTemplate(data),
@@ -137,7 +138,7 @@ export default async function handler(
 
     // ✉️ Bevestiging naar klant
     await resend.emails.send({
-      from: "Vos Web Designs <info@voswebdesigns.nl>",
+      from: "Vos Web Designs <onboarding@resend.dev>",
       to: [data.email],
       subject: "Wij hebben uw bericht ontvangen",
       html: customerTemplate(data),
