@@ -1,140 +1,199 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 
 /* =======================
-   LUXE HTML TEMPLATES
+   DIENST-SPECIFIEKE COPY
+======================= */
+
+const serviceCopy: Record<
+  string,
+  { title: string; intro: string; expectations: string[] }
+> = {
+  webdesign: {
+    title: "Uw nieuwe website begint hier",
+    intro:
+      "Een professionele website is de basis van uw online uitstraling. Wij kijken niet alleen naar design, maar ook naar gebruiksvriendelijkheid en conversie.",
+    expectations: [
+      "Bespreking van uw wensen en doelen",
+      "Advies over structuur, design en content",
+      "Heldere uitleg over planning en investering",
+    ],
+  },
+
+  ecommerce: {
+    title: "Samen bouwen aan een succesvolle webshop",
+    intro:
+      "Een goede webshop verkoopt. Wij focussen op snelheid, vertrouwen en een soepele gebruikerservaring voor uw klanten.",
+    expectations: [
+      "Bespreking van producten, betalingen en verzending",
+      "Advies over conversie en schaalbaarheid",
+      "Duidelijk stappenplan richting livegang",
+    ],
+  },
+
+  development: {
+    title: "Maatwerk webontwikkeling",
+    intro:
+      "Voor technische of complexe projecten denken wij actief mee in oplossingen, structuur en schaalbaarheid.",
+    expectations: [
+      "Inventarisatie van functionaliteiten",
+      "Technisch advies en haalbaarheid",
+      "Toekomstbestendige en schaalbare aanpak",
+    ],
+  },
+
+  seo: {
+    title: "Meer zichtbaarheid en online groei",
+    intro:
+      "Goede vindbaarheid begint bij een sterke basis. Wij kijken zowel technisch als strategisch naar SEO.",
+    expectations: [
+      "Analyse van uw huidige website",
+      "Kansen voor betere vindbaarheid",
+      "Eerlijk en transparant groeiplan",
+    ],
+  },
+
+  other: {
+    title: "Uw aanvraag is ontvangen",
+    intro:
+      "Elke aanvraag is uniek. Wij nemen de tijd om uw vraag goed te begrijpen en passend advies te geven.",
+    expectations: [
+      "Persoonlijke reactie",
+      "Meedenken in oplossingen",
+      "Eerlijk advies, ook als iets niet past",
+    ],
+  },
+};
+
+/* =======================
+   ADMIN TEMPLATE
 ======================= */
 
 const adminTemplate = (data: any) => `
 <!DOCTYPE html>
 <html>
 <body style="margin:0;padding:0;background:#0a0a0a;font-family:Arial,sans-serif;color:#ffffff;">
-  <table width="100%" cellpadding="0" cellspacing="0">
-    <tr>
-      <td align="center" style="padding:40px 16px;">
-        <table width="600" style="background:#111;border-radius:16px;border:1px solid #2a2a2a;">
-          <tr>
-            <td style="padding:32px;text-align:center;">
-              <h1 style="margin:0;font-size:28px;color:#D4AF37;">Nieuw Contactbericht</h1>
-              <p style="margin-top:8px;color:#aaa;">Vos Web Designs</p>
-            </td>
-          </tr>
+<table width="100%" cellpadding="0" cellspacing="0">
+<tr>
+<td align="center" style="padding:40px 16px;">
+<table width="600" style="background:#111;border-radius:16px;border:1px solid #2a2a2a;">
+<tr>
+<td style="padding:32px;text-align:center;">
+<h1 style="margin:0;font-size:28px;color:#D4AF37;">Nieuw Contactbericht</h1>
+<p style="margin-top:8px;color:#aaa;">Vos Web Designs</p>
+</td>
+</tr>
 
-          <tr>
-            <td style="padding:0 32px 32px;font-size:15px;">
-              <p><strong>Naam:</strong> ${data.name}</p>
-              <p><strong>Email:</strong> ${data.email}</p>
-              <p><strong>Telefoon:</strong> ${data.phone || "-"}</p>
-              <p><strong>Bedrijf:</strong> ${data.company || "-"}</p>
-              <p><strong>Dienst:</strong> ${data.service || "-"}</p>
-              <p><strong>Pakket:</strong> ${data.package || "-"}</p>
+<tr>
+<td style="padding:0 32px 32px;font-size:15px;">
+<p><strong>Naam:</strong> ${data.name}</p>
+<p><strong>Email:</strong> ${data.email}</p>
+<p><strong>Telefoon:</strong> ${data.phone || "-"}</p>
+<p><strong>Bedrijf:</strong> ${data.company || "-"}</p>
+<p><strong>Dienst:</strong> ${data.service || "-"}</p>
+<p><strong>Pakket:</strong> ${data.package || "-"}</p>
 
-              <p style="margin-top:24px;"><strong>Bericht:</strong></p>
-              <div style="margin-top:8px;padding:16px;background:#1a1a1a;border-radius:8px;border:1px solid #2a2a2a;">
-                ${data.message}
-              </div>
-            </td>
-          </tr>
+<p style="margin-top:24px;"><strong>Bericht:</strong></p>
+<div style="margin-top:8px;padding:16px;background:#1a1a1a;border-radius:8px;border:1px solid #2a2a2a;">
+${data.message}
+</div>
+</td>
+</tr>
 
-          <tr>
-            <td style="padding:24px;text-align:center;font-size:12px;color:#777;">
-              Automatisch verzonden via voswebdesigns.nl
-            </td>
-          </tr>
-        </table>
-      </td>
-    </tr>
-  </table>
-</body>
-</html>
-`;
-
-const customerTemplate = (data: any) => `
-<!DOCTYPE html>
-<html lang="nl">
-<body style="margin:0;padding:0;background:#0a0a0a;font-family:Arial,sans-serif;color:#ffffff;">
-  <table width="100%" cellpadding="0" cellspacing="0">
-    <tr>
-      <td align="center" style="padding:40px 16px;">
-        <table width="600" style="background:#111;border-radius:16px;border:1px solid #2a2a2a;overflow:hidden;">
-          
-          <!-- HEADER -->
-          <tr>
-            <td style="padding:40px;text-align:center;">
-              <h1 style="margin:0;font-size:30px;color:#D4AF37;">
-                Bedankt voor uw bericht
-              </h1>
-              <p style="margin-top:12px;color:#aaa;">
-                Vos Web Designs
-              </p>
-            </td>
-          </tr>
-
-          <!-- CONTENT -->
-          <tr>
-            <td style="padding:0 40px 32px;font-size:16px;line-height:1.7;">
-              <p>Beste <strong>${data.name}</strong>,</p>
-
-              <p>
-                Bedankt voor het invullen van het contactformulier.
-                Wij hebben uw aanvraag goed ontvangen en nemen
-                <strong>binnen 24 uur</strong> persoonlijk contact met u op.
-              </p>
-
-              <!-- SAMENVATTING -->
-              <div style="margin:24px 0;padding:20px;background:#1a1a1a;border-radius:10px;border:1px solid #2a2a2a;">
-                <strong style="color:#D4AF37;">Samenvatting van uw aanvraag</strong><br /><br />
-
-                <strong>Interesse:</strong> ${data.service || "Niet gespecificeerd"}<br />
-                <strong>Pakket:</strong> ${data.package || "Nog te bepalen"}<br />
-                <strong>Bedrijf:</strong> ${data.company || "-"}<br /><br />
-
-                <strong>Uw bericht:</strong><br />
-                ${data.message}
-              </div>
-
-              <!-- WAT KUNT U VERWACHTEN -->
-              <p><strong>Wat kunt u nu verwachten?</strong></p>
-              <ul style="padding-left:18px;color:#ccc;">
-                <li>Persoonlijke reactie (geen automatische verkoop)</li>
-                <li>Korte kennismaking & inventarisatie</li>
-                <li>Heldere uitleg over mogelijkheden & kosten</li>
-              </ul>
-
-              <!-- CTA -->
-              <p style="margin-top:24px;">
-                Wilt u alvast iets toevoegen of verduidelijken?<br />
-                Antwoord gerust op deze e-mail of mail naar
-                <a href="mailto:info@voswebdesigns.nl" style="color:#D4AF37;text-decoration:none;">
-                  info@voswebdesigns.nl
-                </a>.
-              </p>
-
-              <p style="margin-top:32px;">
-                Met vriendelijke groet,<br />
-                <strong>Melvin Vos</strong><br />
-                Vos Web Designs
-              </p>
-            </td>
-          </tr>
-
-          <!-- FOOTER -->
-          <tr>
-            <td style="padding:24px;text-align:center;font-size:12px;color:#777;">
-              © Vos Web Designs – Luxe Webdesign & Development<br />
-              Lelystad · Nederland
-            </td>
-          </tr>
-
-        </table>
-      </td>
-    </tr>
-  </table>
+<tr>
+<td style="padding:24px;text-align:center;font-size:12px;color:#777;">
+Automatisch verzonden via voswebdesigns.nl
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
 </body>
 </html>
 `;
 
 /* =======================
-   API HANDLER (ESM SAFE)
+   CUSTOMER TEMPLATE
+======================= */
+
+const customerTemplate = (data: any) => {
+  const key = data.service || "other";
+  const content = serviceCopy[key] || serviceCopy.other;
+
+  return `
+<!DOCTYPE html>
+<html lang="nl">
+<body style="margin:0;padding:0;background:#0a0a0a;font-family:Arial,sans-serif;color:#ffffff;">
+<table width="100%" cellpadding="0" cellspacing="0">
+<tr>
+<td align="center" style="padding:40px 16px;">
+<table width="600" style="background:#111;border-radius:16px;border:1px solid #2a2a2a;overflow:hidden;">
+
+<tr>
+<td style="padding:40px;text-align:center;">
+<h1 style="margin:0;font-size:28px;color:#D4AF37;">
+${content.title}
+</h1>
+<p style="margin-top:12px;color:#aaa;">Vos Web Designs</p>
+</td>
+</tr>
+
+<tr>
+<td style="padding:0 40px 32px;font-size:16px;line-height:1.7;">
+<p>Beste <strong>${data.name}</strong>,</p>
+
+<p>
+Hartelijk dank voor uw bericht. Wij hebben uw aanvraag goed ontvangen en nemen
+<strong>binnen 24 uur</strong> persoonlijk contact met u op.
+</p>
+
+<p>${content.intro}</p>
+
+<div style="margin:24px 0;padding:20px;background:#1a1a1a;border-radius:10px;border:1px solid #2a2a2a;">
+<strong style="color:#D4AF37;">Samenvatting van uw aanvraag</strong><br /><br />
+<strong>Dienst:</strong> ${data.service || "Niet gespecificeerd"}<br />
+<strong>Pakket:</strong> ${data.package || "Nog te bepalen"}<br />
+<strong>Bedrijf:</strong> ${data.company || "-"}<br /><br />
+<strong>Uw bericht:</strong><br />
+${data.message}
+</div>
+
+<p><strong>Wat kunt u van ons verwachten?</strong></p>
+<ul style="padding-left:18px;color:#ccc;">
+${content.expectations.map(item => `<li>${item}</li>`).join("")}
+</ul>
+
+<p style="margin-top:24px;">
+Wij nemen contact met u op via e-mail of telefoon.
+Wilt u alvast extra informatie delen? U kunt eenvoudig reageren op deze e-mail.
+</p>
+
+<p style="margin-top:32px;">
+Met vriendelijke groet,<br />
+<strong>Melvin Vos</strong><br />
+Vos Web Designs
+</p>
+</td>
+</tr>
+
+<tr>
+<td style="padding:24px;text-align:center;font-size:12px;color:#777;">
+© Vos Web Designs – Luxe Webdesign & Development<br />
+Lelystad · Nederland
+</td>
+</tr>
+
+</table>
+</td>
+</tr>
+</table>
+</body>
+</html>
+`;
+};
+
+/* =======================
+   API HANDLER
 ======================= */
 
 export default async function handler(
@@ -146,7 +205,6 @@ export default async function handler(
   }
 
   try {
-    // ✅ DYNAMIC IMPORT (ESSENTIEEL)
     const { Resend } = await import("resend");
     const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -157,7 +215,6 @@ export default async function handler(
       return res.status(400).json({ error: "Invalid form data" });
     }
 
-    // 📩 Mail naar jou
     await resend.emails.send({
       from: "Vos Web Designs <info@voswebdesigns.nl>",
       to: ["info@voswebdesigns.nl"],
@@ -165,7 +222,6 @@ export default async function handler(
       html: adminTemplate(data),
     });
 
-    // ✉️ Bevestiging naar klant
     await resend.emails.send({
       from: "Vos Web Designs <info@voswebdesigns.nl>",
       to: [data.email],
