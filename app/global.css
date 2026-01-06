@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .input {
+    @apply w-full px-4 py-3 bg-[#1a1a1a] border border-gray-800 rounded-lg 
+    text-white transition-colors
+    focus:border-[#D4AF37] focus:outline-none;
+  }
+}
