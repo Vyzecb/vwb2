@@ -6,7 +6,7 @@ import type { VercelRequest, VercelResponse } from "@vercel/node";
 
 const LOGO_URL = "https://voswebdesigns.nl/logo.jpeg";
 const FROM_EMAIL = "Vos Web Designs <contact@voswebdesigns.nl>";
-const BCC_EMAIL = "info@voswebdesigns.nl";
+const ADMIN_EMAIL = "info@voswebdesigns.nl";
 
 /* =======================
    DIENST-SPECIFIEKE COPY
@@ -24,8 +24,7 @@ const serviceCopy: Record<
 > = {
   webdesign: {
     title: "Uw nieuwe website begint hier",
-    introCustomer:
-      "Hartelijk dank voor uw bericht. Wij hebben uw aanvraag goed ontvangen en nemen binnen 24 uur persoonlijk contact met u op.",
+    introCustomer: "",
     introAdmin:
       "Er is een nieuwe webdesign aanvraag binnengekomen via het contactformulier.",
     deepText:
@@ -39,8 +38,7 @@ const serviceCopy: Record<
 
   ecommerce: {
     title: "Samen bouwen aan een succesvolle webshop",
-    introCustomer:
-      "Hartelijk dank voor uw bericht. Wij hebben uw webshop-aanvraag goed ontvangen en nemen binnen 24 uur persoonlijk contact met u op.",
+    introCustomer: "",
     introAdmin:
       "Er is een nieuwe e-commerce aanvraag binnengekomen via het contactformulier.",
     deepText:
@@ -54,8 +52,7 @@ const serviceCopy: Record<
 
   development: {
     title: "Maatwerk webontwikkeling",
-    introCustomer:
-      "Hartelijk dank voor uw bericht. Uw aanvraag voor maatwerk webontwikkeling is goed ontvangen.",
+    introCustomer: "",
     introAdmin:
       "Er is een nieuwe aanvraag voor maatwerk webontwikkeling binnengekomen.",
     deepText:
@@ -69,8 +66,7 @@ const serviceCopy: Record<
 
   seo: {
     title: "Meer zichtbaarheid en online groei",
-    introCustomer:
-      "Hartelijk dank voor uw bericht. Wij hebben uw SEO-aanvraag goed ontvangen.",
+    introCustomer: "",
     introAdmin:
       "Er is een nieuwe SEO & marketing aanvraag binnengekomen.",
     deepText:
@@ -83,9 +79,8 @@ const serviceCopy: Record<
   },
 
   other: {
-    title: "Uw aanvraag is ontvangen",
-    introCustomer:
-      "Hartelijk dank voor uw bericht. Wij hebben uw aanvraag goed ontvangen en nemen contact met u op.",
+    title: "Nieuwe aanvraag ontvangen",
+    introCustomer: "",
     introAdmin:
       "Er is een nieuwe contactaanvraag binnengekomen.",
     deepText:
@@ -121,32 +116,27 @@ const packageCopy: Record<string, { title: string; text: string }> = {
 };
 
 /* =======================
-   FOOTER (EMAIL SAFE)
+   FOOTER
 ======================= */
 
 const emailFooter = `
 <hr style="border:none;border-top:1px solid #2a2a2a;margin:32px 0;" />
-
 <p style="font-size:14px;color:#aaa;line-height:1.6;">
 <strong>Vos Web Designs</strong><br />
 Premium webdesign & ontwikkeling<br /><br />
-
 📧 <a href="mailto:info@voswebdesigns.nl" style="color:#D4AF37;text-decoration:none;">info@voswebdesigns.nl</a><br />
 📍 Lelystad, Nederland
 </p>
-
 <p style="font-size:12px;color:#666;">
-© ${new Date().getFullYear()} Vos Web Designs · Alle rechten voorbehouden<br />
-<a href="https://voswebdesigns.nl/privacy" style="color:#666;">Privacybeleid</a> ·
-<a href="https://voswebdesigns.nl/voorwaarden" style="color:#666;">Algemene voorwaarden</a>
+© ${new Date().getFullYear()} Vos Web Designs · Alle rechten voorbehouden
 </p>
 `;
 
 /* =======================
-   SHARED TEMPLATE
+   TEMPLATE
 ======================= */
 
-const sharedTemplate = (data: any, isAdmin = false) => {
+const sharedTemplate = (data: any) => {
   const service = serviceCopy[data.service] || serviceCopy.other;
   const pkg = packageCopy[data.package];
 
@@ -158,27 +148,23 @@ const sharedTemplate = (data: any, isAdmin = false) => {
 <tr>
 <td align="center" style="padding:40px 16px;">
 <table width="600" style="background:#111;border-radius:16px;border:1px solid #2a2a2a;">
-
 <tr>
 <td style="padding:32px;text-align:center;">
 <img src="${LOGO_URL}" width="160" style="margin-bottom:20px;" />
 <h1 style="color:#D4AF37;">${service.title}</h1>
-<p style="color:#aaa;">Vos Web Designs</p>
 </td>
 </tr>
 
 <tr>
 <td style="padding:0 40px 32px;font-size:16px;line-height:1.7;">
-
-${isAdmin ? "<p><strong>Nieuwe aanvraag ontvangen</strong></p>" : `<p>Beste <strong>${data.name}</strong>,</p>`}
-
-<p>${isAdmin ? service.introAdmin : service.introCustomer}</p>
+<p><strong>Nieuwe aanvraag ontvangen</strong></p>
+<p>${service.introAdmin}</p>
 <p>${service.deepText}</p>
 
 ${pkg ? `<h3 style="color:#D4AF37;">${pkg.title}</h3><p>${pkg.text}</p>` : ""}
 
 <div style="margin:28px 0;padding:22px;background:#1a1a1a;border-radius:12px;border:1px solid #2a2a2a;">
-<strong style="color:#D4AF37;">${isAdmin ? "Aanvraaggegevens" : "Samenvatting van uw aanvraag"}</strong><br /><br />
+<strong style="color:#D4AF37;">Aanvraaggegevens</strong><br /><br />
 <strong>Naam:</strong> ${data.name}<br />
 <strong>Email:</strong> ${data.email}<br />
 <strong>Telefoon:</strong> ${data.phone || "-"}<br />
@@ -189,22 +175,9 @@ ${pkg ? `<h3 style="color:#D4AF37;">${pkg.title}</h3><p>${pkg.text}</p>` : ""}
 ${data.message}
 </div>
 
-<p><strong>Wat kunt u verwachten?</strong></p>
-<ul>
-${service.expectations.map(e => `<li>${e}</li>`).join("")}
-</ul>
-
-<p>
-Met vriendelijke groet,<br />
-<strong>Melvin Vos</strong><br />
-Vos Web Designs
-</p>
-
 ${emailFooter}
-
 </td>
 </tr>
-
 </table>
 </td>
 </tr>
@@ -237,22 +210,13 @@ export default async function handler(
       return res.status(400).json({ error: "Invalid form data" });
     }
 
-    // ADMIN MAIL (zelfde layout)
+    // ✅ ALLEEN ADMIN MAIL
     await resend.emails.send({
       from: FROM_EMAIL,
-      to: ["info@voswebdesigns.nl"],
+      to: [ADMIN_EMAIL],
+      reply_to: data.email,
       subject: `Nieuwe aanvraag: ${data.name}`,
-      html: sharedTemplate(data, true),
-    });
-
-    // CUSTOMER MAIL + BCC
-    await resend.emails.send({
-      from: FROM_EMAIL,
-      to: [data.email],
-      bcc: [BCC_EMAIL],
-      reply_to: "info@voswebdesigns.nl",
-      subject: "Wij hebben uw bericht ontvangen",
-      html: sharedTemplate(data, false),
+      html: sharedTemplate(data),
     });
 
     return res.status(200).json({ success: true });
