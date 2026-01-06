@@ -24,12 +24,21 @@ const ContactPage = () => {
     }));
   };
 
-  const handleSubmit = e => {
-    e.preventDefault();
+  const handleSubmit = async e => {
+  e.preventDefault();
+
+  try {
+    const res = await fetch("/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData)
+    });
+
+    if (!res.ok) throw new Error("Mail failed");
 
     toast({
       title: "Bericht Verzonden! ✉️",
-      description: "We nemen binnen 24 uur contact met u op. Bedankt voor uw interesse!",
+      description: "We nemen binnen 24 uur contact met u op.",
       duration: 5000
     });
 
@@ -42,7 +51,15 @@ const ContactPage = () => {
       package: '',
       message: ''
     });
-  };
+
+  } catch {
+    toast({
+      title: "Fout",
+      description: "Er ging iets mis bij het verzenden.",
+      variant: "destructive"
+    });
+  }
+};
 
   return (
     <>
