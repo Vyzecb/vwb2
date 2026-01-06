@@ -145,16 +145,7 @@ const ServicesPage = () => {
           ))}
         </section>
 
-        {/* VOOR WIE */}
-        <section className="container mx-auto px-4 max-w-5xl text-center space-y-6">
-          <h2 className="text-4xl font-bold">Voor wie wij werken</h2>
-          <p className="text-gray-400">
-            Wij helpen ondernemers, zzp’ers en kleine bedrijven die professioneel
-            online zichtbaar willen zijn en klaar zijn om te groeien.
-          </p>
-        </section>
-
-        {/* SERVICES – JOUW BESTAANDE BLOK */}
+        {/* SERVICES */}
         <section ref={ref} className="container mx-auto px-4 space-y-32">
           {services.map(service => (
             <motion.div
@@ -207,6 +198,7 @@ const ServicesPage = () => {
                         {isStarter && <span className="text-base text-gray-400 mr-1">Vanaf</span>}
                         {pkg.price}
                       </p>
+
                       <p className="text-sm text-gray-400 mt-1">{getDelivery(pkg.name)}</p>
                       <p className="text-xs text-gray-500 mb-4">Geen aanbetaling nodig • Persoonlijk contact</p>
 
@@ -231,6 +223,40 @@ const ServicesPage = () => {
               </div>
             </motion.div>
           ))}
+        </section>
+
+        {/* FAQ */}
+        <section className="container mx-auto px-4 max-w-3xl">
+          <h2 className="text-4xl font-bold text-center mb-10">Veelgestelde vragen</h2>
+          <div className="space-y-6">
+            {[
+              {
+                q: 'Moet ik vooraf betalen?',
+                a: 'Nee. Wij werken zonder aanbetaling. We starten pas nadat alles duidelijk is afgestemd.'
+              },
+              {
+                q: 'Hoe lang duurt een project gemiddeld?',
+                a: 'Starter-projecten zijn vaak binnen 1–2 weken klaar. Grotere projecten worden vooraf ingepland.'
+              },
+              {
+                q: 'Kan ik later uitbreiden?',
+                a: 'Ja. Alle websites en webshops zijn zo opgebouwd dat uitbreiden altijd mogelijk is.'
+              },
+              {
+                q: 'Is support inbegrepen?',
+                a: 'Ja. Na oplevering kun je altijd bij ons terecht voor vragen of kleine aanpassingen.'
+              },
+              {
+                q: 'Blijft de website mijn eigendom?',
+                a: 'Ja. Na oplevering is de website volledig van jou.'
+              }
+            ].map(item => (
+              <div key={item.q} className="border border-gray-800 rounded-xl p-6 bg-[#0f0f0f]">
+                <h3 className="font-semibold mb-2">{item.q}</h3>
+                <p className="text-gray-400">{item.a}</p>
+              </div>
+            ))}
+          </div>
         </section>
 
         {/* EINDE CTA */}
