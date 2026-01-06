@@ -5,7 +5,7 @@ import type { VercelRequest, VercelResponse } from "@vercel/node";
 ======================= */
 
 const LOGO_URL = "https://voswebdesigns.nl/logo.jpeg";
-const FROM_EMAIL = "Vos Web Designs <no-reply@voswebdesigns.nl>";
+const FROM_EMAIL = "Vos Web Designs <contact@voswebdesigns.nl>";
 const BCC_EMAIL = "info@voswebdesigns.nl";
 
 /* =======================
@@ -240,7 +240,7 @@ export default async function handler(
     // ADMIN MAIL (zelfde layout)
     await resend.emails.send({
       from: FROM_EMAIL,
-      to: [BCC_EMAIL],
+      to: ["info@voswebdesigns.nl"],
       subject: `Nieuwe aanvraag: ${data.name}`,
       html: sharedTemplate(data, true),
     });
@@ -250,7 +250,7 @@ export default async function handler(
       from: FROM_EMAIL,
       to: [data.email],
       bcc: [BCC_EMAIL],
-      reply_to: BCC_EMAIL,
+      reply_to: "info@voswebdesigns.nl",
       subject: "Wij hebben uw bericht ontvangen",
       html: sharedTemplate(data, false),
     });
