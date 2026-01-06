@@ -101,7 +101,7 @@ const ServicesPage = () => {
       title: 'E-commerce',
       shortDescription: 'Complete online winkels die verkopen stimuleren',
       description:
-        'Wij bouwen krachtige webshops die niet alleen mooi zijn, maar ook converteren.',
+        'Wij bouwen krachtige webshops die niet alleen mooi zijn, maar ook converteren. Van productbeheer tot betalingen en automatisering.',
       image: '/ecom.png',
       packages: [
         {
@@ -138,7 +138,7 @@ const ServicesPage = () => {
       title: 'SEO & Marketing',
       shortDescription: 'Vergroot uw online zichtbaarheid en trek meer klanten aan',
       description:
-        'Wij optimaliseren uw website technisch en inhoudelijk voor structurele groei.',
+        'Wij optimaliseren uw website technisch en inhoudelijk voor structurele groei in Google en andere zoekmachines.',
       image: '/seo.png',
       packages: [
         {
@@ -175,7 +175,7 @@ const ServicesPage = () => {
       title: 'Performance Optimalisatie',
       shortDescription: 'Snellere websites voor betere conversies',
       description:
-        'Wij optimaliseren snelheid, Core Web Vitals en technische prestaties.',
+        'Wij optimaliseren snelheid, Core Web Vitals en technische prestaties voor maximale gebruikerservaring en SEO.',
       image: '/performance.png',
       packages: [
         {
@@ -209,7 +209,6 @@ const ServicesPage = () => {
     }
   ];
 
-  // 🔥 1 willekeurig “meest gekozen” pakket per dienst (per page-load)
   const highlightedIndexes = useMemo(
     () => services.map(s => Math.floor(Math.random() * s.packages.length)),
     []
@@ -219,13 +218,17 @@ const ServicesPage = () => {
     <>
       <Helmet>
         <title>Diensten – Vos Web Designs</title>
+        <meta
+          name="description"
+          content="Webdesign, webontwikkeling, e-commerce, SEO en performance optimalisatie. Complete digitale oplossingen."
+        />
       </Helmet>
 
       <main className="pt-24 pb-20 bg-[#0a0a0a]">
         <section ref={ref} className="container mx-auto px-4 space-y-32">
           {services.map((service, i) => (
             <motion.div
-              key={i}
+              key={service.title}
               initial={{ opacity: 0, y: 40 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.7 }}
