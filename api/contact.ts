@@ -128,7 +128,10 @@ export default async function handler(
   }
 
   try {
-    const data = req.body;
+    const data =
+  typeof req.body === "string"
+    ? JSON.parse(req.body)
+    : req.body;
 
     if (!data?.email || !data?.name || !data?.message) {
       return res.status(400).json({ error: "Invalid form data" });
