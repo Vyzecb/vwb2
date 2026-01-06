@@ -18,13 +18,14 @@ const ServicesPage = () => {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-100px' });
 
-  const getCTA = (name: string) => {
+  // ❗ FIX: GEEN TypeScript in JSX
+  const getCTA = (name) => {
     if (name === 'Starter') return 'Start eenvoudig';
     if (name === 'Groei') return 'Beste keuze – start nu';
     return 'Plan een kennismaking';
   };
 
-  const getDelivery = (name: string) => {
+  const getDelivery = (name) => {
     if (name === 'Starter') return 'Meestal binnen 1–2 weken opgeleverd';
     if (name === 'Groei') return 'Meestal binnen 2–4 weken opgeleverd';
     return 'Planning in overleg';
