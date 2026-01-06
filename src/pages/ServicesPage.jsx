@@ -18,7 +18,6 @@ const ServicesPage = () => {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-100px' });
 
-  // ❗ FIX: GEEN TypeScript in JSX
   const getCTA = (name) => {
     if (name === 'Starter') return 'Start eenvoudig';
     if (name === 'Groei') return 'Beste keuze – start nu';
@@ -31,6 +30,9 @@ const ServicesPage = () => {
     return 'Planning in overleg';
   };
 
+  /* =========================
+     SERVICES (ONGEWIJZIGD)
+  ========================= */
   const services = [
     {
       icon: <Palette size={36} />,
@@ -42,39 +44,11 @@ const ServicesPage = () => {
       highlightedPackage: 'Groei',
       highlightLabel: 'Meest gekozen',
       packages: [
-        {
-          name: 'Starter',
-          price: '€349',
-          features: [
-            '1–2 pagina’s',
-            'Modern & responsive design',
-            'Contactformulier',
-            'Basis SEO'
-          ]
-        },
-        {
-          name: 'Groei',
-          price: '€649',
-          features: [
-            'Tot 5 pagina’s',
-            'Conversiegericht ontwerp',
-            'Subtiele animaties',
-            'SEO & performance basis'
-          ]
-        },
-        {
-          name: 'Pro',
-          price: '€995',
-          features: [
-            'Volledig maatwerk design',
-            'Unieke branding look',
-            'Uitbreidbaar voor groei',
-            'Persoonlijke begeleiding'
-          ]
-        }
+        { name: 'Starter', price: '€349', features: ['1–2 pagina’s','Modern & responsive design','Contactformulier','Basis SEO'] },
+        { name: 'Groei', price: '€649', features: ['Tot 5 pagina’s','Conversiegericht ontwerp','Subtiele animaties','SEO & performance basis'] },
+        { name: 'Pro', price: '€995', features: ['Volledig maatwerk design','Unieke branding look','Uitbreidbaar voor groei','Persoonlijke begeleiding'] }
       ]
     },
-
     {
       icon: <Code size={36} />,
       title: 'Webontwikkeling',
@@ -85,36 +59,11 @@ const ServicesPage = () => {
       highlightedPackage: 'Groei',
       highlightLabel: 'Beste balans',
       packages: [
-        {
-          name: 'Starter',
-          price: '€595',
-          features: [
-            'Professionele website',
-            'Snelle laadtijden',
-            'Eenvoudig beheerbaar'
-          ]
-        },
-        {
-          name: 'Groei',
-          price: '€995',
-          features: [
-            'Uitgebreide pagina’s',
-            'Formulieren & koppelingen',
-            'Performance optimalisatie'
-          ]
-        },
-        {
-          name: 'Pro',
-          price: '€1.495',
-          features: [
-            'Custom functionaliteit',
-            'Database of login systeem',
-            'Doorontwikkelbaar platform'
-          ]
-        }
+        { name: 'Starter', price: '€595', features: ['Professionele website','Snelle laadtijden','Eenvoudig beheerbaar'] },
+        { name: 'Groei', price: '€995', features: ['Uitgebreide pagina’s','Formulieren & koppelingen','Performance optimalisatie'] },
+        { name: 'Pro', price: '€1.495', features: ['Custom functionaliteit','Database of login systeem','Doorontwikkelbaar platform'] }
       ]
     },
-
     {
       icon: <ShoppingCart size={36} />,
       title: 'E-commerce',
@@ -125,36 +74,11 @@ const ServicesPage = () => {
       highlightedPackage: 'Starter',
       highlightLabel: 'Ideaal voor starters',
       packages: [
-        {
-          name: 'Starter',
-          price: '€895',
-          features: [
-            'Tot 10 producten',
-            'iDEAL betalingen',
-            'Gebruiksvriendelijk beheer'
-          ]
-        },
-        {
-          name: 'Groei',
-          price: '€1.495',
-          features: [
-            'Onbeperkt producten',
-            'Kortingen & acties',
-            'Conversiegericht design'
-          ]
-        },
-        {
-          name: 'Pro',
-          price: '€2.495',
-          features: [
-            'Maatwerk webshop',
-            'Automatiseringen',
-            'Analytics & optimalisatie'
-          ]
-        }
+        { name: 'Starter', price: '€895', features: ['Tot 10 producten','iDEAL betalingen','Gebruiksvriendelijk beheer'] },
+        { name: 'Groei', price: '€1.495', features: ['Onbeperkt producten','Kortingen & acties','Conversiegericht design'] },
+        { name: 'Pro', price: '€2.495', features: ['Maatwerk webshop','Automatiseringen','Analytics & optimalisatie'] }
       ]
     },
-
     {
       icon: <Search size={36} />,
       title: 'SEO & Marketing',
@@ -165,36 +89,11 @@ const ServicesPage = () => {
       highlightedPackage: 'Starter',
       highlightLabel: 'Laagdrempelig',
       packages: [
-        {
-          name: 'Starter',
-          price: '€149 / maand',
-          features: [
-            'Technische SEO check',
-            'Basis optimalisatie',
-            'Maandelijkse rapportage'
-          ]
-        },
-        {
-          name: 'Groei',
-          price: '€299 / maand',
-          features: [
-            'Content optimalisatie',
-            'Lokale SEO',
-            'Actieplan per maand'
-          ]
-        },
-        {
-          name: 'Pro',
-          price: '€499 / maand',
-          features: [
-            'Concurrentie analyse',
-            'Doorlopende optimalisatie',
-            'Structurele groei'
-          ]
-        }
+        { name: 'Starter', price: '€149 / maand', features: ['Technische SEO check','Basis optimalisatie','Maandelijkse rapportage'] },
+        { name: 'Groei', price: '€299 / maand', features: ['Content optimalisatie','Lokale SEO','Actieplan per maand'] },
+        { name: 'Pro', price: '€499 / maand', features: ['Concurrentie analyse','Doorlopende optimalisatie','Structurele groei'] }
       ]
     },
-
     {
       icon: <Zap size={36} />,
       title: 'Performance Optimalisatie',
@@ -205,33 +104,9 @@ const ServicesPage = () => {
       highlightedPackage: 'Starter',
       highlightLabel: 'Quick win',
       packages: [
-        {
-          name: 'Starter',
-          price: '€295',
-          features: [
-            'Snelheidsanalyse',
-            'Afbeelding optimalisatie',
-            'Basis caching'
-          ]
-        },
-        {
-          name: 'Groei',
-          price: '€495',
-          features: [
-            'Core Web Vitals',
-            'Lazy loading',
-            'Code optimalisatie'
-          ]
-        },
-        {
-          name: 'Pro',
-          price: '€795',
-          features: [
-            'Geavanceerde optimalisatie',
-            'Monitoring',
-            'Advies voor groei'
-          ]
-        }
+        { name: 'Starter', price: '€295', features: ['Snelheidsanalyse','Afbeelding optimalisatie','Basis caching'] },
+        { name: 'Groei', price: '€495', features: ['Core Web Vitals','Lazy loading','Code optimalisatie'] },
+        { name: 'Pro', price: '€795', features: ['Geavanceerde optimalisatie','Monitoring','Advies voor groei'] }
       ]
     }
   ];
@@ -242,7 +117,44 @@ const ServicesPage = () => {
         <title>Diensten – Vos Web Designs</title>
       </Helmet>
 
-      <main className="pt-24 pb-20 bg-[#0a0a0a]">
+      <main className="pt-24 pb-24 bg-[#0a0a0a] space-y-32">
+
+        {/* HERO */}
+        <section className="container mx-auto px-4 max-w-4xl text-center">
+          <h1 className="text-5xl font-bold mb-6">
+            Professionele websites die écht voor je werken
+          </h1>
+          <p className="text-xl text-gray-400 mb-10">
+            Van eerste website tot schaalbare online oplossing. Transparant, betaalbaar
+            en zonder technische zorgen.
+          </p>
+          <Link to="/contact">
+            <Button className="bg-gradient-to-r from-[#D4AF37] to-[#F4E4C1] text-black px-8 py-4 text-lg">
+              Gratis kennismaking
+            </Button>
+          </Link>
+        </section>
+
+        {/* USP */}
+        <section className="container mx-auto px-4 grid md:grid-cols-4 gap-8 text-center">
+          {['Transparante prijzen','Geen aanbetaling','Snelle oplevering','Persoonlijk contact'].map(item => (
+            <div key={item} className="border border-gray-800 rounded-xl p-6 bg-[#0f0f0f]">
+              <CheckCircle className="mx-auto mb-4 text-[#D4AF37]" />
+              <p className="text-gray-300">{item}</p>
+            </div>
+          ))}
+        </section>
+
+        {/* VOOR WIE */}
+        <section className="container mx-auto px-4 max-w-5xl text-center space-y-6">
+          <h2 className="text-4xl font-bold">Voor wie wij werken</h2>
+          <p className="text-gray-400">
+            Wij helpen ondernemers, zzp’ers en kleine bedrijven die professioneel
+            online zichtbaar willen zijn en klaar zijn om te groeien.
+          </p>
+        </section>
+
+        {/* SERVICES – JOUW BESTAANDE BLOK */}
         <section ref={ref} className="container mx-auto px-4 space-y-32">
           {services.map(service => (
             <motion.div
@@ -252,7 +164,6 @@ const ServicesPage = () => {
               transition={{ duration: 0.7 }}
               className="space-y-16"
             >
-              {/* INFO */}
               <div className="grid lg:grid-cols-2 gap-12 items-center">
                 <div>
                   <div className="w-16 h-16 rounded-xl bg-[#D4AF37]/10 flex items-center justify-center text-[#D4AF37] mb-6">
@@ -262,15 +173,9 @@ const ServicesPage = () => {
                   <p className="text-xl text-gray-300 mb-4">{service.shortDescription}</p>
                   <p className="text-gray-400">{service.description}</p>
                 </div>
-
-                <img
-                  src={service.image}
-                  alt={service.title}
-                  className="rounded-2xl border border-gray-800"
-                />
+                <img src={service.image} alt={service.title} className="rounded-2xl border border-gray-800" />
               </div>
 
-              {/* PACKAGES */}
               <div className="grid md:grid-cols-3 gap-8">
                 {service.packages.map(pkg => {
                   const isHighlighted = pkg.name === service.highlightedPackage;
@@ -298,21 +203,12 @@ const ServicesPage = () => {
                       )}
 
                       <h3 className="text-2xl font-bold mb-2">{pkg.name}</h3>
-
                       <p className="text-[#D4AF37] text-3xl font-bold">
-                        {isStarter && (
-                          <span className="text-base text-gray-400 mr-1">Vanaf</span>
-                        )}
+                        {isStarter && <span className="text-base text-gray-400 mr-1">Vanaf</span>}
                         {pkg.price}
                       </p>
-
-                      <p className="text-sm text-gray-400 mt-1">
-                        {getDelivery(pkg.name)}
-                      </p>
-
-                      <p className="text-xs text-gray-500 mb-4">
-                        Geen aanbetaling nodig • Persoonlijk contact
-                      </p>
+                      <p className="text-sm text-gray-400 mt-1">{getDelivery(pkg.name)}</p>
+                      <p className="text-xs text-gray-500 mb-4">Geen aanbetaling nodig • Persoonlijk contact</p>
 
                       <ul className="space-y-3 mb-8">
                         {pkg.features.map(f => (
@@ -335,62 +231,23 @@ const ServicesPage = () => {
               </div>
             </motion.div>
           ))}
-
-          {/* GARANTIE BLOK */}
-          <div className="bg-[#121212] border border-[#D4AF37]/30 rounded-2xl p-10 text-center">
-            <h2 className="text-3xl font-bold mb-4">Onze garantie</h2>
-            <p className="text-gray-300 max-w-2xl mx-auto mb-6">
-              Wij werken transparant en zonder risico voor u. Geen kleine lettertjes,
-              geen verplichtingen en altijd persoonlijk contact.
-            </p>
-            <ul className="space-y-3 max-w-xl mx-auto">
-              {[
-                'Geen aanbetaling nodig',
-                'Tevredenheid staat voorop',
-                'Duidelijke afspraken vooraf',
-                'Persoonlijk contact tijdens het hele traject'
-              ].map(item => (
-                <li key={item} className="flex items-center gap-2 justify-center text-gray-300">
-                  <CheckCircle size={18} className="text-[#D4AF37]" />
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* FAQ */}
-          <div className="max-w-3xl mx-auto">
-            <h2 className="text-3xl font-bold mb-8 text-center">Veelgestelde vragen</h2>
-            <div className="space-y-6">
-              {[
-                {
-                  q: 'Moet ik vooraf betalen?',
-                  a: 'Nee, wij vragen geen aanbetaling. We starten pas nadat alles duidelijk is afgestemd.'
-                },
-                {
-                  q: 'Kan ik later uitbreiden?',
-                  a: 'Ja, alle websites zijn zo opgezet dat uitbreiden altijd mogelijk is.'
-                },
-                {
-                  q: 'Hoe lang duurt een project?',
-                  a: 'Starter-projecten zijn vaak binnen 1–2 weken klaar. Grotere projecten in overleg.'
-                },
-                {
-                  q: 'Is support inbegrepen?',
-                  a: 'Ja, na oplevering staan we altijd klaar voor vragen of kleine aanpassingen.'
-                }
-              ].map(item => (
-                <div
-                  key={item.q}
-                  className="border border-gray-800 rounded-xl p-6 bg-[#0f0f0f]"
-                >
-                  <h3 className="font-semibold mb-2">{item.q}</h3>
-                  <p className="text-gray-400">{item.a}</p>
-                </div>
-              ))}
-            </div>
-          </div>
         </section>
+
+        {/* EINDE CTA */}
+        <section className="container mx-auto px-4 max-w-3xl text-center">
+          <h2 className="text-4xl font-bold mb-6">
+            Klaar om professioneel te groeien?
+          </h2>
+          <p className="text-gray-400 mb-8">
+            Plan vrijblijvend een kennismaking en ontdek welke oplossing het beste past bij jouw situatie.
+          </p>
+          <Link to="/contact">
+            <Button className="bg-gradient-to-r from-[#D4AF37] to-[#F4E4C1] text-black px-10 py-4 text-lg">
+              Start vandaag nog
+            </Button>
+          </Link>
+        </section>
+
       </main>
     </>
   );
