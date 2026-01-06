@@ -50,35 +50,60 @@ const adminTemplate = (data: any) => `
 
 const customerTemplate = (data: any) => `
 <!DOCTYPE html>
-<html>
+<html lang="nl">
 <body style="margin:0;padding:0;background:#0a0a0a;font-family:Arial,sans-serif;color:#ffffff;">
   <table width="100%" cellpadding="0" cellspacing="0">
     <tr>
       <td align="center" style="padding:40px 16px;">
-        <table width="600" style="background:#111;border-radius:16px;border:1px solid #2a2a2a;">
+        <table width="600" style="background:#111;border-radius:16px;border:1px solid #2a2a2a;overflow:hidden;">
+          
+          <!-- HEADER -->
           <tr>
             <td style="padding:40px;text-align:center;">
-              <h1 style="margin:0;font-size:30px;color:#D4AF37;">Bedankt voor uw bericht</h1>
-              <p style="margin-top:12px;color:#aaa;">Vos Web Designs</p>
+              <h1 style="margin:0;font-size:30px;color:#D4AF37;">
+                Bedankt voor uw bericht
+              </h1>
+              <p style="margin-top:12px;color:#aaa;">
+                Vos Web Designs
+              </p>
             </td>
           </tr>
 
+          <!-- CONTENT -->
           <tr>
-            <td style="padding:0 40px 32px;font-size:16px;line-height:1.6;">
+            <td style="padding:0 40px 32px;font-size:16px;line-height:1.7;">
               <p>Beste <strong>${data.name}</strong>,</p>
 
               <p>
-                Hartelijk dank voor uw bericht. Wij hebben uw aanvraag ontvangen en nemen
-                <strong>binnen 24 uur</strong> contact met u op.
+                Bedankt voor het invullen van het contactformulier.
+                Wij hebben uw aanvraag goed ontvangen en nemen
+                <strong>binnen 24 uur</strong> persoonlijk contact met u op.
               </p>
 
+              <!-- SAMENVATTING -->
               <div style="margin:24px 0;padding:20px;background:#1a1a1a;border-radius:10px;border:1px solid #2a2a2a;">
-                <strong>Uw bericht:</strong><br /><br />
+                <strong style="color:#D4AF37;">Samenvatting van uw aanvraag</strong><br /><br />
+
+                <strong>Interesse:</strong> ${data.service || "Niet gespecificeerd"}<br />
+                <strong>Pakket:</strong> ${data.package || "Nog te bepalen"}<br />
+                <strong>Bedrijf:</strong> ${data.company || "-"}<br /><br />
+
+                <strong>Uw bericht:</strong><br />
                 ${data.message}
               </div>
 
-              <p>
-                Heeft u vragen? Mail gerust naar
+              <!-- WAT KUNT U VERWACHTEN -->
+              <p><strong>Wat kunt u nu verwachten?</strong></p>
+              <ul style="padding-left:18px;color:#ccc;">
+                <li>Persoonlijke reactie (geen automatische verkoop)</li>
+                <li>Korte kennismaking & inventarisatie</li>
+                <li>Heldere uitleg over mogelijkheden & kosten</li>
+              </ul>
+
+              <!-- CTA -->
+              <p style="margin-top:24px;">
+                Wilt u alvast iets toevoegen of verduidelijken?<br />
+                Antwoord gerust op deze e-mail of mail naar
                 <a href="mailto:info@voswebdesigns.nl" style="color:#D4AF37;text-decoration:none;">
                   info@voswebdesigns.nl
                 </a>.
@@ -86,16 +111,20 @@ const customerTemplate = (data: any) => `
 
               <p style="margin-top:32px;">
                 Met vriendelijke groet,<br />
-                <strong>Vos Web Designs</strong>
+                <strong>Melvin Vos</strong><br />
+                Vos Web Designs
               </p>
             </td>
           </tr>
 
+          <!-- FOOTER -->
           <tr>
             <td style="padding:24px;text-align:center;font-size:12px;color:#777;">
-              © Vos Web Designs – Luxe Webdesign & Development
+              © Vos Web Designs – Luxe Webdesign & Development<br />
+              Lelystad · Nederland
             </td>
           </tr>
+
         </table>
       </td>
     </tr>
