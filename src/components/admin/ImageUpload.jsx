@@ -67,7 +67,7 @@ const ImageUpload = ({ value, onChange, className }) => {
         </div>
       ) : (
         <div className="flex items-center justify-center w-full">
-          <label className="flex flex-col items-center justify-center w-full h-32 border-2 border-gray-700 border-dashed rounded-lg cursor-pointer bg-[#1a1a1a] hover:bg-[#252525] transition-colors">
+          <label className="flex flex-col items-center justify-center w-full h-32 border-2 border-gray-700 border-dashed rounded-lg cursor-pointer bg-[#111827] hover:bg-[#252525] transition-colors">
             <div className="flex flex-col items-center justify-center pt-5 pb-6">
               {uploading ? (
                 <Loader2 className="animate-spin text-gray-400 mb-2" size={24} />

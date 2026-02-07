@@ -18,8 +18,8 @@ const AdminLayout = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#0a0a0a] text-white flex items-center justify-center">
-        <div className="animate-pulse text-[#D4AF37]">Laden...</div>
+      <div className="min-h-screen bg-[#0f172a] text-white flex items-center justify-center">
+        <div className="animate-pulse text-[#38bdf8]">Laden...</div>
       </div>
     );
   }
@@ -34,9 +34,9 @@ const AdminLayout = () => {
   ];
 
   const SidebarContent = () => (
-    <div className="flex flex-col h-full bg-[#111] border-r border-gray-800">
+    <div className="flex flex-col h-full bg-[#111827] border-r border-gray-800">
       <div className="h-16 flex items-center px-6 border-b border-gray-800 shrink-0">
-        <span className="text-xl font-bold bg-gradient-to-r from-[#D4AF37] to-[#F4E4C1] bg-clip-text text-transparent">
+        <span className="text-xl font-bold bg-gradient-to-r from-[#38bdf8] to-[#60a5fa] bg-clip-text text-transparent">
           Vos Admin
         </span>
       </div>
@@ -48,7 +48,7 @@ const AdminLayout = () => {
             to={item.path}
             className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
               location.pathname === item.path 
-                ? 'bg-[#D4AF37]/10 text-[#D4AF37] border border-[#D4AF37]/20' 
+                ? 'bg-[#38bdf8]/10 text-[#38bdf8] border border-[#38bdf8]/20' 
                 : 'text-gray-400 hover:text-white hover:bg-gray-800'
             }`}
           >
@@ -72,11 +72,11 @@ const AdminLayout = () => {
   );
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white flex flex-col lg:flex-row relative">
+    <div className="min-h-screen bg-[#0f172a] text-white flex flex-col lg:flex-row relative">
       
       {/* Mobile Header - Fixed at Top */}
-      <header className="lg:hidden fixed top-0 left-0 right-0 h-16 bg-[#111] border-b border-gray-800 z-50 flex items-center justify-between px-4">
-        <span className="text-lg font-bold bg-gradient-to-r from-[#D4AF37] to-[#F4E4C1] bg-clip-text text-transparent">
+      <header className="lg:hidden fixed top-0 left-0 right-0 h-16 bg-[#111827] border-b border-gray-800 z-50 flex items-center justify-between px-4">
+        <span className="text-lg font-bold bg-gradient-to-r from-[#38bdf8] to-[#60a5fa] bg-clip-text text-transparent">
           Vos Admin
         </span>
         <button 
@@ -111,7 +111,7 @@ const AdminLayout = () => {
               animate={{ x: 0 }}
               exit={{ x: '-100%' }}
               transition={{ type: "spring", bounce: 0, duration: 0.3 }}
-              className="fixed inset-y-0 left-0 w-72 bg-[#111] z-50 shadow-2xl lg:hidden flex flex-col"
+              className="fixed inset-y-0 left-0 w-72 bg-[#111827] z-50 shadow-2xl lg:hidden flex flex-col"
             >
               <div className="absolute top-4 right-4 z-10">
                 <button 

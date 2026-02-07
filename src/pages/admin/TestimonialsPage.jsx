@@ -129,7 +129,7 @@ const TestimonialsPage = () => {
           {!showForm && (
             <Button
               onClick={() => setShowForm(true)}
-              className="bg-[#D4AF37] text-black"
+              className="bg-[#38bdf8] text-black"
             >
               <Plus size={18} className="mr-2" />
               Nieuwe review
@@ -147,7 +147,7 @@ const TestimonialsPage = () => {
                 exit={{ opacity: 0 }}
                 className="lg:col-span-4"
               >
-                <div className="bg-[#1a1a1a] p-5 rounded-xl border border-gray-800 sticky top-24">
+                <div className="bg-[#111827] p-5 rounded-xl border border-gray-800 sticky top-24">
                   <div className="flex justify-between items-center mb-4">
                     <h3 className="font-bold text-white">
                       {isEditing ? 'Bewerk review' : 'Nieuwe review'}
@@ -190,7 +190,7 @@ const TestimonialsPage = () => {
                       onChange={e => setFormData({ ...formData, rating: Number(e.target.value) })}
                     />
 
-                    <Button type="submit" className="w-full bg-[#D4AF37] text-black">
+                    <Button type="submit" className="w-full bg-[#38bdf8] text-black">
                       Opslaan
                     </Button>
                   </form>
@@ -203,19 +203,19 @@ const TestimonialsPage = () => {
           <div className={`${showForm ? 'lg:col-span-8' : 'lg:col-span-12'}`}>
             {loading ? (
               <div className="flex justify-center py-20">
-                <Loader2 className="animate-spin text-[#D4AF37]" size={32} />
+                <Loader2 className="animate-spin text-[#38bdf8]" size={32} />
               </div>
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {testimonials.map(t => (
-                  <div key={t.id} className="bg-[#1a1a1a] p-5 rounded-xl border border-gray-800 flex flex-col">
+                  <div key={t.id} className="bg-[#111827] p-5 rounded-xl border border-gray-800 flex flex-col">
                     <div className="flex justify-between mb-3">
                       <div className="flex gap-1">
                         {[...Array(5)].map((_, i) => (
                           <Star
                             key={i}
                             size={14}
-                            className={i < t.rating ? 'text-[#D4AF37] fill-[#D4AF37]' : 'text-gray-700'}
+                            className={i < t.rating ? 'text-[#38bdf8] fill-[#38bdf8]' : 'text-gray-700'}
                           />
                         ))}
                       </div>
@@ -231,7 +231,7 @@ const TestimonialsPage = () => {
                     </div>
 
                     <div className="relative pl-4 mb-4">
-                      <Quote className="absolute left-0 top-0 text-[#D4AF37]/20" size={24} />
+                      <Quote className="absolute left-0 top-0 text-[#38bdf8]/20" size={24} />
                       <p className="text-gray-300 italic text-sm">"{t.text}"</p>
                     </div>
 

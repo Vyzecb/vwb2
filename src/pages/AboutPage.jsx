@@ -61,9 +61,9 @@ const AboutPage = () => {
         />
       </Helmet>
 
-      <main className="pt-24 pb-16 bg-[#0a0a0a]">
+      <main className="pt-24 pb-16 bg-[#0f172a]">
         {/* HERO */}
-        <section className="py-16 bg-gradient-to-b from-[#0a0a0a] to-[#0f0f0f]">
+        <section className="py-16 bg-gradient-to-b from-[#0f172a] to-[#0b1120]">
           <div className="container mx-auto px-4 text-center">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -73,7 +73,7 @@ const AboutPage = () => {
             >
               <h1 className="text-5xl md:text-6xl font-bold mb-6">
                 Over{' '}
-                <span className="bg-gradient-to-r from-[#D4AF37] to-[#F4E4C1] bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-[#38bdf8] to-[#60a5fa] bg-clip-text text-transparent">
                   Vos Web Designs
                 </span>
               </h1>
@@ -115,7 +115,7 @@ const AboutPage = () => {
         </section>
 
         {/* VALUES */}
-        <section ref={valuesRef} className="py-16 bg-[#0f0f0f]">
+        <section ref={valuesRef} className="py-16 bg-[#0b1120]">
           <div className="container mx-auto px-4">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -125,7 +125,7 @@ const AboutPage = () => {
             >
               <h2 className="text-4xl font-bold">
                 Onze{' '}
-                <span className="bg-gradient-to-r from-[#D4AF37] to-[#F4E4C1] bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-[#38bdf8] to-[#60a5fa] bg-clip-text text-transparent">
                   Waarden
                 </span>
               </h2>
@@ -138,9 +138,9 @@ const AboutPage = () => {
                   initial={{ opacity: 0, y: 30 }}
                   animate={valuesInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="bg-[#1a1a1a] border border-gray-800 rounded-2xl p-6 text-center"
+                  className="bg-[#111827] border border-gray-800 rounded-2xl p-6 text-center"
                 >
-                  <div className="w-16 h-16 mx-auto mb-4 rounded-xl bg-[#D4AF37]/10 text-[#D4AF37] flex items-center justify-center">
+                  <div className="w-16 h-16 mx-auto mb-4 rounded-xl bg-[#38bdf8]/10 text-[#38bdf8] flex items-center justify-center">
                     {value.icon}
                   </div>
                   <h3 className="text-xl font-bold mb-2">{value.title}</h3>
@@ -162,7 +162,7 @@ const AboutPage = () => {
             >
               <h2 className="text-4xl font-bold mb-4">
                 Wie Zit Er{' '}
-                <span className="bg-gradient-to-r from-[#D4AF37] to-[#F4E4C1] bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-[#38bdf8] to-[#60a5fa] bg-clip-text text-transparent">
                   Achter?
                 </span>
               </h2>
@@ -171,7 +171,7 @@ const AboutPage = () => {
             {team.map((member) => (
               <div
                 key={member.name}
-                className="bg-[#1a1a1a] border border-gray-800 rounded-2xl overflow-hidden"
+                className="bg-[#111827] border border-gray-800 rounded-2xl overflow-hidden"
               >
                 <img
                   src={member.image}
@@ -180,7 +180,7 @@ const AboutPage = () => {
                 />
                 <div className="p-6 text-center">
                   <h3 className="text-2xl font-bold">{member.name}</h3>
-                  <p className="text-[#D4AF37] font-medium mb-3">
+                  <p className="text-[#38bdf8] font-medium mb-3">
                     {member.role}
                   </p>
                   <p className="text-gray-400">{member.bio}</p>
@@ -191,12 +191,12 @@ const AboutPage = () => {
         </section>
 
         {/* CTA */}
-        <section className="py-16 bg-[#0f0f0f] text-center">
+        <section className="py-16 bg-[#0b1120] text-center">
           <h2 className="text-3xl font-bold mb-6">
             Klaar om samen te werken?
           </h2>
           <Link to="/contact">
-            <Button size="lg" className="bg-[#D4AF37] text-black">
+            <Button size="lg" className="bg-[#38bdf8] text-black">
               Neem Contact Op
               <ArrowRight className="ml-2" />
             </Button>

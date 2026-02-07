@@ -17,10 +17,10 @@ const NotFoundPage = () => {
         />
       </Helmet>
 
-      <main className="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#0a0a0a] via-[#1a1a1a] to-[#0a0a0a] pt-20 px-4">
+      <main className="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#0f172a] via-[#111827] to-[#0f172a] pt-20 px-4">
         <div className="absolute inset-0 opacity-20">
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#D4AF37] rounded-full filter blur-[128px]" />
-          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[#D4AF37] rounded-full filter blur-[128px]" />
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#38bdf8] rounded-full filter blur-[128px]" />
+          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[#38bdf8] rounded-full filter blur-[128px]" />
         </div>
 
         <div className="relative z-10 max-w-2xl mx-auto text-center">
@@ -29,7 +29,7 @@ const NotFoundPage = () => {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
           >
-            <span className="text-9xl md:text-[200px] font-bold bg-gradient-to-r from-[#D4AF37] to-[#F4E4C1] bg-clip-text text-transparent leading-none block mb-4">
+            <span className="text-9xl md:text-[200px] font-bold bg-gradient-to-r from-[#38bdf8] to-[#60a5fa] bg-clip-text text-transparent leading-none block mb-4">
               404
             </span>
           </motion.div>
@@ -61,7 +61,7 @@ const NotFoundPage = () => {
             <Link to="/">
               <Button
                 size="lg"
-                className="bg-gradient-to-r from-[#D4AF37] to-[#F4E4C1] text-black hover:opacity-90 transition-opacity"
+                className="bg-gradient-to-r from-[#38bdf8] to-[#60a5fa] text-black hover:opacity-90 transition-opacity"
               >
                 <Home className="mr-2" size={20} />
                 Naar Homepage
@@ -70,7 +70,7 @@ const NotFoundPage = () => {
             <Button
               size="lg"
               variant="outline"
-              className="border-gray-700 text-gray-300 hover:border-[#D4AF37] hover:text-[#D4AF37]"
+              className="border-gray-700 text-gray-300 hover:border-[#38bdf8] hover:text-[#38bdf8]"
               onClick={() => window.history.back()}
             >
               <ArrowLeft className="mr-2" size={20} />
@@ -86,16 +86,16 @@ const NotFoundPage = () => {
           >
             <p className="text-gray-400 mb-4">Populaire Paginas:</p>
             <div className="flex flex-wrap justify-center gap-4">
-              <Link to="/portfolio" className="text-[#D4AF37] hover:underline">
+              <Link to="/portfolio" className="text-[#38bdf8] hover:underline">
                 Portfolio
               </Link>
-              <Link to="/diensten" className="text-[#D4AF37] hover:underline">
+              <Link to="/diensten" className="text-[#38bdf8] hover:underline">
                 Diensten
               </Link>
-              <Link to="/over-ons" className="text-[#D4AF37] hover:underline">
+              <Link to="/over-ons" className="text-[#38bdf8] hover:underline">
                 Over Ons
               </Link>
-              <Link to="/contact" className="text-[#D4AF37] hover:underline">
+              <Link to="/contact" className="text-[#38bdf8] hover:underline">
                 Contact
               </Link>
             </div>

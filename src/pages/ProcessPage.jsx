@@ -102,7 +102,7 @@ const ProcessPage = () => {
       </Helmet>
 
       <main className="pt-24 pb-16">
-        <section className="py-16 bg-gradient-to-b from-[#0a0a0a] to-[#0f0f0f]">
+        <section className="py-16 bg-gradient-to-b from-[#0f172a] to-[#0b1120]">
           <div className="container mx-auto px-4">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -112,7 +112,7 @@ const ProcessPage = () => {
             >
               <h1 className="text-5xl md:text-6xl font-bold mb-6">
                 Onze{' '}
-                <span className="bg-gradient-to-r from-[#D4AF37] to-[#F4E4C1] bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-[#38bdf8] to-[#60a5fa] bg-clip-text text-transparent">
                   Werkwijze
                 </span>
               </h1>
@@ -123,10 +123,10 @@ const ProcessPage = () => {
           </div>
         </section>
 
-        <section className="py-16 bg-[#0a0a0a]">
+        <section className="py-16 bg-[#0f172a]">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto mb-16">
-              <div className="bg-gradient-to-r from-[#1a1a1a] to-[#0f0f0f] border border-gray-800 rounded-2xl p-8">
+              <div className="bg-gradient-to-r from-[#111827] to-[#0b1120] border border-gray-800 rounded-2xl p-8">
                 <h2 className="text-2xl font-bold mb-4">Transparantie & Communicatie</h2>
                 <p className="text-gray-300 leading-relaxed mb-4">
                   Bij Vos Web Designs werken we met volledige transparantie. U bent altijd op de hoogte van de voortgang en heeft directe toegang tot uw dedicated team. We communiceren via uw voorkeurskanaal - email, telefoon, video calls, of persoonlijke meetings.
@@ -139,7 +139,7 @@ const ProcessPage = () => {
           </div>
         </section>
 
-        <section ref={processRef} className="py-16 bg-[#0f0f0f]">
+        <section ref={processRef} className="py-16 bg-[#0b1120]">
           <div className="container mx-auto px-4">
             <div className="max-w-5xl mx-auto space-y-16">
               {processSteps.map((step, index) => (
@@ -151,24 +151,24 @@ const ProcessPage = () => {
                   className="relative"
                 >
                   {index < processSteps.length - 1 && (
-                    <div className="hidden lg:block absolute left-[73px] top-[120px] w-0.5 h-[calc(100%+64px)] bg-gradient-to-b from-[#D4AF37] to-transparent" />
+                    <div className="hidden lg:block absolute left-[73px] top-[120px] w-0.5 h-[calc(100%+64px)] bg-gradient-to-b from-[#38bdf8] to-transparent" />
                   )}
 
                   <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
                     <div className="lg:col-span-2 flex flex-col items-center lg:items-start">
-                      <div className="w-24 h-24 bg-gradient-to-r from-[#D4AF37]/10 to-[#F4E4C1]/10 rounded-2xl flex items-center justify-center border border-[#D4AF37]/30 text-[#D4AF37] mb-4 relative z-10">
+                      <div className="w-24 h-24 bg-gradient-to-r from-[#38bdf8]/10 to-[#60a5fa]/10 rounded-2xl flex items-center justify-center border border-[#38bdf8]/30 text-[#38bdf8] mb-4 relative z-10">
                         {step.icon}
                       </div>
-                      <span className="text-5xl font-bold bg-gradient-to-r from-[#D4AF37] to-[#F4E4C1] bg-clip-text text-transparent">
+                      <span className="text-5xl font-bold bg-gradient-to-r from-[#38bdf8] to-[#60a5fa] bg-clip-text text-transparent">
                         {step.number}
                       </span>
                     </div>
 
                     <div className="lg:col-span-10">
-                      <div className="bg-[#1a1a1a] border border-gray-800 rounded-2xl p-8 hover:border-[#D4AF37] transition-colors">
+                      <div className="bg-[#111827] border border-gray-800 rounded-2xl p-8 hover:border-[#38bdf8] transition-colors">
                         <div className="flex flex-wrap items-center gap-4 mb-4">
                           <h3 className="text-2xl md:text-3xl font-bold">{step.title}</h3>
-                          <span className="px-3 py-1 bg-[#D4AF37]/10 text-[#D4AF37] text-sm font-medium rounded-full">
+                          <span className="px-3 py-1 bg-[#38bdf8]/10 text-[#38bdf8] text-sm font-medium rounded-full">
                             {step.duration}
                           </span>
                         </div>
@@ -181,7 +181,7 @@ const ProcessPage = () => {
                           <span className="text-white font-semibold mb-3 block">Belangrijkste Activiteiten:</span>
                           {step.activities.map((activity, i) => (
                             <div key={i} className="flex items-start gap-3">
-                              <CheckCircle size={20} className="text-[#D4AF37] mt-0.5 shrink-0" />
+                              <CheckCircle size={20} className="text-[#38bdf8] mt-0.5 shrink-0" />
                               <span className="text-gray-400">{activity}</span>
                             </div>
                           ))}
@@ -195,13 +195,13 @@ const ProcessPage = () => {
           </div>
         </section>
 
-        <section className="py-16 bg-[#0a0a0a]">
+        <section className="py-16 bg-[#0f172a]">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
-              <div className="bg-gradient-to-r from-[#1a1a1a] to-[#0f0f0f] border border-gray-800 rounded-2xl p-8 md:p-12">
+              <div className="bg-gradient-to-r from-[#111827] to-[#0b1120] border border-gray-800 rounded-2xl p-8 md:p-12">
                 <h2 className="text-3xl md:text-4xl font-bold mb-6">
                   Na De{' '}
-                  <span className="bg-gradient-to-r from-[#D4AF37] to-[#F4E4C1] bg-clip-text text-transparent">
+                  <span className="bg-gradient-to-r from-[#38bdf8] to-[#60a5fa] bg-clip-text text-transparent">
                     Lancering
                   </span>
                 </h2>
@@ -209,20 +209,20 @@ const ProcessPage = () => {
                   Onze betrokkenheid stopt niet bij de lancering. We bieden continue support, monitoren de prestaties, en staan klaar om uw website te laten groeien met uw bedrijf.
                 </p>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                  <div className="bg-[#0f0f0f] border border-gray-800 rounded-xl p-6">
-                    <h3 className="font-bold mb-2 text-[#D4AF37]">Onderhoud & Support</h3>
+                  <div className="bg-[#0b1120] border border-gray-800 rounded-xl p-6">
+                    <h3 className="font-bold mb-2 text-[#38bdf8]">Onderhoud & Support</h3>
                     <p className="text-gray-400 text-sm">Technische updates, bugfixes, en content aanpassingen</p>
                   </div>
-                  <div className="bg-[#0f0f0f] border border-gray-800 rounded-xl p-6">
-                    <h3 className="font-bold mb-2 text-[#D4AF37]">Performance Monitoring</h3>
+                  <div className="bg-[#0b1120] border border-gray-800 rounded-xl p-6">
+                    <h3 className="font-bold mb-2 text-[#38bdf8]">Performance Monitoring</h3>
                     <p className="text-gray-400 text-sm">Continue monitoring en optimalisatie voor beste resultaten</p>
                   </div>
-                  <div className="bg-[#0f0f0f] border border-gray-800 rounded-xl p-6">
-                    <h3 className="font-bold mb-2 text-[#D4AF37]">SEO & Marketing</h3>
+                  <div className="bg-[#0b1120] border border-gray-800 rounded-xl p-6">
+                    <h3 className="font-bold mb-2 text-[#38bdf8]">SEO & Marketing</h3>
                     <p className="text-gray-400 text-sm">Doorlopende SEO optimalisatie en marketing support</p>
                   </div>
-                  <div className="bg-[#0f0f0f] border border-gray-800 rounded-xl p-6">
-                    <h3 className="font-bold mb-2 text-[#D4AF37]">Groei & Uitbreidingen</h3>
+                  <div className="bg-[#0b1120] border border-gray-800 rounded-xl p-6">
+                    <h3 className="font-bold mb-2 text-[#38bdf8]">Groei & Uitbreidingen</h3>
                     <p className="text-gray-400 text-sm">Nieuwe features en functionaliteiten wanneer u deze nodig heeft</p>
                   </div>
                 </div>
@@ -230,7 +230,7 @@ const ProcessPage = () => {
                   <Link to="/contact">
                     <Button
                       size="lg"
-                      className="bg-gradient-to-r from-[#D4AF37] to-[#F4E4C1] text-black hover:opacity-90 transition-opacity"
+                      className="bg-gradient-to-r from-[#38bdf8] to-[#60a5fa] text-black hover:opacity-90 transition-opacity"
                     >
                       Start Uw Project
                       <ArrowRight className="ml-2" size={20} />

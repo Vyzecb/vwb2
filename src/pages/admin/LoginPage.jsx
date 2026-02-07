@@ -23,11 +23,11 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center px-4">
+    <div className="min-h-screen bg-[#0f172a] flex items-center justify-center px-4">
       <Helmet>
         <title>Admin Login - Vos Web Designs</title>
       </Helmet>
-      <div className="bg-[#1a1a1a] p-8 rounded-xl border border-gray-800 w-full max-w-md">
+      <div className="bg-[#111827] p-8 rounded-xl border border-gray-800 w-full max-w-md">
         <h1 className="text-2xl font-bold mb-6 text-center">Admin Portal</h1>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
@@ -36,7 +36,7 @@ const LoginPage = () => {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-4 py-2 bg-[#0a0a0a] border border-gray-800 rounded-lg focus:border-[#D4AF37] focus:outline-none text-white"
+              className="w-full px-4 py-2 bg-[#0f172a] border border-gray-800 rounded-lg focus:border-[#38bdf8] focus:outline-none text-white"
               required
             />
           </div>
@@ -46,13 +46,13 @@ const LoginPage = () => {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-4 py-2 bg-[#0a0a0a] border border-gray-800 rounded-lg focus:border-[#D4AF37] focus:outline-none text-white"
+              className="w-full px-4 py-2 bg-[#0f172a] border border-gray-800 rounded-lg focus:border-[#38bdf8] focus:outline-none text-white"
               required
             />
           </div>
           <Button 
             type="submit" 
-            className="w-full bg-[#D4AF37] text-black hover:bg-[#b8962e]"
+            className="w-full bg-[#38bdf8] text-black hover:bg-[#0ea5e9]"
             disabled={loading}
           >
             {loading ? 'Inloggen...' : 'Inloggen'}
