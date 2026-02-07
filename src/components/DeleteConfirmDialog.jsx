@@ -18,7 +18,7 @@ const DeleteConfirmDialog = ({
       className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/70"
       style={{ WebkitTransform: 'translateZ(0)' }} // iOS Safari fix
     >
-      <div className="bg-[#111] border border-gray-800 rounded-xl w-[90%] max-w-sm p-5">
+      <div className="bg-[#111827] border border-gray-800 rounded-xl w-[90%] max-w-sm p-5">
         <h2 className="text-white font-bold text-lg mb-2">{title}</h2>
         <p className="text-gray-400 text-sm mb-6">{description}</p>
 

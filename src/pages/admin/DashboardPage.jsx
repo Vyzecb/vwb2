@@ -135,7 +135,7 @@ const DashboardPage = () => {
               ? (
                 <Button
                   variant="link"
-                  className="text-[#D4AF37]"
+                  className="text-[#38bdf8]"
                   onClick={() => navigate(getTargetRoute(activity))}
                 >
                   Bekijk
@@ -157,7 +157,7 @@ const DashboardPage = () => {
   /* ================= COMPONENTS ================= */
 
   const StatCard = ({ title, value, icon: Icon, color, href }) => (
-    <Card className="bg-[#1a1a1a] border-gray-800">
+    <Card className="bg-[#111827] border-gray-800">
       <CardHeader className="flex flex-row items-center justify-between pb-2">
         <CardTitle className="text-sm font-medium text-gray-400">
           {title}
@@ -170,7 +170,7 @@ const DashboardPage = () => {
         </div>
         <Button
           variant="link"
-          className="px-0 text-[#D4AF37] h-auto mt-2 text-xs flex items-center gap-1"
+          className="px-0 text-[#38bdf8] h-auto mt-2 text-xs flex items-center gap-1"
           onClick={() => navigate(href)}
         >
           Beheren <ArrowRight size={12} />
@@ -201,7 +201,7 @@ const DashboardPage = () => {
       {/* CONTENT */}
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
         {/* ACTIVITY */}
-        <Card className="col-span-4 bg-[#1a1a1a] border-gray-800">
+        <Card className="col-span-4 bg-[#111827] border-gray-800">
           <CardHeader>
             <CardTitle className="text-white">Recente Activiteit</CardTitle>
           </CardHeader>
@@ -221,7 +221,7 @@ const DashboardPage = () => {
                       route ? 'cursor-pointer hover:bg-[#222]' : ''
                     } p-2 rounded`}
                   >
-                    <div className="h-2 w-2 rounded-full bg-[#D4AF37]" />
+                    <div className="h-2 w-2 rounded-full bg-[#38bdf8]" />
                     <div className="flex-1">
                       <p className="text-gray-300">
                         {formatActivityText(a)}
@@ -247,7 +247,7 @@ const DashboardPage = () => {
         </Card>
 
        {/* QUICK ACTIONS */}
-<Card className="col-span-3 bg-[#1a1a1a] border-gray-800">
+<Card className="col-span-3 bg-[#111827] border-gray-800">
   <CardHeader>
     <CardTitle className="text-white">Snelle Acties</CardTitle>
   </CardHeader>
@@ -259,8 +259,8 @@ const DashboardPage = () => {
       className="
         w-full h-16
         flex items-center justify-center gap-3
-        bg-[#D4AF37] text-black
-        hover:bg-[#b8962e]
+        bg-[#38bdf8] text-black
+        hover:bg-[#0ea5e9]
         font-semibold text-base
         rounded-lg
         shadow-md
@@ -280,12 +280,12 @@ const DashboardPage = () => {
           flex items-center gap-3
           justify-start
           border-gray-700 text-gray-300
-          hover:border-[#D4AF37]
+          hover:border-[#38bdf8]
           hover:text-white
           rounded-lg
         "
       >
-        <Plus size={18} className="text-[#D4AF37]" />
+        <Plus size={18} className="text-[#38bdf8]" />
         Nieuwe review toevoegen
       </Button>
 
@@ -316,7 +316,7 @@ const DashboardPage = () => {
           w-full
           flex items-center justify-center gap-2
           text-gray-400
-          hover:text-[#D4AF37]
+          hover:text-[#38bdf8]
         "
       >
         <Eye size={16} />

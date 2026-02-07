@@ -166,7 +166,7 @@ const SettingsPage = () => {
   if (loading) {
     return (
       <div className="flex justify-center items-center min-h-[50vh]">
-        <Loader2 className="animate-spin text-[#D4AF37]" size={32} />
+        <Loader2 className="animate-spin text-[#38bdf8]" size={32} />
       </div>
     );
   }
@@ -190,7 +190,7 @@ const SettingsPage = () => {
         <Button
           onClick={handleSave}
           disabled={saving}
-          className="bg-[#D4AF37] text-black min-w-[140px]"
+          className="bg-[#38bdf8] text-black min-w-[140px]"
         >
           {saving ? (
             <Loader2 className="animate-spin mr-2" size={18} />
@@ -202,38 +202,38 @@ const SettingsPage = () => {
       </div>
       
       <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-        <TabsList className="bg-[#1a1a1a] border border-gray-800 w-full justify-start h-auto flex-wrap p-2 gap-2 mb-6 rounded-lg">
+        <TabsList className="bg-[#111827] border border-gray-800 w-full justify-start h-auto flex-wrap p-2 gap-2 mb-6 rounded-lg">
           <TabsTrigger 
             value="general"
-            className="data-[state=active]:bg-[#D4AF37] data-[state=active]:text-black text-gray-400"
+            className="data-[state=active]:bg-[#38bdf8] data-[state=active]:text-black text-gray-400"
           >
             <Globe size={16} className="mr-2" />
             Algemeen
           </TabsTrigger>
           <TabsTrigger 
             value="business"
-            className="data-[state=active]:bg-[#D4AF37] data-[state=active]:text-black text-gray-400"
+            className="data-[state=active]:bg-[#38bdf8] data-[state=active]:text-black text-gray-400"
           >
             <Building2 size={16} className="mr-2" />
             Bedrijfsgegevens
           </TabsTrigger>
           <TabsTrigger 
             value="socials"
-            className="data-[state=active]:bg-[#D4AF37] data-[state=active]:text-black text-gray-400"
+            className="data-[state=active]:bg-[#38bdf8] data-[state=active]:text-black text-gray-400"
           >
             <Share2 size={16} className="mr-2" />
             Social Media
           </TabsTrigger>
           <TabsTrigger 
             value="seo"
-            className="data-[state=active]:bg-[#D4AF37] data-[state=active]:text-black text-gray-400"
+            className="data-[state=active]:bg-[#38bdf8] data-[state=active]:text-black text-gray-400"
           >
             <Search size={16} className="mr-2" />
             SEO
           </TabsTrigger>
           <TabsTrigger 
             value="notifications"
-            className="data-[state=active]:bg-[#D4AF37] data-[state=active]:text-black text-gray-400"
+            className="data-[state=active]:bg-[#38bdf8] data-[state=active]:text-black text-gray-400"
           >
             <Bell size={16} className="mr-2" />
             Notificaties
@@ -243,7 +243,7 @@ const SettingsPage = () => {
         <div className="space-y-4">
           {/* General Tab */}
           <TabsContent value="general">
-            <Card className="bg-[#1a1a1a] border-gray-800">
+            <Card className="bg-[#111827] border-gray-800">
               <CardHeader>
                 <CardTitle className="text-white">Algemene Informatie</CardTitle>
                 <CardDescription>Basisinstellingen voor je website.</CardDescription>
@@ -256,7 +256,7 @@ const SettingsPage = () => {
                     name="site_name" 
                     value={formData.site_name || ''} 
                     onChange={handleInputChange} 
-                    className="bg-black border-gray-700 text-white focus:border-[#D4AF37]" 
+                    className="bg-black border-gray-700 text-white focus:border-[#38bdf8]" 
                   />
                 </div>
                 <div className="grid gap-2">
@@ -266,7 +266,7 @@ const SettingsPage = () => {
                     name="site_description" 
                     value={formData.site_description || ''} 
                     onChange={handleInputChange} 
-                    className="bg-black border-gray-700 text-white focus:border-[#D4AF37]" 
+                    className="bg-black border-gray-700 text-white focus:border-[#38bdf8]" 
                   />
                 </div>
                 <div className="grid sm:grid-cols-2 gap-4">
@@ -278,7 +278,7 @@ const SettingsPage = () => {
                       type="email"
                       value={formData.contact_email || ''} 
                       onChange={handleInputChange} 
-                      className="bg-black border-gray-700 text-white focus:border-[#D4AF37]" 
+                      className="bg-black border-gray-700 text-white focus:border-[#38bdf8]" 
                     />
                   </div>
                   <div className="grid gap-2">
@@ -288,7 +288,7 @@ const SettingsPage = () => {
                       name="contact_phone" 
                       value={formData.contact_phone || ''} 
                       onChange={handleInputChange} 
-                      className="bg-black border-gray-700 text-white focus:border-[#D4AF37]" 
+                      className="bg-black border-gray-700 text-white focus:border-[#38bdf8]" 
                     />
                   </div>
                 </div>
@@ -298,7 +298,7 @@ const SettingsPage = () => {
 
           {/* Business Tab */}
           <TabsContent value="business">
-            <Card className="bg-[#1a1a1a] border-gray-800">
+            <Card className="bg-[#111827] border-gray-800">
               <CardHeader>
                 <CardTitle className="text-white">Bedrijfsgegevens</CardTitle>
                 <CardDescription>Deze gegevens worden getoond in de footer en op de contactpagina.</CardDescription>
@@ -311,7 +311,7 @@ const SettingsPage = () => {
                     name="address_street" 
                     value={formData.address_street || ''} 
                     onChange={handleInputChange} 
-                    className="bg-black border-gray-700 text-white focus:border-[#D4AF37]" 
+                    className="bg-black border-gray-700 text-white focus:border-[#38bdf8]" 
                   />
                 </div>
                 <div className="grid sm:grid-cols-3 gap-4">
@@ -322,7 +322,7 @@ const SettingsPage = () => {
                       name="address_city" 
                       value={formData.address_city || ''} 
                       onChange={handleInputChange} 
-                      className="bg-black border-gray-700 text-white focus:border-[#D4AF37]" 
+                      className="bg-black border-gray-700 text-white focus:border-[#38bdf8]" 
                     />
                   </div>
                   <div className="grid gap-2">
@@ -332,7 +332,7 @@ const SettingsPage = () => {
                       name="address_postal_code" 
                       value={formData.address_postal_code || ''} 
                       onChange={handleInputChange} 
-                      className="bg-black border-gray-700 text-white focus:border-[#D4AF37]" 
+                      className="bg-black border-gray-700 text-white focus:border-[#38bdf8]" 
                     />
                   </div>
                   <div className="grid gap-2">
@@ -342,7 +342,7 @@ const SettingsPage = () => {
                       name="address_country" 
                       value={formData.address_country || ''} 
                       onChange={handleInputChange} 
-                      className="bg-black border-gray-700 text-white focus:border-[#D4AF37]" 
+                      className="bg-black border-gray-700 text-white focus:border-[#38bdf8]" 
                     />
                   </div>
                 </div>
@@ -352,7 +352,7 @@ const SettingsPage = () => {
 
           {/* Socials Tab */}
           <TabsContent value="socials">
-            <Card className="bg-[#1a1a1a] border-gray-800">
+            <Card className="bg-[#111827] border-gray-800">
               <CardHeader>
                 <CardTitle className="text-white">Social Media</CardTitle>
                 <CardDescription>Links naar je social media profielen.</CardDescription>
@@ -366,7 +366,7 @@ const SettingsPage = () => {
                     placeholder="https://instagram.com/..."
                     value={formData.social_instagram || ''} 
                     onChange={handleInputChange} 
-                    className="bg-black border-gray-700 text-white focus:border-[#D4AF37]" 
+                    className="bg-black border-gray-700 text-white focus:border-[#38bdf8]" 
                   />
                 </div>
                 <div className="grid gap-2">
@@ -377,7 +377,7 @@ const SettingsPage = () => {
                     placeholder="https://linkedin.com/in/..."
                     value={formData.social_linkedin || ''} 
                     onChange={handleInputChange} 
-                    className="bg-black border-gray-700 text-white focus:border-[#D4AF37]" 
+                    className="bg-black border-gray-700 text-white focus:border-[#38bdf8]" 
                   />
                 </div>
                 <div className="grid gap-2">
@@ -388,7 +388,7 @@ const SettingsPage = () => {
                     placeholder="https://facebook.com/..."
                     value={formData.social_facebook || ''} 
                     onChange={handleInputChange} 
-                    className="bg-black border-gray-700 text-white focus:border-[#D4AF37]" 
+                    className="bg-black border-gray-700 text-white focus:border-[#38bdf8]" 
                   />
                 </div>
                 <div className="grid gap-2">
@@ -399,7 +399,7 @@ const SettingsPage = () => {
                     placeholder="https://x.com/..."
                     value={formData.social_twitter || ''} 
                     onChange={handleInputChange} 
-                    className="bg-black border-gray-700 text-white focus:border-[#D4AF37]" 
+                    className="bg-black border-gray-700 text-white focus:border-[#38bdf8]" 
                   />
                 </div>
               </CardContent>
@@ -408,7 +408,7 @@ const SettingsPage = () => {
 
           {/* SEO Tab */}
           <TabsContent value="seo">
-            <Card className="bg-[#1a1a1a] border-gray-800">
+            <Card className="bg-[#111827] border-gray-800">
               <CardHeader>
                 <CardTitle className="text-white">SEO Instellingen</CardTitle>
                 <CardDescription>Optimaliseer je vindbaarheid in zoekmachines.</CardDescription>
@@ -422,7 +422,7 @@ const SettingsPage = () => {
                     rows={4}
                     value={formData.seo_meta_description || ''} 
                     onChange={handleInputChange} 
-                    className="bg-black border-gray-700 text-white focus:border-[#D4AF37]" 
+                    className="bg-black border-gray-700 text-white focus:border-[#38bdf8]" 
                   />
                   <p className="text-xs text-gray-500">Wordt gebruikt als er geen specifieke pagina beschrijving is.</p>
                 </div>
@@ -434,7 +434,7 @@ const SettingsPage = () => {
                     placeholder="webdesign, portfolio, development..."
                     value={formData.seo_keywords || ''} 
                     onChange={handleInputChange} 
-                    className="bg-black border-gray-700 text-white focus:border-[#D4AF37]" 
+                    className="bg-black border-gray-700 text-white focus:border-[#38bdf8]" 
                   />
                 </div>
               </CardContent>
@@ -443,7 +443,7 @@ const SettingsPage = () => {
 
           {/* Notifications Tab */}
           <TabsContent value="notifications">
-            <Card className="bg-[#1a1a1a] border-gray-800">
+            <Card className="bg-[#111827] border-gray-800">
               <CardHeader>
                 <CardTitle className="text-white">Email Notificaties</CardTitle>
                 <CardDescription>Beheer waarvoor je notificaties wilt ontvangen.</CardDescription>

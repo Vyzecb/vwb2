@@ -78,13 +78,13 @@ const PortfolioPage = () => {
         />
       </Helmet>
 
-      <main className="pt-24 pb-16 bg-[#0a0a0a]">
+      <main className="pt-24 pb-16 bg-[#0f172a]">
         {/* HERO */}
-        <section className="py-16 bg-gradient-to-b from-[#0a0a0a] to-[#0f0f0f]">
+        <section className="py-16 bg-gradient-to-b from-[#0f172a] to-[#0b1120]">
           <div className="container mx-auto px-4 text-center">
             <h1 className="text-5xl md:text-6xl font-bold mb-6">
               Ons{' '}
-              <span className="bg-gradient-to-r from-[#D4AF37] to-[#F4E4C1] bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[#38bdf8] to-[#60a5fa] bg-clip-text text-transparent">
                 Portfolio
               </span>
             </h1>
@@ -95,13 +95,13 @@ const PortfolioPage = () => {
         </section>
 
         {/* FILTERS */}
-        <section className="py-8 bg-[#0f0f0f] sticky top-20 z-40 border-b border-gray-800">
+        <section className="py-8 bg-[#0b1120] sticky top-20 z-40 border-b border-gray-800">
           <div className="container mx-auto px-4 flex flex-wrap justify-center gap-3">
             <Button
               onClick={() => setActiveFilter('Alle')}
               className={
                 activeFilter === 'Alle'
-                  ? 'bg-[#D4AF37] text-black'
+                  ? 'bg-[#38bdf8] text-black'
                   : 'border border-gray-700 text-gray-300 bg-transparent'
               }
             >
@@ -114,7 +114,7 @@ const PortfolioPage = () => {
                 onClick={() => setActiveFilter(cat.name)}
                 className={
                   activeFilter === cat.name
-                    ? 'bg-[#D4AF37] text-black'
+                    ? 'bg-[#38bdf8] text-black'
                     : 'border border-gray-700 text-gray-300 bg-transparent'
                 }
               >
@@ -125,7 +125,7 @@ const PortfolioPage = () => {
         </section>
 
         {/* PROJECT GRID */}
-        <section ref={projectsRef} className="py-16 bg-[#0a0a0a]">
+        <section ref={projectsRef} className="py-16 bg-[#0f172a]">
           <div className="container mx-auto px-4">
             {loading ? (
               <p className="text-center text-gray-400">Projecten laden…</p>
@@ -148,7 +148,7 @@ const PortfolioPage = () => {
                     }}
                   >
                     <Link to={`/portfolio/${project.id}`}>
-                      <div className="group relative overflow-hidden rounded-2xl bg-[#1a1a1a] border border-gray-800 hover:border-[#D4AF37] transition-all duration-300">
+                      <div className="group relative overflow-hidden rounded-2xl bg-[#111827] border border-gray-800 hover:border-[#38bdf8] transition-all duration-300">
                         {/* IMAGE */}
                         <div className="aspect-[4/3] overflow-hidden">
                           <img
@@ -164,12 +164,12 @@ const PortfolioPage = () => {
                         {/* CONTENT */}
                         <div className="p-6">
                           {project.categories?.name && (
-                            <span className="inline-block px-3 py-1 bg-[#D4AF37]/10 text-[#D4AF37] text-xs font-medium rounded-full mb-3">
+                            <span className="inline-block px-3 py-1 bg-[#38bdf8]/10 text-[#38bdf8] text-xs font-medium rounded-full mb-3">
                               {project.categories.name}
                             </span>
                           )}
 
-                          <h3 className="text-xl font-bold mb-2 group-hover:text-[#D4AF37] transition-colors">
+                          <h3 className="text-xl font-bold mb-2 group-hover:text-[#38bdf8] transition-colors">
                             {project.title}
                           </h3>
 
@@ -177,7 +177,7 @@ const PortfolioPage = () => {
                             {project.short_description}
                           </p>
 
-                          <div className="flex items-center text-[#D4AF37] text-sm font-medium">
+                          <div className="flex items-center text-[#38bdf8] text-sm font-medium">
                             Bekijk project
                             <ArrowRight
                               className="ml-2 group-hover:translate-x-2 transition-transform"

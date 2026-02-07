@@ -14,7 +14,7 @@ import { useAuth } from '@/contexts/SupabaseAuthContext';
 /* ===== INPUT STYLE ===== */
 const INPUT =
   'w-full bg-black border border-gray-700 rounded-lg px-4 py-3 text-white ' +
-  'placeholder:text-gray-500 focus:border-[#D4AF37] focus:outline-none';
+  'placeholder:text-gray-500 focus:border-[#38bdf8] focus:outline-none';
 
 const INITIAL_FORM_STATE = {
   title: '',
@@ -194,7 +194,7 @@ const ProjectsPage = () => {
           <p className="text-gray-400 text-sm">Beheer je projecten en cases</p>
         </div>
         {!showForm && (
-          <Button onClick={() => setShowForm(true)} className="bg-[#D4AF37] text-black">
+          <Button onClick={() => setShowForm(true)} className="bg-[#38bdf8] text-black">
             <Plus size={18} className="mr-2" /> Nieuw project
           </Button>
         )}
@@ -210,7 +210,7 @@ const ProjectsPage = () => {
               exit={{ opacity: 0 }}
               className="lg:col-span-5"
             >
-              <form onSubmit={handleSubmit} className="bg-[#111] rounded-xl border border-gray-800 p-5 space-y-4">
+              <form onSubmit={handleSubmit} className="bg-[#111827] rounded-xl border border-gray-800 p-5 space-y-4">
                 <ImageUpload
                   value={formData.hero_image || ''}
                   onChange={url => setFormData({ ...formData, hero_image: url })}
@@ -241,7 +241,7 @@ const ProjectsPage = () => {
                 </div>
 
                 <div className="flex gap-3">
-                  <Button type="submit" className="flex-1 bg-[#D4AF37] text-black">Opslaan</Button>
+                  <Button type="submit" className="flex-1 bg-[#38bdf8] text-black">Opslaan</Button>
                   <Button type="button" variant="outline" className="flex-1" onClick={closeForm}>Annuleren</Button>
                 </div>
               </form>
@@ -252,7 +252,7 @@ const ProjectsPage = () => {
         {/* LIST */}
         <div className={`${showForm ? 'lg:col-span-7' : 'lg:col-span-12'} space-y-4`}>
           {loading ? (
-            <div className="flex justify-center py-20"><Loader2 className="animate-spin text-[#D4AF37]" /></div>
+            <div className="flex justify-center py-20"><Loader2 className="animate-spin text-[#38bdf8]" /></div>
           ) : projects.length === 0 ? (
             <div className="text-center py-20 text-gray-500 border border-dashed border-gray-800 rounded-xl">
               <FolderKanban size={48} className="mx-auto mb-4 opacity-20" />
@@ -260,7 +260,7 @@ const ProjectsPage = () => {
             </div>
           ) : (
             projects.map(p => (
-              <div key={p.id} className="bg-[#111] border border-gray-800 rounded-xl p-4 flex flex-col sm:flex-row gap-4">
+              <div key={p.id} className="bg-[#111827] border border-gray-800 rounded-xl p-4 flex flex-col sm:flex-row gap-4">
                 <div className="w-full sm:w-24 h-40 sm:h-24 bg-black rounded overflow-hidden">
                   {p.hero_image ? <img src={p.hero_image} alt={p.title} className="w-full h-full object-cover" /> : <ImageIcon className="m-auto text-gray-600" />}
                 </div>
@@ -269,7 +269,7 @@ const ProjectsPage = () => {
                   <h3 className="font-bold text-white">{p.title}</h3>
                   <p className="text-sm text-gray-400 line-clamp-3">{p.short_description || '—'}</p>
                   {p.category?.name && (
-                    <span className="text-xs text-[#D4AF37]">{p.category.name}</span>
+                    <span className="text-xs text-[#38bdf8]">{p.category.name}</span>
                   )}
                 </div>
 

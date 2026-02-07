@@ -11,14 +11,14 @@ const PrivacyPolicyPage = () => {
         <meta name="description" content="Privacybeleid van Vos Web Designs. Lees hoe wij omgaan met uw gegevens volgens de AVG/GDPR richtlijnen." />
       </Helmet>
 
-      <main className="pt-24 pb-16 bg-[#0a0a0a] min-h-screen">
+      <main className="pt-24 pb-16 bg-[#0f172a] min-h-screen">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             className="max-w-4xl mx-auto"
           >
-            <h1 className="text-4xl md:text-5xl font-bold mb-8 bg-gradient-to-r from-[#D4AF37] to-[#F4E4C1] bg-clip-text text-transparent">
+            <h1 className="text-4xl md:text-5xl font-bold mb-8 bg-gradient-to-r from-[#38bdf8] to-[#60a5fa] bg-clip-text text-transparent">
               Privacybeleid
             </h1>
             

@@ -131,18 +131,18 @@ const CategoriesPage = () => {
       </div>
 
       {/* ADD */}
-      <div className="bg-[#1a1a1a] p-4 rounded-xl border border-gray-800">
+      <div className="bg-[#111827] p-4 rounded-xl border border-gray-800">
         <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
           <input
             placeholder="Nieuwe categorie naam..."
-            className="flex-1 px-4 py-3 bg-black border border-gray-700 rounded-lg text-white focus:border-[#D4AF37] focus:outline-none"
+            className="flex-1 px-4 py-3 bg-black border border-gray-700 rounded-lg text-white focus:border-[#38bdf8] focus:outline-none"
             value={name}
             onChange={e => setName(e.target.value)}
             required
           />
           <Button
             type="submit"
-            className="bg-[#D4AF37] text-black font-medium sm:w-auto w-full"
+            className="bg-[#38bdf8] text-black font-medium sm:w-auto w-full"
           >
             <Plus size={18} className="mr-2" />
             Toevoegen
@@ -151,10 +151,10 @@ const CategoriesPage = () => {
       </div>
 
       {/* LIST */}
-      <div className="bg-[#1a1a1a] rounded-xl border border-gray-800 overflow-hidden">
+      <div className="bg-[#111827] rounded-xl border border-gray-800 overflow-hidden">
         {loading ? (
           <div className="p-12 flex justify-center">
-            <Loader2 className="animate-spin text-[#D4AF37]" size={32} />
+            <Loader2 className="animate-spin text-[#38bdf8]" size={32} />
           </div>
         ) : (
           <div className="divide-y divide-gray-800">

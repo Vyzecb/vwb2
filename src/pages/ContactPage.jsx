@@ -72,7 +72,7 @@ const ContactPage = () => {
       </Helmet>
 
       <main className="pt-24 pb-16">
-        <section className="py-16 bg-gradient-to-b from-[#0a0a0a] to-[#0f0f0f]">
+        <section className="py-16 bg-gradient-to-b from-[#0f172a] to-[#0b1120]">
           <div className="container mx-auto px-4">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -82,7 +82,7 @@ const ContactPage = () => {
             >
               <h1 className="text-5xl md:text-6xl font-bold mb-6">
                 Laten We{' '}
-                <span className="bg-gradient-to-r from-[#D4AF37] to-[#F4E4C1] bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-[#38bdf8] to-[#60a5fa] bg-clip-text text-transparent">
                   In Gesprek Gaan
                 </span>
               </h1>
@@ -93,7 +93,7 @@ const ContactPage = () => {
           </div>
         </section>
 
-        <section className="py-16 bg-[#0a0a0a]">
+        <section className="py-16 bg-[#0f172a]">
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
 
@@ -104,13 +104,13 @@ const ContactPage = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6 }}
-                  className="bg-[#1a1a1a] border border-gray-800 rounded-2xl p-8 text-center hover:border-[#D4AF37] transition-colors"
+                  className="bg-[#111827] border border-gray-800 rounded-2xl p-8 text-center hover:border-[#38bdf8] transition-colors"
                 >
-                  <div className="w-16 h-16 bg-gradient-to-r from-[#D4AF37]/10 to-[#F4E4C1]/10 rounded-full flex items-center justify-center mx-auto mb-4 text-[#D4AF37]">
+                  <div className="w-16 h-16 bg-gradient-to-r from-[#38bdf8]/10 to-[#60a5fa]/10 rounded-full flex items-center justify-center mx-auto mb-4 text-[#38bdf8]">
                     <Mail size={28} />
                   </div>
                   <h3 className="text-xl font-bold mb-2">Email</h3>
-                  <a href="mailto:info@voswebdesigns.nl" className="text-gray-300 hover:text-[#D4AF37] transition-colors">
+                  <a href="mailto:info@voswebdesigns.nl" className="text-gray-300 hover:text-[#38bdf8] transition-colors">
                     info@voswebdesigns.nl
                   </a>
                 </motion.div>
@@ -120,13 +120,13 @@ const ContactPage = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: 0.1 }}
-                  className="bg-[#1a1a1a] border border-gray-800 rounded-2xl p-8 text-center hover:border-[#D4AF37] transition-colors"
+                  className="bg-[#111827] border border-gray-800 rounded-2xl p-8 text-center hover:border-[#38bdf8] transition-colors"
                 >
-                  <div className="w-16 h-16 bg-gradient-to-r from-[#D4AF37]/10 to-[#F4E4C1]/10 rounded-full flex items-center justify-center mx-auto mb-4 text-[#D4AF37]">
+                  <div className="w-16 h-16 bg-gradient-to-r from-[#38bdf8]/10 to-[#60a5fa]/10 rounded-full flex items-center justify-center mx-auto mb-4 text-[#38bdf8]">
                     <Phone size={28} />
                   </div>
                   <h3 className="text-xl font-bold mb-2">Telefoon</h3>
-                  <a href="tel:+31648608336" className="text-gray-300 hover:text-[#D4AF37] transition-colors">
+                  <a href="tel:+31648608336" className="text-gray-300 hover:text-[#38bdf8] transition-colors">
                     +31 6 4860 8336
                   </a>
                 </motion.div>
@@ -136,9 +136,9 @@ const ContactPage = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: 0.2 }}
-                  className="bg-[#1a1a1a] border border-gray-800 rounded-2xl p-8 text-center hover:border-[#D4AF37] transition-colors"
+                  className="bg-[#111827] border border-gray-800 rounded-2xl p-8 text-center hover:border-[#38bdf8] transition-colors"
                 >
-                  <div className="w-16 h-16 bg-gradient-to-r from-[#D4AF37]/10 to-[#F4E4C1]/10 rounded-full flex items-center justify-center mx-auto mb-4 text-[#D4AF37]">
+                  <div className="w-16 h-16 bg-gradient-to-r from-[#38bdf8]/10 to-[#60a5fa]/10 rounded-full flex items-center justify-center mx-auto mb-4 text-[#38bdf8]">
                     <MapPin size={28} />
                   </div>
                   <h3 className="text-xl font-bold mb-2">Locatie</h3>
@@ -166,7 +166,7 @@ const ContactPage = () => {
                           value={formData.name}
                           onChange={handleChange}
                           required
-                          className="w-full px-4 py-3 bg-[#1a1a1a] border border-gray-800 rounded-lg focus:border-[#D4AF37] focus:outline-none transition-colors text-white"
+                          className="w-full px-4 py-3 bg-[#111827] border border-gray-800 rounded-lg focus:border-[#38bdf8] focus:outline-none transition-colors text-white"
                           placeholder="Uw naam"
                         />
                       </div>
@@ -179,7 +179,7 @@ const ContactPage = () => {
                           value={formData.email}
                           onChange={handleChange}
                           required
-                          className="w-full px-4 py-3 bg-[#1a1a1a] border border-gray-800 rounded-lg focus:border-[#D4AF37] focus:outline-none transition-colors text-white"
+                          className="w-full px-4 py-3 bg-[#111827] border border-gray-800 rounded-lg focus:border-[#38bdf8] focus:outline-none transition-colors text-white"
                           placeholder="uw@email.nl"
                         />
                       </div>
@@ -193,7 +193,7 @@ const ContactPage = () => {
                           name="phone"
                           value={formData.phone}
                           onChange={handleChange}
-                          className="w-full px-4 py-3 bg-[#1a1a1a] border border-gray-800 rounded-lg focus:border-[#D4AF37] focus:outline-none transition-colors text-white"
+                          className="w-full px-4 py-3 bg-[#111827] border border-gray-800 rounded-lg focus:border-[#38bdf8] focus:outline-none transition-colors text-white"
                           placeholder="+31 6 12345678"
                         />
                       </div>
@@ -204,7 +204,7 @@ const ContactPage = () => {
                           name="company"
                           value={formData.company}
                           onChange={handleChange}
-                          className="w-full px-4 py-3 bg-[#1a1a1a] border border-gray-800 rounded-lg focus:border-[#D4AF37] focus:outline-none transition-colors text-white"
+                          className="w-full px-4 py-3 bg-[#111827] border border-gray-800 rounded-lg focus:border-[#38bdf8] focus:outline-none transition-colors text-white"
                           placeholder="Uw bedrijf"
                         />
                       </div>
@@ -218,7 +218,7 @@ const ContactPage = () => {
                           name="service"
                           value={formData.service}
                           onChange={handleChange}
-                          className="w-full px-4 py-3 bg-[#1a1a1a] border border-gray-800 rounded-lg focus:border-[#D4AF37] focus:outline-none transition-colors text-white"
+                          className="w-full px-4 py-3 bg-[#111827] border border-gray-800 rounded-lg focus:border-[#38bdf8] focus:outline-none transition-colors text-white"
                         >
                           <option value="">Selecteer een dienst</option>
                           <option value="webdesign">Webdesign</option>
@@ -235,7 +235,7 @@ const ContactPage = () => {
                           name="package"
                           value={formData.package}
                           onChange={handleChange}
-                          className="w-full px-4 py-3 bg-[#1a1a1a] border border-gray-800 rounded-lg focus:border-[#D4AF37] focus:outline-none transition-colors text-white"
+                          className="w-full px-4 py-3 bg-[#111827] border border-gray-800 rounded-lg focus:border-[#38bdf8] focus:outline-none transition-colors text-white"
                         >
                           <option value="">Selecteer pakket</option>
                           <option value="Starter">Starter</option>
@@ -254,7 +254,7 @@ const ContactPage = () => {
                         onChange={handleChange}
                         required
                         rows={6}
-                        className="w-full px-4 py-3 bg-[#1a1a1a] border border-gray-800 rounded-lg focus:border-[#D4AF37] focus:outline-none transition-colors text-white resize-none"
+                        className="w-full px-4 py-3 bg-[#111827] border border-gray-800 rounded-lg focus:border-[#38bdf8] focus:outline-none transition-colors text-white resize-none"
                         placeholder="Vertel ons over uw project..."
                       />
                     </div>
@@ -262,7 +262,7 @@ const ContactPage = () => {
                     <Button
                       type="submit"
                       size="lg"
-                      className="w-full bg-gradient-to-r from-[#D4AF37] to-[#F4E4C1] text-black hover:opacity-90 transition-opacity"
+                      className="w-full bg-gradient-to-r from-[#38bdf8] to-[#60a5fa] text-black hover:opacity-90 transition-opacity"
                     >
                       Verstuur Bericht
                       <Send className="ml-2" size={20} />
@@ -278,13 +278,13 @@ const ContactPage = () => {
                   transition={{ duration: 0.8 }}
                   className="lg:sticky lg:top-28"
                 >
-                  <div className="bg-gradient-to-br from-[#1a1a1a] to-[#0f0f0f] border border-gray-800 rounded-2xl p-8">
+                  <div className="bg-gradient-to-br from-[#111827] to-[#0b1120] border border-gray-800 rounded-2xl p-8">
                     <h3 className="text-2xl font-bold mb-6">Wat Kunt U Verwachten?</h3>
 
                     <div className="space-y-6">
                       <div className="flex gap-4">
-                        <div className="w-10 h-10 bg-[#D4AF37]/10 rounded-full flex items-center justify-center">
-                          <span className="text-[#D4AF37] font-bold">1</span>
+                        <div className="w-10 h-10 bg-[#38bdf8]/10 rounded-full flex items-center justify-center">
+                          <span className="text-[#38bdf8] font-bold">1</span>
                         </div>
                         <div>
                           <span className="font-semibold block mb-1">Snelle Reactie</span>
@@ -293,8 +293,8 @@ const ContactPage = () => {
                       </div>
 
                       <div className="flex gap-4">
-                        <div className="w-10 h-10 bg-[#D4AF37]/10 rounded-full flex items-center justify-center">
-                          <span className="text-[#D4AF37] font-bold">2</span>
+                        <div className="w-10 h-10 bg-[#38bdf8]/10 rounded-full flex items-center justify-center">
+                          <span className="text-[#38bdf8] font-bold">2</span>
                         </div>
                         <div>
                           <span className="font-semibold block mb-1">Kennismakingsgesprek</span>
@@ -303,8 +303,8 @@ const ContactPage = () => {
                       </div>
 
                       <div className="flex gap-4">
-                        <div className="w-10 h-10 bg-[#D4AF37]/10 rounded-full flex items-center justify-center">
-                          <span className="text-[#D4AF37] font-bold">3</span>
+                        <div className="w-10 h-10 bg-[#38bdf8]/10 rounded-full flex items-center justify-center">
+                          <span className="text-[#38bdf8] font-bold">3</span>
                         </div>
                         <div>
                           <span className="font-semibold block mb-1">Offerte op Maat</span>
@@ -313,8 +313,8 @@ const ContactPage = () => {
                       </div>
 
                       <div className="flex gap-4">
-                        <div className="w-10 h-10 bg-[#D4AF37]/10 rounded-full flex items-center justify-center">
-                          <span className="text-[#D4AF37] font-bold">4</span>
+                        <div className="w-10 h-10 bg-[#38bdf8]/10 rounded-full flex items-center justify-center">
+                          <span className="text-[#38bdf8] font-bold">4</span>
                         </div>
                         <div>
                           <span className="font-semibold block mb-1">Project Start</span>

@@ -117,7 +117,7 @@ const ServicesPage = () => {
         <title>Diensten – Vos Web Designs</title>
       </Helmet>
 
-      <main className="pt-24 pb-24 bg-[#0a0a0a] space-y-32">
+      <main className="pt-24 pb-24 bg-[#0f172a] space-y-32">
 
         {/* HERO */}
         <section className="container mx-auto px-4 max-w-4xl text-center">
@@ -129,7 +129,7 @@ const ServicesPage = () => {
             en zonder technische zorgen.
           </p>
           <Link to="/contact">
-            <Button className="bg-gradient-to-r from-[#D4AF37] to-[#F4E4C1] text-black px-8 py-4 text-lg">
+            <Button className="bg-gradient-to-r from-[#38bdf8] to-[#60a5fa] text-black px-8 py-4 text-lg">
               Gratis kennismaking
             </Button>
           </Link>
@@ -138,8 +138,8 @@ const ServicesPage = () => {
         {/* USP */}
         <section className="container mx-auto px-4 grid md:grid-cols-4 gap-8 text-center">
           {['Transparante prijzen','Geen aanbetaling','Snelle oplevering','Persoonlijk contact'].map(item => (
-            <div key={item} className="border border-gray-800 rounded-xl p-6 bg-[#0f0f0f]">
-              <CheckCircle className="mx-auto mb-4 text-[#D4AF37]" />
+            <div key={item} className="border border-gray-800 rounded-xl p-6 bg-[#0b1120]">
+              <CheckCircle className="mx-auto mb-4 text-[#38bdf8]" />
               <p className="text-gray-300">{item}</p>
             </div>
           ))}
@@ -157,7 +157,7 @@ const ServicesPage = () => {
             >
               <div className="grid lg:grid-cols-2 gap-12 items-center">
                 <div>
-                  <div className="w-16 h-16 rounded-xl bg-[#D4AF37]/10 flex items-center justify-center text-[#D4AF37] mb-6">
+                  <div className="w-16 h-16 rounded-xl bg-[#38bdf8]/10 flex items-center justify-center text-[#38bdf8] mb-6">
                     {service.icon}
                   </div>
                   <h2 className="text-4xl font-bold mb-4">{service.title}</h2>
@@ -177,24 +177,24 @@ const ServicesPage = () => {
                       key={pkg.name}
                       className={`relative rounded-2xl border p-8 ${
                         isHighlighted
-                          ? 'border-[#D4AF37] bg-[#121212] scale-105'
-                          : 'border-gray-800 bg-[#0f0f0f]'
+                          ? 'border-[#38bdf8] bg-[#121212] scale-105'
+                          : 'border-gray-800 bg-[#0b1120]'
                       }`}
                     >
                       {isHighlighted && (
-                        <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-[#D4AF37] to-[#F4E4C1] text-black text-sm px-4 py-1 rounded-full flex items-center gap-1">
+                        <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-[#38bdf8] to-[#60a5fa] text-black text-sm px-4 py-1 rounded-full flex items-center gap-1">
                           <Star size={14} /> {service.highlightLabel}
                         </div>
                       )}
 
                       {isStarter && (
-                        <div className="absolute top-4 right-4 text-xs px-3 py-1 rounded-full bg-white/10 text-[#D4AF37] border border-[#D4AF37]/30">
+                        <div className="absolute top-4 right-4 text-xs px-3 py-1 rounded-full bg-white/10 text-[#38bdf8] border border-[#38bdf8]/30">
                           Perfect voor starters
                         </div>
                       )}
 
                       <h3 className="text-2xl font-bold mb-2">{pkg.name}</h3>
-                      <p className="text-[#D4AF37] text-3xl font-bold">
+                      <p className="text-[#38bdf8] text-3xl font-bold">
                         {isStarter && <span className="text-base text-gray-400 mr-1">Vanaf</span>}
                         {pkg.price}
                       </p>
@@ -205,14 +205,14 @@ const ServicesPage = () => {
                       <ul className="space-y-3 mb-8">
                         {pkg.features.map(f => (
                           <li key={f} className="flex gap-2 text-gray-300">
-                            <CheckCircle size={18} className="text-[#D4AF37]" />
+                            <CheckCircle size={18} className="text-[#38bdf8]" />
                             {f}
                           </li>
                         ))}
                       </ul>
 
                       <Link to="/contact">
-                        <Button className="w-full bg-gradient-to-r from-[#D4AF37] to-[#F4E4C1] text-black">
+                        <Button className="w-full bg-gradient-to-r from-[#38bdf8] to-[#60a5fa] text-black">
                           {getCTA(pkg.name)}
                           <ArrowRight className="ml-2" size={18} />
                         </Button>
@@ -251,7 +251,7 @@ const ServicesPage = () => {
                 a: 'Ja. Na oplevering is de website volledig van jou.'
               }
             ].map(item => (
-              <div key={item.q} className="border border-gray-800 rounded-xl p-6 bg-[#0f0f0f]">
+              <div key={item.q} className="border border-gray-800 rounded-xl p-6 bg-[#0b1120]">
                 <h3 className="font-semibold mb-2">{item.q}</h3>
                 <p className="text-gray-400">{item.a}</p>
               </div>
@@ -268,7 +268,7 @@ const ServicesPage = () => {
             Plan vrijblijvend een kennismaking en ontdek welke oplossing het beste past bij jouw situatie.
           </p>
           <Link to="/contact">
-            <Button className="bg-gradient-to-r from-[#D4AF37] to-[#F4E4C1] text-black px-10 py-4 text-lg">
+            <Button className="bg-gradient-to-r from-[#38bdf8] to-[#60a5fa] text-black px-10 py-4 text-lg">
               Start vandaag nog
             </Button>
           </Link>

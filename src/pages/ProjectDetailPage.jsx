@@ -36,7 +36,7 @@ const ProjectDetailPage = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center text-gray-300">
+      <div className="min-h-screen bg-[#0f172a] flex items-center justify-center text-gray-300">
         Laden...
       </div>
     );
@@ -73,7 +73,7 @@ const ProjectDetailPage = () => {
                 'https://images.unsplash.com/photo-1649215636705-1084bd6df97a'
               }
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a]/60 via-[#0a0a0a]/80 to-[#0a0a0a]" />
+            <div className="absolute inset-0 bg-gradient-to-b from-[#0f172a]/60 via-[#0f172a]/80 to-[#0f172a]" />
           </div>
 
           <div className="container mx-auto px-4 relative z-10">
@@ -84,7 +84,7 @@ const ProjectDetailPage = () => {
               className="max-w-4xl mx-auto text-center"
             >
               {project.categories?.name && (
-                <span className="inline-block px-4 py-2 bg-[#D4AF37]/20 border border-[#D4AF37]/40 rounded-full text-[#D4AF37] text-sm font-medium mb-4">
+                <span className="inline-block px-4 py-2 bg-[#38bdf8]/20 border border-[#38bdf8]/40 rounded-full text-[#38bdf8] text-sm font-medium mb-4">
                   {project.categories.name}
                 </span>
               )}
@@ -100,7 +100,7 @@ const ProjectDetailPage = () => {
         </section>
 
         {/* CONTENT */}
-        <section className="py-16 bg-[#0a0a0a]">
+        <section className="py-16 bg-[#0f172a]">
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
               {/* META BLOCKS */}
@@ -133,7 +133,7 @@ const ProjectDetailPage = () => {
                 <Link to="/portfolio">
                   <Button
                     variant="outline"
-                    className="border-gray-700 text-gray-300 hover:border-[#D4AF37] hover:text-[#D4AF37]"
+                    className="border-gray-700 text-gray-300 hover:border-[#38bdf8] hover:text-[#38bdf8]"
                   >
                     <ArrowLeft className="mr-2" size={20} />
                     Terug naar portfolio
@@ -141,7 +141,7 @@ const ProjectDetailPage = () => {
                 </Link>
 
                 <Link to="/contact">
-                  <Button className="bg-gradient-to-r from-[#D4AF37] to-[#F4E4C1] text-black hover:opacity-90">
+                  <Button className="bg-gradient-to-r from-[#38bdf8] to-[#60a5fa] text-black hover:opacity-90">
                     Start uw project
                     <ArrowRight className="ml-2" size={20} />
                   </Button>
@@ -156,7 +156,7 @@ const ProjectDetailPage = () => {
 };
 
 const InfoBlock = ({ label, value }) => (
-  <div className="bg-[#1a1a1a] border border-gray-800 rounded-xl p-6">
+  <div className="bg-[#111827] border border-gray-800 rounded-xl p-6">
     <span className="text-gray-400 text-sm">{label}</span>
     <p className="text-white font-semibold mt-1">{value}</p>
   </div>
