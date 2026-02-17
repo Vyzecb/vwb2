@@ -8,6 +8,7 @@ import {
 import { toast } from '@/components/ui/use-toast';
 import DeleteConfirmDialog from '@/components/DeleteConfirmDialog';
 import ImageUpload from '@/components/admin/ImageUpload';
+import ProjectGalleryManager from '@/components/admin/ProjectGalleryManager';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '@/contexts/SupabaseAuthContext';
 
@@ -40,6 +41,7 @@ const ProjectsPage = () => {
   const [deleteId, setDeleteId] = useState(null);
   const [showForm, setShowForm] = useState(false);
   const [formData, setFormData] = useState(INITIAL_FORM_STATE);
+  const [activeProjectId, setActiveProjectId] = useState(null);
 
   /* ================= DATA ================= */
   const fetchData = async () => {
@@ -81,6 +83,7 @@ const ProjectsPage = () => {
   const openEdit = (project) => {
     setFormData({ ...INITIAL_FORM_STATE, ...project });
     setIsEditing(project.id);
+    setActiveProjectId(project.id);
     setShowForm(true);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -88,6 +91,7 @@ const ProjectsPage = () => {
   const closeForm = () => {
     setShowForm(false);
     setIsEditing(null);
+    setActiveProjectId(null);
     setFormData(INITIAL_FORM_STATE);
   };
 
@@ -107,9 +111,11 @@ const ProjectsPage = () => {
 
       const isUpdate = Boolean(isEditing);
 
-      const { error } = isUpdate
-        ? await supabase.from('projects').update(cleanData).eq('id', isEditing)
-        : await supabase.from('projects').insert([cleanData]);
+      const projectQuery = isUpdate
+        ? supabase.from('projects').update(cleanData).eq('id', isEditing).select('id').single()
+        : supabase.from('projects').insert([cleanData]).select('id').single();
+
+      const { data: savedProject, error } = await projectQuery;
 
       if (error) throw error;
 
@@ -126,7 +132,10 @@ const ProjectsPage = () => {
         description: isUpdate ? 'Project bijgewerkt' : 'Project aangemaakt'
       });
 
-      closeForm();
+      if (savedProject?.id) {
+        setActiveProjectId(savedProject.id);
+        setIsEditing(savedProject.id);
+      }
       fetchData();
     } catch (e) {
       toast({
@@ -194,7 +203,7 @@ const ProjectsPage = () => {
           <p className="text-gray-400 text-sm">Beheer je projecten en cases</p>
         </div>
         {!showForm && (
-          <Button onClick={() => setShowForm(true)} className="bg-[#38bdf8] text-black">
+          <Button onClick={() => { setShowForm(true); setIsEditing(null); setActiveProjectId(null); setFormData(INITIAL_FORM_STATE); }} className="bg-[#38bdf8] text-black">
             <Plus size={18} className="mr-2" /> Nieuw project
           </Button>
         )}
@@ -215,6 +224,17 @@ const ProjectsPage = () => {
                   value={formData.hero_image || ''}
                   onChange={url => setFormData({ ...formData, hero_image: url })}
                 />
+
+                {activeProjectId ? (
+                  <ProjectGalleryManager
+                    projectId={activeProjectId}
+                    onCoverChange={(heroImage) => setFormData((prev) => ({ ...prev, hero_image: heroImage }))}
+                  />
+                ) : (
+                  <div className="rounded-lg border border-dashed border-gray-700 p-4 text-sm text-gray-400">
+                    Sla eerst het project op om meerdere afbeeldingen toe te voegen.
+                  </div>
+                )}
 
                 <input className={INPUT} placeholder="Titel" value={formData.title} onChange={e => setFormData({ ...formData, title: e.target.value })} required />
                 <select className={INPUT} value={formData.category_id || ''} onChange={e => setFormData({ ...formData, category_id: e.target.value })}>
