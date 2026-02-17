@@ -1,6 +1,12 @@
 
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  Outlet,
+  Route,
+  RouterProvider,
+} from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { Toaster } from '@/components/ui/toaster';
 import { AuthProvider } from '@/contexts/SupabaseAuthContext';
@@ -43,41 +49,60 @@ const GlobalSEO = () => {
 
 function App() {
   return (
-    <Router>
-      <AuthProvider>
-        <SettingsProvider>
-          <div className="min-h-screen bg-[#0f172a] text-white flex flex-col">
-            <GlobalSEO />
-            <Routes>
-              {/* Public Routes */}
-              <Route path="/" element={<><Header /><HomePage /><Footer /></>} />
-              <Route path="/portfolio" element={<><Header /><PortfolioPage /><Footer /></>} />
-              <Route path="/portfolio/:projectId" element={<><Header /><ProjectDetailPage /><Footer /></>} />
-              <Route path="/diensten" element={<><Header /><ServicesPage /><Footer /></>} />
-              <Route path="/over-ons" element={<><Header /><AboutPage /><Footer /></>} />
-              <Route path="/werkwijze" element={<><Header /><ProcessPage /><Footer /></>} />
-              <Route path="/contact" element={<><Header /><ContactPage /><Footer /></>} />
-              <Route path="/privacy" element={<><Header /><PrivacyPolicyPage /><Footer /></>} />
-              <Route path="/voorwaarden" element={<><Header /><TermsPage /><Footer /></>} />
-              <Route path="/login" element={<LoginPage />} />
-
-              {/* Admin Routes */}
-              <Route path="/admin" element={<AdminLayout />}>
-                <Route index element={<DashboardPage />} />
-                <Route path="projects" element={<ProjectsPage />} />
-                <Route path="testimonials" element={<TestimonialsPage />} />
-                <Route path="categories" element={<CategoriesPage />} />
-                <Route path="settings" element={<SettingsPage />} />
-              </Route>
-
-              <Route path="*" element={<><Header /><NotFoundPage /><Footer /></>} />
-            </Routes>
-            <Toaster />
-          </div>
-        </SettingsProvider>
-      </AuthProvider>
-    </Router>
+    <RouterProvider router={router} />
   );
 }
+
+const PublicPageLayout = ({ children }) => (
+  <>
+    <Header />
+    {children}
+    <Footer />
+  </>
+);
+
+const RootLayout = () => (
+  <AuthProvider>
+    <SettingsProvider>
+      <div className="min-h-screen bg-[#0f172a] text-white flex flex-col">
+        <GlobalSEO />
+        <Outlet />
+        <Toaster />
+      </div>
+    </SettingsProvider>
+  </AuthProvider>
+);
+
+const routes = createRoutesFromElements(
+  <Route path="/" element={<RootLayout />}>
+    <Route index element={<PublicPageLayout><HomePage /></PublicPageLayout>} />
+    <Route path="portfolio" element={<PublicPageLayout><PortfolioPage /></PublicPageLayout>} />
+    <Route path="portfolio/:projectId" element={<PublicPageLayout><ProjectDetailPage /></PublicPageLayout>} />
+    <Route path="diensten" element={<PublicPageLayout><ServicesPage /></PublicPageLayout>} />
+    <Route path="over-ons" element={<PublicPageLayout><AboutPage /></PublicPageLayout>} />
+    <Route path="werkwijze" element={<PublicPageLayout><ProcessPage /></PublicPageLayout>} />
+    <Route path="contact" element={<PublicPageLayout><ContactPage /></PublicPageLayout>} />
+    <Route path="privacy" element={<PublicPageLayout><PrivacyPolicyPage /></PublicPageLayout>} />
+    <Route path="voorwaarden" element={<PublicPageLayout><TermsPage /></PublicPageLayout>} />
+    <Route path="login" element={<LoginPage />} />
+
+    <Route path="admin" element={<AdminLayout />}>
+      <Route index element={<DashboardPage />} />
+      <Route path="projects" element={<ProjectsPage />} />
+      <Route path="testimonials" element={<TestimonialsPage />} />
+      <Route path="categories" element={<CategoriesPage />} />
+      <Route path="settings" element={<SettingsPage />} />
+    </Route>
+
+    <Route path="*" element={<PublicPageLayout><NotFoundPage /></PublicPageLayout>} />
+  </Route>
+);
+
+const router = createBrowserRouter(routes, {
+  future: {
+    v7_startTransition: true,
+    v7_relativeSplatPath: true,
+  },
+});
 
 export default App;
