@@ -50,14 +50,16 @@ const ProjectGalleryManager = ({ projectId, onCoverChange }) => {
 
       for (let index = 0; index < files.length; index += 1) {
         const file = files[index];
-        const ext = file.name.split('.').pop()?.toLowerCase() || 'jpg';
+        const ext = file.name.split('.').pop()?.toLowerCase() || 'png';
         const path = `portfolio/${projectId}/${crypto.randomUUID()}.${ext}`;
+        const contentType = file.type || `image/${ext === 'jpg' ? 'jpeg' : ext}`;
 
         const { error: uploadError } = await supabase.storage
           .from(BUCKET_NAME)
-          .upload(path, file, { cacheControl: '3600', upsert: false });
+          .upload(path, file, { cacheControl: '3600', upsert: false, contentType });
 
         if (uploadError) {
+          console.error('UPLOAD_ERROR', uploadError, { path, contentType, fileName: file.name, size: file.size });
           throw uploadError;
         }
 
@@ -74,7 +76,10 @@ const ProjectGalleryManager = ({ projectId, onCoverChange }) => {
       }
 
       const { error: insertError } = await supabase.from('portfolio_images').insert(records);
-      if (insertError) throw insertError;
+      if (insertError) {
+        console.error('DB_INSERT_ERROR', insertError, { projectId, recordsCount: records.length });
+        throw insertError;
+      }
 
       toast({ title: 'Succes', description: `${records.length} afbeelding(en) geüpload` });
       await fetchImages();
