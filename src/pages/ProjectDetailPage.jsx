@@ -3,12 +3,14 @@ import { Helmet } from 'react-helmet';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { supabase } from '@/lib/customSupabaseClient';
 import { ArrowRight, ArrowLeft } from 'lucide-react';
+import PortfolioGallery from '@/components/portfolio/PortfolioGallery';
+import { getPortfolioByIdWithImages } from '@/lib/portfolio';
 
 const ProjectDetailPage = () => {
   const { projectId } = useParams();
   const [project, setProject] = useState(null);
+  const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);
 
@@ -16,19 +18,15 @@ const ProjectDetailPage = () => {
     const fetchProject = async () => {
       setLoading(true);
 
-      const { data, error } = await supabase
-        .from('projects')
-        .select('*, categories(name)')
-        .eq('id', projectId)
-        .single();
-
-      if (error || !data) {
+      try {
+        const { portfolio, images: galleryImages } = await getPortfolioByIdWithImages(projectId);
+        setProject(portfolio);
+        setImages(galleryImages);
+      } catch {
         setNotFound(true);
-      } else {
-        setProject(data);
+      } finally {
+        setLoading(false);
       }
-
-      setLoading(false);
     };
 
     fetchProject();
@@ -42,10 +40,11 @@ const ProjectDetailPage = () => {
     );
   }
 
-  // ❗ GEEN /404 redirect → React Router vangt dit af
-  if (notFound) {
+  if (notFound || !project) {
     return null;
   }
+
+  const coverImage = images.find((image) => image.is_cover)?.url || images[0]?.url || project.hero_image;
 
   return (
     <>
@@ -59,20 +58,19 @@ const ProjectDetailPage = () => {
             'Project uitgevoerd door Vos Web Designs'
           }
         />
+        {coverImage ? <meta property="og:image" content={coverImage} /> : null}
       </Helmet>
 
       <main className="pt-20">
-        {/* HERO */}
         <section className="relative h-[60vh] flex items-center justify-center overflow-hidden">
           <div className="absolute inset-0">
-            <img
-              className="w-full h-full object-cover"
-              alt={project.title}
-              src={
-                project.hero_image ||
-                'https://images.unsplash.com/photo-1649215636705-1084bd6df97a'
-              }
-            />
+            {coverImage ? (
+              <img
+                className="w-full h-full object-cover"
+                alt={project.title}
+                src={coverImage}
+              />
+            ) : null}
             <div className="absolute inset-0 bg-gradient-to-b from-[#0f172a]/60 via-[#0f172a]/80 to-[#0f172a]" />
           </div>
 
@@ -99,11 +97,15 @@ const ProjectDetailPage = () => {
           </div>
         </section>
 
-        {/* CONTENT */}
         <section className="py-16 bg-[#0f172a]">
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
-              {/* META BLOCKS */}
+              <PortfolioGallery
+                title={project.title}
+                images={images}
+                fallbackImage={project.hero_image}
+              />
+
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
                 <InfoBlock label="Client" value={project.client || 'Niet opgegeven'} />
                 <InfoBlock label="Jaar" value={project.year || '—'} />
@@ -113,7 +115,6 @@ const ProjectDetailPage = () => {
                 />
               </div>
 
-              {/* DESCRIPTION */}
               <div className="mb-12">
                 <h2 className="text-3xl font-bold mb-6">Projectbeschrijving</h2>
 
@@ -128,7 +129,6 @@ const ProjectDetailPage = () => {
                 )}
               </div>
 
-              {/* CTA */}
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-12">
                 <Link to="/portfolio">
                   <Button
