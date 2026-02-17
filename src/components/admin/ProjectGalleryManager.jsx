@@ -75,9 +75,16 @@ const ProjectGalleryManager = ({ projectId, onCoverChange }) => {
         });
       }
 
-      const { error: insertError } = await supabase.from('portfolio_images').insert(records);
+      const { error: insertError } = await supabase
+        .from('portfolio_images')
+        .insert(records);
       if (insertError) {
-        console.error('DB_INSERT_ERROR', insertError, { projectId, recordsCount: records.length });
+        console.error('PORTFOLIO_IMAGES_ERROR', {
+          message: insertError.message,
+          details: insertError.details,
+          hint: insertError.hint,
+          code: insertError.code,
+        });
         throw insertError;
       }
 
@@ -98,21 +105,45 @@ const ProjectGalleryManager = ({ projectId, onCoverChange }) => {
         .update({ is_cover: false })
         .eq('portfolio_id', image.portfolio_id);
 
-      if (unsetError) throw unsetError;
+      if (unsetError) {
+        console.error('PORTFOLIO_IMAGES_ERROR', {
+          message: unsetError.message,
+          details: unsetError.details,
+          hint: unsetError.hint,
+          code: unsetError.code,
+        });
+        throw unsetError;
+      }
 
       const { error: setError } = await supabase
         .from('portfolio_images')
         .update({ is_cover: true })
         .eq('id', image.id);
 
-      if (setError) throw setError;
+      if (setError) {
+        console.error('PORTFOLIO_IMAGES_ERROR', {
+          message: setError.message,
+          details: setError.details,
+          hint: setError.hint,
+          code: setError.code,
+        });
+        throw setError;
+      }
 
       const { error: heroError } = await supabase
         .from('projects')
         .update({ hero_image: image.url })
         .eq('id', image.portfolio_id);
 
-      if (heroError) throw heroError;
+      if (heroError) {
+        console.error('PROJECTS_ERROR', {
+          message: heroError.message,
+          details: heroError.details,
+          hint: heroError.hint,
+          code: heroError.code,
+        });
+        throw heroError;
+      }
 
       onCoverChange(image.url);
       toast({ title: 'Cover bijgewerkt' });
@@ -133,7 +164,15 @@ const ProjectGalleryManager = ({ projectId, onCoverChange }) => {
       }
 
       const { error } = await supabase.from('portfolio_images').delete().eq('id', image.id);
-      if (error) throw error;
+      if (error) {
+        console.error('PORTFOLIO_IMAGES_ERROR', {
+          message: error.message,
+          details: error.details,
+          hint: error.hint,
+          code: error.code,
+        });
+        throw error;
+      }
 
       toast({ title: 'Afbeelding verwijderd' });
       await fetchImages();
@@ -150,14 +189,26 @@ const ProjectGalleryManager = ({ projectId, onCoverChange }) => {
       const updates = ordered.map((item, index) => ({
         id: item.id,
         portfolio_id: projectId,
+        url: item.url,
+        path: item.path || null,
+        alt: item.alt || null,
         sort_order: index,
+        is_cover: Boolean(item.is_cover),
       }));
 
       const { error } = await supabase
         .from('portfolio_images')
         .upsert(updates, { onConflict: 'id' });
 
-      if (error) throw error;
+      if (error) {
+        console.error('PORTFOLIO_IMAGES_ERROR', {
+          message: error.message,
+          details: error.details,
+          hint: error.hint,
+          code: error.code,
+        });
+        throw error;
+      }
       setImages(ordered);
       toast({ title: 'Volgorde opgeslagen' });
       await fetchImages();
